@@ -5,7 +5,7 @@ const { morphism } = require('morphism')
 class Controller {
 	#doneString = null
 
-	constructor(EntityRepository, EntityDto, StringHelper, Config, DoneString) {
+	constructor(EntityRepository, EntityDto, Config, StringHelper, DoneString) {
 		this.entityRepository = EntityRepository
 		this.entityDto = EntityDto
 

@@ -2,9 +2,9 @@
 const { join } = require('path')
 const Politic = require(join(__dirname, './politic'))
 
-class BasicPolitic extends Politic {
+class DevPolitic extends Politic {
 	constructor({ Config }) {
-		const rol = Config.ROL.BASIC
+		const rol = Config.ROL.DEV
 		const authRol = Config.ROL.ATTRIBUTE
 		const baseUrl = Config.BASE_API
 		const permissions = {
@@ -64,4 +64,4 @@ class BasicPolitic extends Politic {
 	}
 }
 
-module.exports = BasicPolitic
+module.exports = DevPolitic

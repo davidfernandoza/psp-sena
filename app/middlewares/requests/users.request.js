@@ -7,13 +7,8 @@ let passwordRule = {}
 class UsersRequest extends Request {
 	constructor({ JoiValidator, Config, JWTService }) {
 		body = {
-			// table_id: JoiValidator.number()
-			// 	.integer()
-			// 	.min(0)
-			// 	.max(99999999990)
-			// 	.required(),
-			name: JoiValidator.string().min(8).max(225).required(),
-			lastname: JoiValidator.string().min(8).max(225).required(),
+			first_name: JoiValidator.string().min(8).max(225).required(),
+			last_name: JoiValidator.string().min(8).max(225).required(),
 			email: JoiValidator.string()
 				.email({ ignoreLength: true })
 				.min(8)
@@ -21,11 +16,7 @@ class UsersRequest extends Request {
 				.required(),
 			phone: JoiValidator.string().min(8).max(15).required(),
 			password: JoiValidator.string().min(8).max(60).required(),
-			rol: JoiValidator.any().valid('ADMIN', 'BASIC').required(),
-			birthday: JoiValidator.date().required(),
-			range: JoiValidator.number().required(),
-			status: JoiValidator.boolean().required(),
-			biography: JoiValidator.string().min(8).allow('').optional()
+			rol: JoiValidator.any().valid('ADMIN', 'DEV').required()
 		}
 
 		// Reglas para el cambio de pasword

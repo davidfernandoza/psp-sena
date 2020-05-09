@@ -23,7 +23,7 @@ module.exports = {
 	},
 	ROL: {
 		ATTRIBUTE: process.env.ROL_ATTRIBUTE,
-		BASIC: process.env.ROL_BASIC,
+		DEV: process.env.ROL_DEV,
 		ADMIN: process.env.ROL_ADMIN
 	},
 	MAIL: {

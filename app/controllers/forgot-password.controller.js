@@ -28,8 +28,8 @@ class ForgotPasswordController extends Controller {
 		super(
 			ForgotPasswordRepository,
 			ForgotPasswordDto,
-			StringHelper,
 			Config,
+			StringHelper,
 			DoneString
 		)
 		this.#usersController = UsersController

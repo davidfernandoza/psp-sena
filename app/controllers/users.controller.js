@@ -5,7 +5,7 @@ const Controller = require(join(__dirname, './controller'))
 
 class UsersController extends Controller {
 	constructor({ UsersRepository, UsersDto, Config, StringHelper, DoneString }) {
-		super(UsersRepository, UsersDto, StringHelper, Config, DoneString)
+		super(UsersRepository, UsersDto, Config, StringHelper, DoneString)
 	}
 
 	async create(req, res) {

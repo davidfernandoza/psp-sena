@@ -11,7 +11,7 @@ module.exports = ({
 	AuthMiddleware,
 	TokenAuth,
 	AdminPolitic,
-	BasicPolitic
+	DevPolitic
 }) => {
 	const router = Router()
 
@@ -29,7 +29,7 @@ module.exports = ({
 	 */
 	const politics = [
 		AdminPolitic.validate.bind(AdminPolitic),
-		BasicPolitic.validate.bind(BasicPolitic)
+		DevPolitic.validate.bind(DevPolitic)
 	]
 
 	/*

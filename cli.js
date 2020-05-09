@@ -71,7 +71,10 @@ function run(message) {
 				 */
 
 				let nameModule = modules.module.toLowerCase()
-				const arrayName = modules.module.split('-')
+				let arrayName = modules.module.split('-')
+				if (arrayName.length == 1) {
+					arrayName = modules.module.split('_')
+				}
 
 				await modules.files.forEach(async (item, index) => {
 					let baseFileFolder = cliFolder
@@ -84,6 +87,9 @@ function run(message) {
 					let foreignKey_5 = null
 					let objAtributes = {}
 					let password_p = ''
+
+					// Nombre de los archivos
+					nameModule = nameModule.replace(/_/g, '-')
 
 					/*
 					 * Foreach para nombres compuestos
@@ -353,7 +359,7 @@ function run(message) {
 									// Numeros Enteros
 									else if (keyValue[1] == 'integer' && keyValue[0] != 'id') {
 										for (let i = 0; i < modules.amount; i++) {
-											let number = numbers(10)
+											let number = numbers(9)
 											objAtributes[i][keyValue[0]] = number
 										}
 									}

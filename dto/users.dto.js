@@ -6,17 +6,12 @@ class UsersDto extends Dto {
 	constructor() {
 		const schema = {
 			id: 'id',
-			// table_id: 'table_id',
-			name: 'name',
-			lastname: 'lastname',
+			first_name: 'first_name',
+			last_name: 'last_name',
 			email: 'email',
-			password: 'password',
-			rol: 'rol',
-			birthday: 'birthday',
-			range: 'range',
 			phone: 'phone',
-			status: 'status',
-			biography: 'biography'
+			password: 'password',
+			rol: 'rol'
 		}
 		super(schema)
 	}

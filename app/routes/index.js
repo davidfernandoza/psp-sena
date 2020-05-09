@@ -8,10 +8,30 @@ require('express-async-errors')
 
 module.exports = ({
 	AuthRoutes,
-	ForgotPasswordRoutes,
-	UsersRoutes,
+	AlgorithmsRoutes,
+	BasePartsRoutes,
 	Config,
-	StringHelper
+	DefectLogRoutes,
+	EstimatesNewPartsRoutes,
+	EstimatesRoutes,
+	ExperiencesLanguagesRoutes,
+	ExperiencesRoutes,
+	ForgotPasswordRoutes,
+	LanguagesRoutes,
+	ModulesRoutes,
+	NewPartsRoutes,
+	PhasesRoutes,
+	PipRoutes,
+	PositionsRoutes,
+	ProgramsRoutes,
+	ProjectsUsersRoutes,
+	ProjectsRoutes,
+	ReusablePartsRoutes,
+	StandardDefectsRoutes,
+	StringHelper,
+	TestReportsRoutes,
+	TimeLogRoutes,
+	UsersRoutes
 }) => {
 	const routers = Router()
 	const apiRoute = Router()
@@ -27,6 +47,26 @@ module.exports = ({
 
 	// registro de las rutas
 	apiRoute.use('/auth', AuthRoutes)
+	apiRoute.use('/algorithms', AlgorithmsRoutes)
+	apiRoute.use('/base-parts', BasePartsRoutes)
+	apiRoute.use('/defect-log', DefectLogRoutes)
+	apiRoute.use('/estimates-new-parts', EstimatesNewPartsRoutes)
+	apiRoute.use('/estimates', EstimatesRoutes)
+	apiRoute.use('/experiences-languages', ExperiencesLanguagesRoutes)
+	apiRoute.use('/experiences', ExperiencesRoutes)
+	apiRoute.use('/languages', LanguagesRoutes)
+	apiRoute.use('/modules', ModulesRoutes)
+	apiRoute.use('/new-parts', NewPartsRoutes)
+	apiRoute.use('/phases', PhasesRoutes)
+	apiRoute.use('/pip', PipRoutes)
+	apiRoute.use('/positions', PositionsRoutes)
+	apiRoute.use('/programs', ProgramsRoutes)
+	apiRoute.use('/projects-users', ProjectsUsersRoutes)
+	apiRoute.use('/projects', ProjectsRoutes)
+	apiRoute.use('/reusable-parts', ReusablePartsRoutes)
+	apiRoute.use('/standard-defects', StandardDefectsRoutes)
+	apiRoute.use('/test-reports', TestReportsRoutes)
+	apiRoute.use('/time-log', TimeLogRoutes)
 	apiRoute.use('/users', UsersRoutes)
 	apiRoute.use('/forgot-password', ForgotPasswordRoutes)
 	routers.use('/api', apiRoute)
