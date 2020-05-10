@@ -177,7 +177,10 @@ class ForgotPasswordController extends Controller {
 	async sendSms(token, user) {
 		// await this.#smsService
 
-		let message = this.#smsString.MSG01.message.replace(/#1/g, this.app)
+		let message = this.#smsString.MSG01.message.replace(
+			/#1/g,
+			this.app.toUpperCase()
+		)
 		message = message.replace(
 			/#2/g,
 			`${this.config.DOMAIN}/recover-password/${token}`

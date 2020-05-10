@@ -11,6 +11,10 @@ class AuthRequest extends Request {
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
 	}
 
-	
+	async logout(req, res, next) {
+		const header = await super.header(req)
+		if (header != true) return await super.errorHandle(header)
+		return next()
+	}
 }
 module.exports = AuthRequest

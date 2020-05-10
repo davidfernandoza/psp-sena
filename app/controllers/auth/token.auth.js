@@ -59,11 +59,11 @@ class TokenAuth extends Controller {
 				moment().subtract(7, 'days').toISOString()
 			)
 			if (created) {
-				await super.response(res, null, 'DON204')
+				await super.response(res, {}, 'DON204')
 				return true
 			}
 		}
-		await super.response(res, null, 'DON404')
+		return await super.response(res, null, 'DON404')
 	}
 }
 

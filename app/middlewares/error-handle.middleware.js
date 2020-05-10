@@ -1,10 +1,8 @@
 /* eslint-disable indent */
 'use strict'
 // const axios = require('axios')
-let errorObject = {}
 let code = 'ERR500'
 let codeweb = '500'
-let detail = null
 
 class ErrorHandleMiddleware {
 	#app = ''
@@ -25,42 +23,43 @@ class ErrorHandleMiddleware {
 	}
 
 	async index(error, req, res, next) {
-		/*
-		 * Errores programados de api
-		 */
+		let objError = {}
+		let errorObject = {}
+		let detail = null
 
+		// Errores programados de api
 		if (error.message.length === 6) {
 			code = error.message
 		}
 
 		// Errores programados Web
 		else if (error.message.length === 3) {
-			const objetWeb = {
+			objError = {
 				app: this.#app // Nombre de la aplicacion
 			}
 
 			switch (error.message) {
 				case '403':
 					codeweb = '403'
-					objetWeb.title = 'Forbidden'
+					objError.title = 'Forbidden'
 					break
 				case '404':
 					codeweb = '404'
-					objetWeb.title = 'Not Found'
+					objError.title = 'Not Found'
 					break
 				default:
-					objetWeb.title = '500'
+					objError.title = '500'
 					break
 			}
 
-			return res.render(codeweb, objetWeb)
+			return res.render(codeweb, objError)
 		}
 
 		// Errores no programados de api
 		else {
 			// Validacion de objeto
 			try {
-				const objError = JSON.parse(error.message)
+				objError = JSON.parse(error.message)
 
 				// Refactorizado de campos a mostrar por error 400
 				if (objError.status) {
@@ -104,7 +103,6 @@ class ErrorHandleMiddleware {
 				error
 			}
 		}
-
 		errorObject.status = this.errorString[code].status
 		errorObject.name = this.errorString[code].name
 		errorObject.message = this.errorString[code].message
