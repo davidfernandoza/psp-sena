@@ -1,2 +1,2 @@
-# basener.js
-Basener, estructura base para API's en Node.js
+# psp-sena
+Backend NODE.JS para el aplicativo de PSP(Personal Software Process) del SENA, en el programa de Tecnológo ADSI
