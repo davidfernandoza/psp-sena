@@ -28,6 +28,7 @@ class JWTService {
 		// seguridad de usuario
 		else {
 			if (!rol) return { status: 403, payload: null }
+			console.log(rol)
 			payload = {
 				sub: id,
 				rol: rol,

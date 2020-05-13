@@ -19,6 +19,7 @@ module.exports = ({
 	 */
 	const requestPrivate = PipRequest.private.bind(PipRequest)
 	const requestPublic = PipRequest.public.bind(PipRequest)
+	const requestBody = PipRequest.body.bind(PipRequest)
 
 	/*
 	 * Politics:
@@ -67,6 +68,7 @@ module.exports = ({
 		requestPrivate,
 		auth,
 		politics,
+		requestBody,
 		controller.create.bind(controller)
 	)
 
@@ -79,6 +81,7 @@ module.exports = ({
 		requestPrivate,
 		auth,
 		politics,
+		requestBody,
 		controller.update.bind(controller)
 	)
 

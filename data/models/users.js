@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
 		models.users.hasMany(models.experiences, {
 			foreignKey: 'users_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'experiences-1'
+			as: 'experiences'
 		})
 
 		/*
@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
 		models.users.hasMany(models.programs, {
 			foreignKey: 'users_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'programs-1'
+			as: 'programs'
 		})
 
 		// Un users tiene muchas projects (1:M)
@@ -54,14 +54,14 @@ module.exports = (sequelize, DataTypes) => {
 			through: models.projects_users, // Tabla pivote
 			foreignKey: 'users_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'projects-1'
+			as: 'projects'
 		})
 
 		// Un users le pertenece a un forgot_password (1:1)
 		models.users.hasOne(models.forgot_password, {
 			foreignKey: 'users_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'forgot_password-1'
+			as: 'forgot_password'
 		})
 	}
 

@@ -19,6 +19,7 @@ module.exports = ({
 	 */
 	const requestPrivate = PositionsRequest.private.bind(PositionsRequest)
 	const requestPublic = PositionsRequest.public.bind(PositionsRequest)
+	const requestBody = PositionsRequest.body.bind(PositionsRequest)
 
 	/*
 	 * Politics:
@@ -67,6 +68,7 @@ module.exports = ({
 		requestPrivate,
 		auth,
 		politics,
+		requestBody,
 		controller.create.bind(controller)
 	)
 
@@ -79,6 +81,7 @@ module.exports = ({
 		requestPrivate,
 		auth,
 		politics,
+		requestBody,
 		controller.update.bind(controller)
 	)
 
@@ -93,6 +96,5 @@ module.exports = ({
 		politics,
 		controller.delete.bind(controller)
 	)
-
 	return router
 }

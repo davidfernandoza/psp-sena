@@ -226,7 +226,7 @@ const { JWTService, SmsService, MailService } = require(join(
 /* -----------------------------------------------------*/
 /* Strings: 																						*/
 /*------------------------------------------------------*/
-const { DoneString, ErrorString, SmsString } = require(join(
+const { DoneString, ErrorString, SmsString, QueriesString } = require(join(
 	__dirname,
 	'../helpers/strings'
 ))
@@ -299,7 +299,8 @@ container
 	.register({
 		DoneString: asClass(DoneString).singleton(),
 		ErrorString: asClass(ErrorString).singleton(),
-		SmsString: asClass(SmsString).singleton()
+		SmsString: asClass(SmsString).singleton(),
+		QueriesString: asClass(QueriesString).singleton()
 	})
 
 	/*

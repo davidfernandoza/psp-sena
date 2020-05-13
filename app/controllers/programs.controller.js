@@ -12,7 +12,13 @@ class ProgramsController extends Controller {
 	}) {
 		super(ProgramsRepository, ProgramsDto, Config, StringHelper, DoneString)
 	}
-	// Logica diferente al CRUD base aqui:
+
+	// Get by id
+	async getAll(req, res) {
+		const { id } = req.params
+		let entities = await this.entityRepository.getAll(id)
+		return await this.response(res, entities, 'DON200L')
+	}
 }
 
 module.exports = ProgramsController

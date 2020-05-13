@@ -33,10 +33,10 @@ class ForgotPasswordRequest extends Request {
 	}
 
 	async phone(req, res, next) {
-		const header = await super.header(req, 'csrf')
+		const header = await super.headersValidator(req, 'csrf')
 		if (header != true) await super.errorHandle(header)
 		if (req.method == 'POST') {
-			const bodyRes = await super.body(req, phoneRules)
+			const bodyRes = await super.bodyValidator(req, phoneRules)
 			if (bodyRes != true) await super.errorHandle(bodyRes)
 		}
 		next()
@@ -47,7 +47,7 @@ class ForgotPasswordRequest extends Request {
 	//  Validacion WEB
 	async password(req, res, next) {
 		if (req.method == 'POST') {
-			const bodyRes = await super.body(req, passwordRule) // validacion de cuerpo
+			const bodyRes = await super.bodyValidator(req, passwordRule) // validacion de cuerpo
 			if (bodyRes != true)
 				return res.render('recover-password', {
 					page: 'recover-password',
@@ -58,7 +58,7 @@ class ForgotPasswordRequest extends Request {
 
 			// Validacion CSRF WEB
 			req.csrfToken = req.body.csrfToken
-			const validate = await super.header(req, 'web')
+			const validate = await super.headersValidator(req, 'web')
 			if (validate) return next()
 		}
 		throw new Error('403')

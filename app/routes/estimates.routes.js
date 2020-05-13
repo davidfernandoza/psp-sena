@@ -19,6 +19,7 @@ module.exports = ({
 	 */
 	const requestPrivate = EstimatesRequest.private.bind(EstimatesRequest)
 	const requestPublic = EstimatesRequest.public.bind(EstimatesRequest)
+	const requestBody = EstimatesRequest.body.bind(EstimatesRequest)
 
 	/*
 	 * Politics:
@@ -47,6 +48,7 @@ module.exports = ({
 		requestPublic,
 		auth,
 		politics,
+		requestBody,
 		controller.getAll.bind(controller)
 	)
 
@@ -55,6 +57,7 @@ module.exports = ({
 		requestPrivate,
 		auth,
 		politics,
+		requestBody,
 		controller.get.bind(controller)
 	)
 
@@ -67,6 +70,7 @@ module.exports = ({
 		requestPrivate,
 		auth,
 		politics,
+		requestBody,
 		controller.create.bind(controller)
 	)
 
@@ -79,6 +83,7 @@ module.exports = ({
 		requestPrivate,
 		auth,
 		politics,
+		requestBody,
 		controller.update.bind(controller)
 	)
 

@@ -14,7 +14,7 @@ module.exports = {
 				},
 				{
 					projects_id: 2,
-					users_id: 1,
+					users_id: 2,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},

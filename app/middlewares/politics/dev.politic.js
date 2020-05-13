@@ -50,6 +50,46 @@ class DevPolitic extends Politic {
 			auth: {
 				subRoutes: 'all',
 				status: 'enable'
+			},
+			projects: {
+				subRoutes: [
+					{
+						route: '/by-user/:id',
+						method: 'GET',
+						status: 'unique',
+						authParameter: 'id' // Parametro que inyecto el auth al request
+					},
+					{
+						route: '/:id',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/',
+						method: 'POST',
+						status: 'disable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'disable'
+					},
+					{
+						route: '/:id',
+						method: 'DELETE',
+						status: 'disable'
+					}
+				]
+			},
+			programs: {
+				subRoutes: [
+					{
+						route: '/:id',
+						method: 'GET',
+						status: 'unique',
+						authParameter: 'id' // Parametro que inyecto el auth al request
+					}
+				]
 			}
 		}
 		super(rol, authRol, baseUrl, permissions)

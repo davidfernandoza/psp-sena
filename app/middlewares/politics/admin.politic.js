@@ -4,7 +4,7 @@ const Politic = require(join(__dirname, './politic'))
 
 class AdminPolitic extends Politic {
 	constructor({ Config }) {
-		const rol = Config.ROL.BASIC
+		const rol = Config.ROL.ADMIN
 		const authRol = Config.ROL.ATTRIBUTE
 		const baseUrl = Config.BASE_API
 		const permissions = {
@@ -50,6 +50,45 @@ class AdminPolitic extends Politic {
 			auth: {
 				subRoutes: 'all',
 				status: 'enable'
+			},
+			projects: {
+				subRoutes: [
+					{
+						route: '/by-user/:id',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/:id',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/',
+						method: 'POST',
+						status: 'enable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'enable'
+					},
+					{
+						route: '/:id',
+						method: 'DELETE',
+						status: 'enable'
+					}
+				]
+			},
+			programs: {
+				subRoutes: [
+					{
+						route: '/:id',
+						method: 'GET',
+						status: 'unique',
+						authParameter: 'id' // Parametro que inyecto el auth al request
+					}
+				]
 			}
 		}
 		super(rol, authRol, baseUrl, permissions)

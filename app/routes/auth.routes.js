@@ -3,30 +3,38 @@
 const { Router } = require('express')
 
 module.exports = ({
-	AuthRequest,
-	AuthMiddleware,
 	ForgotPasswordController,
+	AuthMiddleware,
+	AuthRequest,
 	TokenAuth,
 	UsersAuth
 }) => {
 	/*
-	 * Rutas de las autentificaciones:
-	 * -------------------------
+	 * Request:
+	 */
+	const requestPublic = AuthRequest.public.bind(AuthRequest)
+	const requestPrivate = AuthRequest.private.bind(AuthRequest)
+	const requestBody = AuthRequest.body.bind(AuthRequest)
+
+	/*
 	 * Middlewares:
 	 */
 	const auth = AuthMiddleware.compare.bind(AuthMiddleware)
 
-	const requestPublic = AuthRequest.public.bind(AuthRequest)
-	const requestLogout = AuthRequest.logout.bind(AuthRequest)
-	const user = UsersAuth
+	/*
+	 * Controllers:
+	 */
 	const forgotPassword = ForgotPasswordController
+	const user = UsersAuth
 	const token = TokenAuth
 	const router = Router()
-	router.post('/login', requestPublic, user.login.bind(user))
-	router.post('/logout', requestLogout, auth, token.delete.bind(token))
+
+	router.post('/login', requestPublic, requestBody, user.login.bind(user))
+	router.post('/logout', requestPrivate, auth, token.delete.bind(token))
 	router.post(
 		'/forgot-password',
 		requestPublic,
+		requestBody,
 		forgotPassword.create.bind(forgotPassword)
 	)
 

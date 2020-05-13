@@ -23,6 +23,9 @@ module.exports = ({
 	const requestPublic = ExperiencesLanguagesRequest.public.bind(
 		ExperiencesLanguagesRequest
 	)
+	const requestBody = ExperiencesLanguagesRequest.body.bind(
+		ExperiencesLanguagesRequest
+	)
 
 	/*
 	 * Politics:
@@ -71,6 +74,7 @@ module.exports = ({
 		requestPrivate,
 		auth,
 		politics,
+		requestBody,
 		controller.create.bind(controller)
 	)
 
@@ -83,6 +87,7 @@ module.exports = ({
 		requestPrivate,
 		auth,
 		politics,
+		requestBody,
 		controller.update.bind(controller)
 	)
 

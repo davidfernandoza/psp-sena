@@ -20,9 +20,9 @@ module.exports = ({
 	 */
 	const requestPrivate = UsersRequest.private.bind(UsersRequest)
 	const requestPublic = UsersRequest.public.bind(UsersRequest)
-	const requestNewToken = UsersRequest.newToken.bind(UsersRequest)
 	const requestPassword = UsersRequest.password.bind(UsersRequest)
 	const requestUpdate = UsersRequest.update.bind(UsersRequest)
+	const requestBody = UsersRequest.body.bind(UsersRequest)
 
 	/*
 	 * Politics:
@@ -72,10 +72,11 @@ module.exports = ({
 		requestPrivate,
 		auth,
 		politics,
+		requestBody,
 		controller.create.bind(controller)
 	)
 
-	router.post('/new-token', requestNewToken, auth, politics, newToken)
+	router.post('/new-token', requestPrivate, auth, politics, newToken)
 
 	/*
 	 * -----------------------------------------------------------------------------------*
@@ -83,9 +84,10 @@ module.exports = ({
 	 */
 	router.put(
 		'/:id',
-		requestUpdate,
+		requestPrivate,
 		auth,
 		politics,
+		requestUpdate,
 		controller.update.bind(controller)
 	)
 
@@ -95,9 +97,10 @@ module.exports = ({
 	 */
 	router.patch(
 		'/new-password',
-		requestPassword,
+		requestPrivate,
 		auth,
 		politics,
+		requestPassword,
 		controller.password.bind(controller)
 	)
 

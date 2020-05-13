@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
 		models.projects.hasMany(models.modules, {
 			foreignKey: 'projects_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'modules-1'
+			as: 'modules'
 		})
 
 		// Un projects tiene muchas users (1:M)
@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
 			through: models.projects_users, // Tabla pivote
 			foreignKey: 'projects_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'users-3'
+			as: 'users'
 		})
 	}
 

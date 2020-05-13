@@ -19,6 +19,7 @@ module.exports = ({
 	 */
 	const requestPrivate = DefectLogRequest.private.bind(DefectLogRequest)
 	const requestPublic = DefectLogRequest.public.bind(DefectLogRequest)
+	const requestBody = DefectLogRequest.body.bind(DefectLogRequest)
 
 	/*
 	 * Politics:
@@ -67,6 +68,7 @@ module.exports = ({
 		requestPrivate,
 		auth,
 		politics,
+		requestBody,
 		controller.create.bind(controller)
 	)
 
@@ -79,6 +81,7 @@ module.exports = ({
 		requestPrivate,
 		auth,
 		politics,
+		requestBody,
 		controller.update.bind(controller)
 	)
 

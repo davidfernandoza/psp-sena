@@ -19,6 +19,7 @@ module.exports = ({
 	 */
 	const requestPrivate = TimeLogRequest.private.bind(TimeLogRequest)
 	const requestPublic = TimeLogRequest.public.bind(TimeLogRequest)
+	const requestBody = TimeLogRequest.body.bind(TimeLogRequest)
 
 	/*
 	 * Politics:
@@ -67,6 +68,7 @@ module.exports = ({
 		requestPrivate,
 		auth,
 		politics,
+		requestBody,
 		controller.create.bind(controller)
 	)
 
@@ -79,6 +81,7 @@ module.exports = ({
 		requestPrivate,
 		auth,
 		politics,
+		requestBody,
 		controller.update.bind(controller)
 	)
 
