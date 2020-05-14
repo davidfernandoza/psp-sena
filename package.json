@@ -1,7 +1,7 @@
 {
-  "name": "basener",
-  "version": "1.0.0",
-  "description": "Estructura base para proyectos API NODE",
+  "name": "psp-sena",
+  "version": "0.1.0",
+  "description": "Backend NODE.JS para el aplicativo de PSP(Personal Software Process) del SENA, en el programa de Tecnológo ADSI",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
