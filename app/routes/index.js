@@ -81,7 +81,7 @@ module.exports = ({
 		if (urlArray[1] == '') {
 			return res.render('home', {
 				title: 'Home',
-				app: app
+				app: app.toUpperCase()
 			})
 		} else {
 			next()

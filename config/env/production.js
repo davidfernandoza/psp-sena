@@ -2,8 +2,8 @@
 
 module.exports = {
 	NODE_ENV: process.env.NODE_ENV,
-	APP_NAME: process.env.APP_NAME,
 	PORT: process.env.PORT,
+	APP_NAME: process.env.APP_NAME,
 	CSRF_TOKEN: process.env.CSRF_TOKEN,
 	DOMAIN: process.env.DOMAIN,
 	BASE_URL: process.env.BASE_URL,
@@ -20,8 +20,7 @@ module.exports = {
 		database: process.env.DB_DATABASE,
 		host: process.env.DB_HOST,
 		dialect: process.env.DB_DIAL,
-		loggin: false,
-		operatorsAliases: false
+		loggin: false
 	},
 	ROL: {
 		ATTRIBUTE: process.env.ROL_ATTRIBUTE,

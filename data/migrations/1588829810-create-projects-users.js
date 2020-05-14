@@ -30,13 +30,3 @@ module.exports = {
 		return queryInterface.dropTable('projects_users')
 	}
 }
-
-select *
-from projects as p
-inner join projects_users as pu on pu.projects_id = p.id
-where pu.users_id = 1
-and pu.projects_id = any (
-	select pu2.projects_id
-	from projects_users as pu2
-	where pu2.users_id = 2
-);
