@@ -137,7 +137,7 @@ class Controller {
 
 		// Respuesta WEB
 		if (code == 'OK') {
-			entity.app = this.app
+			entity.app = this.app.toUpperCase()
 			return res.render(entity.page, entity)
 		}
 

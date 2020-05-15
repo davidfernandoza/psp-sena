@@ -35,7 +35,7 @@ class ErrorHandleMiddleware {
 		// Errores programados Web
 		else if (error.message.length === 3) {
 			objError = {
-				app: this.#app // Nombre de la aplicacion
+				app: this.#app.toUpperCase() // Nombre de la aplicacion
 			}
 
 			switch (error.message) {

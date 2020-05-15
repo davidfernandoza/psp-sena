@@ -166,7 +166,7 @@ class ForgotPasswordController extends Controller {
 			template: 'forgot-password-email',
 			context: {
 				url: `${this.config.BASE_URL}/recover-password/${token}`,
-				app: this.app,
+				app: this.app.toUpperCase(),
 				appUp: this.app.toUpperCase()
 			}
 		}
