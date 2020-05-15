@@ -36,14 +36,14 @@ module.exports = (sequelize, DataTypes) => {
 		models.modules.hasMany(models.programs, {
 			foreignKey: 'modules_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'programs-1'
+			as: 'programs'
 		})
 
 		// Un modules tiene un projects (1:1)
 		models.modules.belongsTo(models.projects, {
 			foreignKey: 'projects_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'projects-1'
+			as: 'projects'
 		})
 	}
 

@@ -17,7 +17,12 @@ class ProjectsRequest extends Request {
 	}
 
 	async owner(req, res, next) {
-		const idProject = req.params.id
+		let idProject = req.params.id
+
+		if (req.method == 'POST' || req.method == 'PUT') {
+			idProject = req.body.projects_id
+		}
+
 		const idUser = req.id
 		const relationData = await this.#projectsUsersRepository.owner(
 			idProject,

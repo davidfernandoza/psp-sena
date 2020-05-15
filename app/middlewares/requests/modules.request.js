@@ -12,9 +12,9 @@ class ModulesRequest extends Request {
 				.required(),
 			name: JoiValidator.string().min(8).max(225).required(),
 			description: JoiValidator.string().min(8).allow('').optional(),
-			planning_date: JoiValidator.date().timestamp().required(),
-			start_date: JoiValidator.date().timestamp().required(),
-			finish_date: JoiValidator.date().timestamp().required()
+			planning_date: JoiValidator.date().required(),
+			start_date: JoiValidator.date().required(),
+			finish_date: JoiValidator.date().required()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
 	}

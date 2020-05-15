@@ -480,7 +480,7 @@ function run(message) {
 										keyValue[1] == 'timestamp'
 									) {
 										objAtributes[keyValue[0]] =
-											'|JoiValidator.date().timestamp().required()|'
+											'|JoiValidator.date().required()|'
 									}
 
 									// Flotantes

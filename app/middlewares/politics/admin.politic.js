@@ -80,6 +80,25 @@ class AdminPolitic extends Politic {
 					}
 				]
 			},
+			modules: {
+				subRoutes: [
+					{
+						route: '/by-project/:id',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/',
+						method: 'POST',
+						status: 'enable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'enable'
+					}
+				]
+			},
 			programs: {
 				subRoutes: [
 					{

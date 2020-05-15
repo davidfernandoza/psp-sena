@@ -81,6 +81,25 @@ class DevPolitic extends Politic {
 					}
 				]
 			},
+			modules: {
+				subRoutes: [
+					{
+						route: '/by-project/:id',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/',
+						method: 'POST',
+						status: 'disable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'disable'
+					}
+				]
+			},
 			programs: {
 				subRoutes: [
 					{

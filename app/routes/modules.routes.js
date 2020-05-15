@@ -7,6 +7,7 @@ const { Router } = require('express')
 
 module.exports = ({
 	ModulesController,
+	ProjectsRequest,
 	ModulesRequest,
 	AuthMiddleware,
 	AdminPolitic,
@@ -18,8 +19,8 @@ module.exports = ({
 	 * Request:
 	 */
 	const requestPrivate = ModulesRequest.private.bind(ModulesRequest)
-	const requestPublic = ModulesRequest.public.bind(ModulesRequest)
 	const requestBody = ModulesRequest.body.bind(ModulesRequest)
+	const requestOwner = ProjectsRequest.owner.bind(ProjectsRequest)
 
 	/*
 	 * Politics:
@@ -44,19 +45,12 @@ module.exports = ({
 	 * GET:
 	 */
 	router.get(
-		'/',
-		requestPublic,
-		auth,
-		politics,
-		controller.getAll.bind(controller)
-	)
-
-	router.get(
-		'/:id',
+		'/by-project/:id',
 		requestPrivate,
 		auth,
 		politics,
-		controller.get.bind(controller)
+		requestOwner,
+		controller.getAllByProject.bind(controller)
 	)
 
 	/*
@@ -69,6 +63,7 @@ module.exports = ({
 		auth,
 		politics,
 		requestBody,
+		requestOwner,
 		controller.create.bind(controller)
 	)
 
@@ -77,24 +72,13 @@ module.exports = ({
 	 * PUT:
 	 */
 	router.put(
-		'/',
+		'/:id',
 		requestPrivate,
 		auth,
 		politics,
 		requestBody,
+		requestOwner,
 		controller.update.bind(controller)
-	)
-
-	/*
-	 * -----------------------------------------------------------------------------------*
-	 * DELETE:
-	 */
-	router.delete(
-		'/',
-		requestPrivate,
-		auth,
-		politics,
-		controller.delete.bind(controller)
 	)
 
 	return router
