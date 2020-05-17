@@ -19,9 +19,11 @@ class ProjectsRequest extends Request {
 	async owner(req, res, next) {
 		let idProject = req.params.id
 
-		if (req.method == 'POST' || req.method == 'PUT') {
+		if (
+			(req.method == 'POST' || req.method == 'PUT') &&
+			req.baseUrl == '/api/modules'
+		)
 			idProject = req.body.projects_id
-		}
 
 		const idUser = req.id
 		const relationData = await this.#projectsUsersRepository.owner(
