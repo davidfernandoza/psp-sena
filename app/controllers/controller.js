@@ -63,6 +63,7 @@ class Controller {
 
 	async create(req, res) {
 		const { body } = req
+		if (body.id) delete body.id
 		const addSubDto = !req.addSubDto ? false : req.addSubDto
 		const transaction = !req.transaction ? null : req.transaction
 		let created = await this.entityRepository.create(
@@ -77,6 +78,7 @@ class Controller {
 	async update(req, res) {
 		const { body } = req
 		const { id } = req.params
+		if (body.id) delete body.id
 		const addSubDto = !req.addSubDto ? false : req.addSubDto
 		const transaction = !req.transaction ? null : req.transaction
 		const dto = !req.dto ? null : req.dto
