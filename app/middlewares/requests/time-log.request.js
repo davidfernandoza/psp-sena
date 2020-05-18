@@ -16,13 +16,14 @@ class TimeLogRequest extends Request {
 				.max(99999999990)
 				.required(),
 			start_date: JoiValidator.date().timestamp().required(),
-			delta_time: JoiValidator.number().required(),
-			pause_date: JoiValidator.date().timestamp().required(),
+			delta_time: JoiValidator.number().allow('').optional(),
+			finish_date: JoiValidator.date().timestamp().allow('').optional(),
 			interruption: JoiValidator.number()
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required(),
+				.allow('')
+				.optional(),
 			comments: JoiValidator.string().min(8).allow('').optional()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)

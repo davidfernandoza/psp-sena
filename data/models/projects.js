@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
 			name: { type: DataTypes.STRING, allowNull: false },
 			description: { type: DataTypes.TEXT, allowNull: false },
 			planning_date: { type: DataTypes.BIGINT, allowNull: false },
-			start_date: { type: DataTypes.BIGINT, allowNull: false },
-			finish_date: { type: DataTypes.BIGINT, allowNull: false }
+			start_date: { type: DataTypes.BIGINT },
+			finish_date: { type: DataTypes.BIGINT }
 		},
 		{
 			timestamps: true,

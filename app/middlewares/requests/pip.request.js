@@ -10,8 +10,8 @@ class PipRequest extends Request {
 				.min(0)
 				.max(99999999990)
 				.required(),
-			description: JoiValidator.string().min(8).allow('').optional(),
-			proposals: JoiValidator.string().min(8).allow('').optional(),
+			description: JoiValidator.string().min(8).required(),
+			proposals: JoiValidator.string().min(8).required(),
 			comments: JoiValidator.string().min(8).allow('').optional(),
 			date: JoiValidator.date().timestamp().required()
 		}

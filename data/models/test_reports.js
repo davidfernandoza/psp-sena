@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
 			conditions: { type: DataTypes.TEXT, allowNull: false },
 			expected_result: { type: DataTypes.TEXT, allowNull: false },
 			current_result: { type: DataTypes.TEXT, allowNull: false },
-			description: { type: DataTypes.TEXT, allowNull: false },
+			description: { type: DataTypes.TEXT },
 			objective: { type: DataTypes.TEXT, allowNull: false }
 		},
 		{

@@ -4,7 +4,7 @@ const Dto = require(join(__dirname, './dto'))
 
 class PhasesDto extends Dto {
 	constructor() {
-		const schema = { id: 'id', name: 'name', description: 'description' }
+		const schema = { id: 'id', name: 'name' }
 		super(schema)
 	}
 }

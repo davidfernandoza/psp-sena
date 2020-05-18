@@ -16,11 +16,11 @@ class TestReportsRequest extends Request {
 				.max(99999999990)
 				.required(),
 			test_name: JoiValidator.string().min(8).max(225).required(),
-			conditions: JoiValidator.string().min(8).allow('').optional(),
-			expected_result: JoiValidator.string().min(8).allow('').optional(),
-			current_result: JoiValidator.string().min(8).allow('').optional(),
+			conditions: JoiValidator.string().min(8).required(),
+			expected_result: JoiValidator.string().min(8).required(),
+			current_result: JoiValidator.string().min(8).required(),
 			description: JoiValidator.string().min(8).allow('').optional(),
-			objective: JoiValidator.string().min(8).allow('').optional()
+			objective: JoiValidator.string().min(8).required()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
 	}

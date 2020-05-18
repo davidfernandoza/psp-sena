@@ -14,6 +14,7 @@ class DefectLogDto extends Dto {
 			description: 'description',
 			solution: 'solution',
 			start_date: 'start_date',
+			finish_date: 'finish_date',
 			time_for_repair: 'time_for_repair'
 		}
 		super(schema)

@@ -21,7 +21,6 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			standard_defects_id: {
 				type: DataTypes.INTEGER,
-				allowNull: false,
 				isNumeric: true
 			},
 			phase_added_id: {
@@ -35,9 +34,10 @@ module.exports = (sequelize, DataTypes) => {
 				isNumeric: true
 			},
 			description: { type: DataTypes.TEXT, allowNull: false },
-			solution: { type: DataTypes.TEXT, allowNull: false },
+			solution: { type: DataTypes.TEXT },
 			start_date: { type: DataTypes.BIGINT, allowNull: false },
-			time_for_repair: { type: DataTypes.INTEGER, allowNull: false }
+			finish_date: { type: DataTypes.BIGINT, allowNull: false },
+			time_for_repair: { type: DataTypes.INTEGER }
 		},
 		{
 			timestamps: true,

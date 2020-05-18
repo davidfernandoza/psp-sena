@@ -20,7 +20,7 @@ module.exports = {
 			conditions: { type: Sequelize.TEXT, allowNull: false },
 			expected_result: { type: Sequelize.TEXT, allowNull: false },
 			current_result: { type: Sequelize.TEXT, allowNull: false },
-			description: { type: Sequelize.TEXT, allowNull: false },
+			description: { type: Sequelize.TEXT },
 			objective: { type: Sequelize.TEXT, allowNull: false },
 			created_at: { allowNull: false, type: Sequelize.DATE },
 			updated_at: { allowNull: false, type: Sequelize.DATE }

@@ -9,8 +9,7 @@ module.exports = {
 				autoIncrement: true
 			},
 			name: { type: Sequelize.STRING, allowNull: false },
-			type: { type: Sequelize.STRING, allowNull: false },
-			description: { type: Sequelize.TEXT },
+			description: { type: Sequelize.TEXT, allowNull: false },
 			created_at: { allowNull: false, type: Sequelize.DATE },
 			updated_at: { allowNull: false, type: Sequelize.DATE }
 		})

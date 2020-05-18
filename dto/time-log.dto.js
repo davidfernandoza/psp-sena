@@ -10,7 +10,7 @@ class TimeLogDto extends Dto {
 			phases_id: 'phases_id',
 			start_date: 'start_date',
 			delta_time: 'delta_time',
-			pause_date: 'pause_date',
+			finish_date: 'finish_date',
 			interruption: 'interruption',
 			comments: 'comments'
 		}

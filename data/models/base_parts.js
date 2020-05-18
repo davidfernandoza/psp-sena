@@ -24,10 +24,10 @@ module.exports = (sequelize, DataTypes) => {
 			planned_lines_deleted: { type: DataTypes.INTEGER, allowNull: false },
 			planned_lines_edits: { type: DataTypes.INTEGER, allowNull: false },
 			planned_lines_added: { type: DataTypes.INTEGER, allowNull: false },
-			current_lines_base: { type: DataTypes.INTEGER, allowNull: false },
-			current_lines_deleted: { type: DataTypes.INTEGER, allowNull: false },
-			current_lines_edits: { type: DataTypes.INTEGER, allowNull: false },
-			current_lines_added: { type: DataTypes.INTEGER, allowNull: false }
+			current_lines_base: { type: DataTypes.INTEGER },
+			current_lines_deleted: { type: DataTypes.INTEGER },
+			current_lines_edits: { type: DataTypes.INTEGER },
+			current_lines_added: { type: DataTypes.INTEGER }
 		},
 		{
 			timestamps: true,

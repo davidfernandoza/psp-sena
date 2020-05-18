@@ -9,7 +9,8 @@ class DefectLogRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required(),
+				.allow('')
+				.optional(),
 			programs_id: JoiValidator.number()
 				.integer()
 				.min(0)
@@ -19,7 +20,8 @@ class DefectLogRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required(),
+				.allow('')
+				.optional(),
 			phase_added_id: JoiValidator.number()
 				.integer()
 				.min(0)
@@ -33,11 +35,13 @@ class DefectLogRequest extends Request {
 			description: JoiValidator.string().min(8).allow('').optional(),
 			solution: JoiValidator.string().min(8).allow('').optional(),
 			start_date: JoiValidator.date().timestamp().required(),
+			finish_date: JoiValidator.date().timestamp().required(),
 			time_for_repair: JoiValidator.number()
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required()
+				.allow('')
+				.optional()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
 	}

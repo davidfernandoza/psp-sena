@@ -22,8 +22,8 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.ENUM('XS', 'S', 'M', 'L', 'XL'),
 				allowNull: false
 			},
-			current_lines: { type: DataTypes.INTEGER, allowNull: false },
-			number_methods_current: { type: DataTypes.INTEGER, allowNull: false }
+			current_lines: { type: DataTypes.INTEGER },
+			number_methods_current: { type: DataTypes.INTEGER }
 		},
 		{
 			timestamps: true,

@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			description: { type: DataTypes.TEXT, allowNull: false },
 			proposals: { type: DataTypes.TEXT, allowNull: false },
-			comments: { type: DataTypes.TEXT, allowNull: false },
+			comments: { type: DataTypes.TEXT },
 			date: { type: DataTypes.BIGINT, allowNull: false }
 		},
 		{
