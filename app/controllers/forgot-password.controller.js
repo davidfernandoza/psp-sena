@@ -160,7 +160,7 @@ class ForgotPasswordController extends Controller {
 
 	async sendEmail(token, user) {
 		const optionMail = {
-			from: `${this.app} Server <${this.config.MAIL.EMAIL}>`,
+			from: `${this.app.toUpperCase()} Server <${this.config.MAIL.EMAIL}>`,
 			to: user.email,
 			subject: `${this.app.toUpperCase()} - ¿Olvidaste tu contraseña?`,
 			template: 'forgot-password-email',
