@@ -22,9 +22,9 @@ module.exports = {
 				onUpdate: 'cascade',
 				onDelete: 'cascade'
 			},
-			start_date: { type: Sequelize.DATE, allowNull: false },
+			start_date: { type: Sequelize.BIGINT, allowNull: false },
 			delta_time: { type: Sequelize.FLOAT },
-			pause_date: { type: Sequelize.DATE },
+			pause_date: { type: Sequelize.BIGINT },
 			interruption: { type: Sequelize.INTEGER },
 			comments: { type: Sequelize.TEXT },
 			created_at: { allowNull: false, type: Sequelize.DATE },

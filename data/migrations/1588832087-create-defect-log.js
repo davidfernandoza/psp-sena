@@ -43,7 +43,7 @@ module.exports = {
 			},
 			description: { type: Sequelize.TEXT, allowNull: false },
 			solution: { type: Sequelize.TEXT, allowNull: false },
-			start_date: { type: Sequelize.DATE, allowNull: false },
+			start_date: { type: Sequelize.BIGINT, allowNull: false },
 			time_for_repair: { type: Sequelize.INTEGER },
 			created_at: { allowNull: false, type: Sequelize.DATE },
 			updated_at: { allowNull: false, type: Sequelize.DATE }

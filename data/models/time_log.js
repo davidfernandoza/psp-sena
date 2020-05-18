@@ -20,13 +20,13 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 				isNumeric: true
 			},
-			start_date: { type: DataTypes.DATE, allowNull: false },
+			start_date: { type: DataTypes.BIGINT, allowNull: false },
 			delta_time: {
 				type: DataTypes.DOUBLE,
 				allowNull: false,
 				isNumeric: true
 			},
-			pause_date: { type: DataTypes.DATE, allowNull: false },
+			pause_date: { type: DataTypes.BIGINT, allowNull: false },
 			interruption: { type: DataTypes.INTEGER, allowNull: false },
 			comments: { type: DataTypes.TEXT, allowNull: false }
 		},

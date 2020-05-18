@@ -15,6 +15,7 @@ class Request {
 		}
 	}
 
+	// ---------------------------------------------------------------------------
 	// Metodo estandar para validaciones privadas
 	async body(req, res, next) {
 		if (req.method != 'GET' && req.method != 'DELETE') {
@@ -24,6 +25,7 @@ class Request {
 		next()
 	}
 
+	// ---------------------------------------------------------------------------
 	// Metodo estandar para validaciones publicas.
 	async public(req, res, next) {
 		const header = await this.headersValidator(req, 'csrf')
@@ -31,6 +33,7 @@ class Request {
 		next()
 	}
 
+	// ---------------------------------------------------------------------------
 	// Metodo estandar para validaciones publicas.
 	async private(req, res, next) {
 		const header = await this.headersValidator(req)
@@ -39,7 +42,7 @@ class Request {
 	}
 
 	// Validaciones
-	// ----------------------------------------------------
+	// ---------------------------------------------------------------------------
 
 	// Validacion de cabecera
 	async headersValidator(req, type) {
@@ -77,6 +80,7 @@ class Request {
 		}
 	}
 
+	// ---------------------------------------------------------------------------
 	// Validacion de cuerpo
 	async bodyValidator(req, rules) {
 		try {
@@ -88,6 +92,7 @@ class Request {
 		}
 	}
 
+	// ---------------------------------------------------------------------------
 	async errorHandle(error) {
 		const objecError = {}
 		objecError.errors = error.details.map(item => {

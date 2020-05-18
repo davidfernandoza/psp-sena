@@ -1,7 +1,7 @@
 'use strict'
 module.exports = {
 	up: (queryInterface, Sequelize) => {
-		return queryInterface.createTable('projects', {
+		return queryInterface.createTable('organizations', {
 			id: {
 				type: Sequelize.INTEGER,
 				allowNull: false,
@@ -9,15 +9,11 @@ module.exports = {
 				autoIncrement: true
 			},
 			name: { type: Sequelize.STRING, allowNull: false },
-			description: { type: Sequelize.TEXT, allowNull: false },
-			planning_date: { type: Sequelize.BIGINT, allowNull: false },
-			start_date: { type: Sequelize.BIGINT, allowNull: false },
-			finish_date: { type: Sequelize.BIGINT, allowNull: false },
 			created_at: { allowNull: false, type: Sequelize.DATE },
 			updated_at: { allowNull: false, type: Sequelize.DATE }
 		})
 	},
 	down: queryInterface => {
-		return queryInterface.dropTable('projects')
+		return queryInterface.dropTable('organizations')
 	}
 }

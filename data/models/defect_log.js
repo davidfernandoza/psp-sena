@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			description: { type: DataTypes.TEXT, allowNull: false },
 			solution: { type: DataTypes.TEXT, allowNull: false },
-			start_date: { type: DataTypes.DATE, allowNull: false },
+			start_date: { type: DataTypes.BIGINT, allowNull: false },
 			time_for_repair: { type: DataTypes.INTEGER, allowNull: false }
 		},
 		{

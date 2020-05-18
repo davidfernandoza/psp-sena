@@ -47,6 +47,10 @@ const ForgotPasswordRoutes = require(join(
 const LanguagesRoutes = require(join(__dirname, './routes/languages.routes'))
 const ModulesRoutes = require(join(__dirname, './routes/modules.routes'))
 const NewPartsRoutes = require(join(__dirname, './routes/new-parts.routes'))
+const OrganizationsRoutes = require(join(
+	__dirname,
+	'./routes/organizations.routes'
+))
 const PhasesRoutes = require(join(__dirname, './routes/phases.routes'))
 const PipRoutes = require(join(__dirname, './routes/pip.routes'))
 const PositionsRoutes = require(join(__dirname, './routes/positions.routes'))
@@ -111,6 +115,7 @@ const {
 	LanguagesRequest,
 	ModulesRequest,
 	NewPartsRequest,
+	OrganizationsRequest,
 	PhasesRequest,
 	PipRequest,
 	PositionsRequest,
@@ -144,6 +149,7 @@ const {
 	LanguagesController,
 	ModulesController,
 	NewPartsController,
+	OrganizationsController,
 	PhasesController,
 	PipController,
 	PositionsController,
@@ -172,6 +178,7 @@ const {
 	LanguagesRepository,
 	ModulesRepository,
 	NewPartsRepository,
+	OrganizationsRepository,
 	PhasesRepository,
 	PipRepository,
 	PositionsRepository,
@@ -201,6 +208,7 @@ const {
 	LanguagesDto,
 	ModulesDto,
 	NewPartsDto,
+	OrganizationsDto,
 	PhasesDto,
 	PipDto,
 	PositionsDto,
@@ -269,6 +277,7 @@ container
 		LanguagesRoutes: asFunction(LanguagesRoutes).singleton(),
 		ModulesRoutes: asFunction(ModulesRoutes).singleton(),
 		NewPartsRoutes: asFunction(NewPartsRoutes).singleton(),
+		OrganizationsRoutes: asFunction(OrganizationsRoutes).singleton(),
 		PhasesRoutes: asFunction(PhasesRoutes).singleton(),
 		PipRoutes: asFunction(PipRoutes).singleton(),
 		PositionsRoutes: asFunction(PositionsRoutes).singleton(),
@@ -339,6 +348,7 @@ container
 		LanguagesController: asClass(LanguagesController).singleton(),
 		ModulesController: asClass(ModulesController).singleton(),
 		NewPartsController: asClass(NewPartsController).singleton(),
+		OrganizationsController: asClass(OrganizationsController).singleton(),
 		PhasesController: asClass(PhasesController).singleton(),
 		PipController: asClass(PipController).singleton(),
 		PositionsController: asClass(PositionsController).singleton(),
@@ -389,6 +399,7 @@ container
 		LanguagesRequest: asClass(LanguagesRequest).singleton(),
 		ModulesRequest: asClass(ModulesRequest).singleton(),
 		NewPartsRequest: asClass(NewPartsRequest).singleton(),
+		OrganizationsRequest: asClass(OrganizationsRequest).singleton(),
 		PhasesRequest: asClass(PhasesRequest).singleton(),
 		PipRequest: asClass(PipRequest).singleton(),
 		PositionsRequest: asClass(PositionsRequest).singleton(),
@@ -421,6 +432,7 @@ container
 		LanguagesRepository: asClass(LanguagesRepository).singleton(),
 		ModulesRepository: asClass(ModulesRepository).singleton(),
 		NewPartsRepository: asClass(NewPartsRepository).singleton(),
+		OrganizationsRepository: asClass(OrganizationsRepository).singleton(),
 		PhasesRepository: asClass(PhasesRepository).singleton(),
 		PipRepository: asClass(PipRepository).singleton(),
 		PositionsRepository: asClass(PositionsRepository).singleton(),
@@ -450,6 +462,7 @@ container
 		LanguagesDto: asClass(LanguagesDto).singleton(),
 		ModulesDto: asClass(ModulesDto).singleton(),
 		NewPartsDto: asClass(NewPartsDto).singleton(),
+		OrganizationsDto: asClass(OrganizationsDto).singleton(),
 		PhasesDto: asClass(PhasesDto).singleton(),
 		PipDto: asClass(PipDto).singleton(),
 		PositionsDto: asClass(PositionsDto).singleton(),

@@ -2,24 +2,24 @@
 const { Router } = require('express')
 
 /*
- * Rutas de los #2:
+ * Rutas de los Organizations:
  */
 
 module.exports = ({
-	#2Controller,
-	#2Request,
+	OrganizationsController,
+	OrganizationsRequest,
 	AuthMiddleware,
 	AdminPolitic,
-	DevPolitic	
+	DevPolitic
 }) => {
 	const router = Router()
 
 	/*
 	 * Request:
 	 */
-	const requestBody = #2Request.body.bind(#2Request)
-	const requestPublic = #2Request.public.bind(#2Request)
-	const requestPrivate = #2Request.private.bind(#2Request)
+	const requestBody = OrganizationsRequest.body.bind(OrganizationsRequest)
+	const requestPublic = OrganizationsRequest.public.bind(OrganizationsRequest)
+	const requestPrivate = OrganizationsRequest.private.bind(OrganizationsRequest)
 
 	/*
 	 * Politics:
@@ -34,12 +34,11 @@ module.exports = ({
 	 */
 	const auth = AuthMiddleware.compare.bind(AuthMiddleware)
 
-
 	/*
 	 * Controller:
 	 */
-	const controller = #2Controller
-	
+	const controller = OrganizationsController
+
 	/*
 	 * -----------------------------------------------------------------------------------*
 	 * GET:
@@ -85,7 +84,6 @@ module.exports = ({
 		requestBody,
 		controller.update.bind(controller)
 	)
-
 
 	/*
 	 * -----------------------------------------------------------------------------------*

@@ -32,6 +32,8 @@ class ForgotPasswordRequest extends Request {
 		this.#errorString = ErrorString
 	}
 
+	//  ----------------------------------------------------------------------
+
 	async phone(req, res, next) {
 		const header = await super.headersValidator(req, 'csrf')
 		if (header != true) await super.errorHandle(header)

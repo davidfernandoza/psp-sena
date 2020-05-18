@@ -32,10 +32,10 @@ module.exports = {
 			name: { type: Sequelize.STRING, allowNull: false },
 			description: { type: Sequelize.TEXT, allowNull: false },
 			total_lines: { type: Sequelize.INTEGER, allowNull: false },
-			planning_date: { type: Sequelize.DATE, allowNull: false },
-			start_date: { type: Sequelize.DATE, allowNull: false },
-			update_date: { type: Sequelize.DATE, allowNull: false },
-			delivery_date: { type: Sequelize.DATE, allowNull: false },
+			planning_date: { type: Sequelize.BIGINT, allowNull: false },
+			start_date: { type: Sequelize.BIGINT, allowNull: false },
+			update_date: { type: Sequelize.BIGINT, allowNull: false },
+			delivery_date: { type: Sequelize.BIGINT, allowNull: false },
 			created_at: { allowNull: false, type: Sequelize.DATE },
 			updated_at: { allowNull: false, type: Sequelize.DATE }
 		})

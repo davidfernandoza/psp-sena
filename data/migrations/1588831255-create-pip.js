@@ -18,7 +18,7 @@ module.exports = {
 			description: { type: Sequelize.TEXT, allowNull: false },
 			proposals: { type: Sequelize.TEXT, allowNull: false },
 			comments: { type: Sequelize.TEXT },
-			date: { type: Sequelize.DATE, allowNull: false },
+			date: { type: Sequelize.BIGINT, allowNull: false },
 			created_at: { allowNull: false, type: Sequelize.DATE },
 			updated_at: { allowNull: false, type: Sequelize.DATE }
 		})

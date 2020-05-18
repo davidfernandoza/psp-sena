@@ -10,6 +10,10 @@ module.exports = (sequelize, DataTypes) => {
 				autoIncrement: true,
 				isNumeric: true
 			},
+			organizations_id: {
+				type: DataTypes.INTEGER,
+				allowNull: false
+			},
 			first_name: { type: DataTypes.STRING, allowNull: false },
 			last_name: { type: DataTypes.STRING, allowNull: false },
 			email: {
@@ -62,6 +66,13 @@ module.exports = (sequelize, DataTypes) => {
 			foreignKey: 'users_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
 			as: 'forgot_password'
+		})
+
+		// Un users tiene un organizatios (1:1)
+		models.time_log.belongsTo(models.organizations, {
+			foreignKey: 'organizations_id', // a donde llega
+			targetKey: 'id', // de donde viene
+			as: 'organizations'
 		})
 	}
 

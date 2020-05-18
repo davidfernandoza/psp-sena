@@ -18,14 +18,14 @@ module.exports = (sequelize, DataTypes) => {
 		models.#3.hasMany(models.#5, {
 			foreignKey: '#3_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: '#5-1'
+			as: '#5'
 		})
 
 		// Un #3 tiene un #5 (1:1)
 		models.#3.belongsTo(models.#5, {
 			foreignKey: '#5_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: '#5-2'
+			as: '#5'
 		})
 
 		// Un #3 tiene muchas #5 (1:M)
@@ -33,14 +33,14 @@ module.exports = (sequelize, DataTypes) => {
 			through: models.#3_#5, // Tabla pivote
 			foreignKey: '#3_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: '#5-3'
+			as: '#5'
 		})
 
 		// Un #3 le pertenece a un #5 (1:1)
 		models.#3.hasOne(models.#5, {
 			foreignKey: '#3_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: '#5-4'
+			as: '#5'
 		})
 	}
 

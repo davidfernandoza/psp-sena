@@ -8,6 +8,13 @@ module.exports = {
 				primaryKey: true,
 				autoIncrement: true
 			},
+			organizations_id: {
+				type: Sequelize.INTEGER,
+				allowNull: false,
+				references: { model: 'organizations', key: 'id' },
+				onUpdate: 'cascade',
+				onDelete: 'cascade'
+			},
 			first_name: { type: Sequelize.STRING, allowNull: false },
 			last_name: { type: Sequelize.STRING, allowNull: false },
 			email: { type: Sequelize.STRING, allowNull: false, unique: true },
