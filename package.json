@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon -e js,handlebars ./index.js",
+    "db-refresh-p": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "db-init": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "db-init-hard": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "db-refresh": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
