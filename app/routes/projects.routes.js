@@ -52,15 +52,6 @@ module.exports = ({
 		controller.getAllByUser.bind(controller)
 	)
 
-	router.get(
-		'/:id',
-		requestPrivate,
-		auth,
-		politics,
-		requestOwner,
-		controller.get.bind(controller)
-	)
-
 	/*
 	 * -----------------------------------------------------------------------------------*
 	 * POST:
