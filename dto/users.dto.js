@@ -6,6 +6,7 @@ class UsersDto extends Dto {
 	constructor() {
 		const schema = {
 			id: 'id',
+			organizations_id: 'organizations_id',
 			first_name: 'first_name',
 			last_name: 'last_name',
 			email: 'email',

@@ -5,6 +5,8 @@ let body = {}
 let passwordRule = {}
 
 class UsersRequest extends Request {
+	#joiValidator = {}
+
 	constructor({ JoiValidator, Config, JWTService }) {
 		body = {
 			first_name: JoiValidator.string().min(8).max(225).required(),
@@ -28,10 +30,17 @@ class UsersRequest extends Request {
 		}
 
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
+		this.#joiValidator = JoiValidator
 	}
 
 	async update(req, res, next) {
 		delete body.password
+		body.organizations_id = this.#joiValidator
+			.number()
+			.integer()
+			.min(0)
+			.max(99999999990)
+			.required()
 		const header = await super.header(req)
 		if (header != true) await super.errorHandle(header)
 		else if (req.method != 'GET' && req.method != 'DELETE') {
