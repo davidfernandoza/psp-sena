@@ -10,7 +10,11 @@ module.exports = (sequelize, DataTypes) => {
 				autoIncrement: true,
 				isNumeric: true
 			},
-			name: { type: DataTypes.STRING, allowNull: false }
+			name: {
+				type: DataTypes.ENUM('PLAN', 'DLD', 'CODE', 'COMPILE', 'UT', 'PM'),
+				unique: true,
+				allowNull: false
+			}
 		},
 		{
 			timestamps: true,

@@ -5,6 +5,13 @@ const Request = require(join(__dirname, './request'))
 class ExperiencesLanguagesRequest extends Request {
 	constructor({ JoiValidator, Config, JWTService }) {
 		const body = {
+			id: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
+				.required()
+				.allow('', null)
+				.optional(),
 			experiences_id: JoiValidator.number()
 				.integer()
 				.min(0)

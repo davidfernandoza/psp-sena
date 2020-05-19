@@ -5,6 +5,13 @@ const Request = require(join(__dirname, './request'))
 class BasePartsRequest extends Request {
 	constructor({ JoiValidator, Config, JWTService }) {
 		const body = {
+			id: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
+				.required()
+				.allow('', null)
+				.optional(),
 			programs_id: JoiValidator.number()
 				.integer()
 				.min(0)
@@ -39,25 +46,25 @@ class BasePartsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('')
+				.allow('', null)
 				.optional(),
 			current_lines_deleted: JoiValidator.number()
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('')
+				.allow('', null)
 				.optional(),
 			current_lines_edits: JoiValidator.number()
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('')
+				.allow('', null)
 				.optional(),
 			current_lines_added: JoiValidator.number()
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('')
+				.allow('', null)
 				.optional()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)

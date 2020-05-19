@@ -11,8 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 				isNumeric: true
 			},
 			organizations_id: {
-				type: DataTypes.INTEGER,
-				allowNull: false
+				type: DataTypes.INTEGER
 			},
 			first_name: { type: DataTypes.STRING, allowNull: false },
 			last_name: { type: DataTypes.STRING, allowNull: false },

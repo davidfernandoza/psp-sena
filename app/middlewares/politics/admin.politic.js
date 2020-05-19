@@ -8,45 +8,6 @@ class AdminPolitic extends Politic {
 		const authRol = Config.ROL.ATTRIBUTE
 		const baseUrl = Config.BASE_API
 		const permissions = {
-			clients: {
-				subRoutes: [
-					{
-						route: '/',
-						method: 'GET',
-						status: 'enamble'
-					},
-					{
-						route: '/:id',
-						method: 'GET',
-						status: 'enable'
-					},
-					{
-						route: '/',
-						method: 'POST',
-						status: 'enable'
-					},
-					{
-						route: '/new-token',
-						method: 'POST',
-						status: 'unique'
-					},
-					{
-						route: '/:id',
-						method: 'PUT',
-						status: 'enable'
-					},
-					{
-						route: '/new-password',
-						method: 'PATCH',
-						status: 'unique'
-					},
-					{
-						route: '/:id',
-						method: 'DELETE',
-						status: 'enable'
-					}
-				]
-			},
 			auth: {
 				subRoutes: 'all',
 				status: 'enable'
@@ -99,13 +60,47 @@ class AdminPolitic extends Politic {
 					}
 				]
 			},
-			programs: {
+			users: {
 				subRoutes: [
 					{
-						route: '/:id',
+						route: '/by-organization/:id',
 						method: 'GET',
-						status: 'unique',
-						authParameter: 'id' // Parametro que inyecto el auth al request
+						status: 'enable'
+					},
+					{
+						route: '/by-projects/:id',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/',
+						method: 'POST',
+						status: 'enable'
+					},
+					{
+						route: '/projects',
+						method: 'POST',
+						status: 'enable'
+					},
+					{
+						route: '/new-token',
+						method: 'POST',
+						status: 'enable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'enable'
+					},
+					{
+						route: '/password',
+						method: 'PATCH',
+						status: 'enable'
+					},
+					{
+						route: '/projects',
+						method: 'DELETE',
+						status: 'enable'
 					}
 				]
 			}

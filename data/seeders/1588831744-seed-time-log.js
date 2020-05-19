@@ -80,7 +80,7 @@ module.exports = {
 				},
 				{
 					programs_id: 7,
-					phases_id: 7,
+					phases_id: 1,
 					start_date: 1589754486,
 					delta_time: 137812.33333333334,
 					finish_date: 1589754486,
@@ -92,7 +92,7 @@ module.exports = {
 				},
 				{
 					programs_id: 8,
-					phases_id: 8,
+					phases_id: 2,
 					start_date: 1589754486,
 					delta_time: 315144.6666666667,
 					finish_date: 1589754486,

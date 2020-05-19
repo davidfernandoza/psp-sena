@@ -5,7 +5,16 @@ const Request = require(join(__dirname, './request'))
 class PhasesRequest extends Request {
 	constructor({ JoiValidator, Config, JWTService }) {
 		const body = {
-			name: JoiValidator.string().min(8).max(225).required()
+			id: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
+				.required()
+				.allow('', null)
+				.optional(),
+			name: JoiValidator.any()
+				.valid('PLAN', 'DLD', 'CODE', 'COMPILE', 'UT', 'PM')
+				.required()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
 	}

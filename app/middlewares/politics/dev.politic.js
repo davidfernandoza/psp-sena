@@ -8,45 +8,6 @@ class DevPolitic extends Politic {
 		const authRol = Config.ROL.ATTRIBUTE
 		const baseUrl = Config.BASE_API
 		const permissions = {
-			clients: {
-				subRoutes: [
-					{
-						route: '/',
-						method: 'GET',
-						status: 'disable'
-					},
-					{
-						route: '/:id',
-						method: 'GET',
-						status: 'unique'
-					},
-					{
-						route: '/',
-						method: 'POST',
-						status: 'enable'
-					},
-					{
-						route: '/new-token',
-						method: 'POST',
-						status: 'unique'
-					},
-					{
-						route: '/:id',
-						method: 'PUT',
-						status: 'unique'
-					},
-					{
-						route: '/new-password',
-						method: 'PATCH',
-						status: 'unique'
-					},
-					{
-						route: '/:id',
-						method: 'DELETE',
-						status: 'unique'
-					}
-				]
-			},
 			auth: {
 				subRoutes: 'all',
 				status: 'enable'
@@ -100,13 +61,48 @@ class DevPolitic extends Politic {
 					}
 				]
 			},
-			programs: {
+			users: {
 				subRoutes: [
 					{
-						route: '/:id',
+						route: '/by-organization/:id',
 						method: 'GET',
+						status: 'disable'
+					},
+					{
+						route: '/by-projects/:id',
+						method: 'GET',
+						status: 'disable'
+					},
+					{
+						route: '/',
+						method: 'POST',
+						status: 'disable'
+					},
+					{
+						route: '/projects',
+						method: 'POST',
+						status: 'disable'
+					},
+					{
+						route: '/new-token',
+						method: 'POST',
+						status: 'enable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
 						status: 'unique',
 						authParameter: 'id' // Parametro que inyecto el auth al request
+					},
+					{
+						route: '/password',
+						method: 'PATCH',
+						status: 'enable'
+					},
+					{
+						route: '/projects',
+						method: 'DELETE',
+						status: 'disable'
 					}
 				]
 			}

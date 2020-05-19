@@ -8,7 +8,10 @@ module.exports = {
 				primaryKey: true,
 				autoIncrement: true
 			},
-			name: { type: Sequelize.STRING, allowNull: false },
+			name: {
+				type: Sequelize.ENUM('PLAN', 'DLD', 'CODE', 'COMPILE', 'UT', 'PM'),
+				allowNull: false
+			},
 			created_at: { allowNull: false, type: Sequelize.DATE },
 			updated_at: { allowNull: false, type: Sequelize.DATE }
 		})

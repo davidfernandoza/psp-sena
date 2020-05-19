@@ -5,6 +5,13 @@ const Request = require(join(__dirname, './request'))
 class TestReportsRequest extends Request {
 	constructor({ JoiValidator, Config, JWTService }) {
 		const body = {
+			id: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
+				.required()
+				.allow('', null)
+				.optional(),
 			programs_id: JoiValidator.number()
 				.integer()
 				.min(0)
@@ -19,7 +26,7 @@ class TestReportsRequest extends Request {
 			conditions: JoiValidator.string().min(8).required(),
 			expected_result: JoiValidator.string().min(8).required(),
 			current_result: JoiValidator.string().min(8).required(),
-			description: JoiValidator.string().min(8).allow('').optional(),
+			description: JoiValidator.string().min(8).allow('', null).optional(),
 			objective: JoiValidator.string().min(8).required()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)

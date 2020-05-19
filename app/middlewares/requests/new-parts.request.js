@@ -5,6 +5,13 @@ const Request = require(join(__dirname, './request'))
 class NewPartsRequest extends Request {
 	constructor({ JoiValidator, Config, JWTService }) {
 		const body = {
+			id: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
+				.required()
+				.allow('', null)
+				.optional(),
 			programs_id: JoiValidator.number()
 				.integer()
 				.min(0)
@@ -28,13 +35,13 @@ class NewPartsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('')
+				.allow('', null)
 				.optional(),
 			number_methods_current: JoiValidator.number()
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('')
+				.allow('', null)
 				.optional()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)

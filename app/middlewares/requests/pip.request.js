@@ -5,6 +5,13 @@ const Request = require(join(__dirname, './request'))
 class PipRequest extends Request {
 	constructor({ JoiValidator, Config, JWTService }) {
 		const body = {
+			id: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
+				.required()
+				.allow('', null)
+				.optional(),
 			programs_id: JoiValidator.number()
 				.integer()
 				.min(0)

@@ -6,11 +6,18 @@ class ProjectsRequest extends Request {
 	#projectsUsersRepository = {}
 	constructor({ JoiValidator, Config, JWTService, ProjectsUsersRepository }) {
 		const body = {
-			name: JoiValidator.string().min(8).max(225).required(),
+			id: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
+				.required()
+				.allow('', null)
+				.optional(),
+			name: JoiValidator.string().min(3).max(225).required(),
 			description: JoiValidator.string().min(8).required(),
 			planning_date: JoiValidator.date().timestamp().required(),
-			start_date: JoiValidator.date().timestamp().allow('').optional(),
-			finish_date: JoiValidator.date().timestamp().allow('').optional()
+			start_date: JoiValidator.date().timestamp().allow('', null).optional(),
+			finish_date: JoiValidator.date().timestamp().allow('', null).optional()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
 		this.#projectsUsersRepository = ProjectsUsersRepository

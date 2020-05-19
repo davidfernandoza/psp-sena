@@ -10,7 +10,6 @@ module.exports = {
 			},
 			organizations_id: {
 				type: Sequelize.INTEGER,
-				allowNull: false,
 				references: { model: 'organizations', key: 'id' },
 				onUpdate: 'cascade',
 				onDelete: 'cascade'

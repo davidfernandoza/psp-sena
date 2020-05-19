@@ -11,6 +11,22 @@ module.exports = (sequelize, DataTypes) => {
 				isNumeric: true
 			},
 			name: { type: DataTypes.STRING, allowNull: false },
+			type: {
+				type: DataTypes.ENUM(
+					'DOCUMENTATION',
+					'SYNTAX',
+					'BUILD',
+					'PACKAGE',
+					'ASSIGMENT',
+					'INTERFACE',
+					'CHECKING',
+					'DATA',
+					'FUNCTION',
+					'SYSTEM',
+					'ENVIRONMENT'
+				),
+				allowNull: false
+			},
 			description: { type: DataTypes.TEXT, allowNull: false }
 		},
 		{

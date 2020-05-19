@@ -7,42 +7,32 @@ module.exports = {
 			'phases',
 			[
 				{
-					name: 'Name Ipsum 1',
+					name: 'PLAN',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
 				{
-					name: 'Name Ipsum 2',
+					name: 'DLD',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
 				{
-					name: 'Name Ipsum 3',
+					name: 'CODE',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
 				{
-					name: 'Name Ipsum 4',
+					name: 'COMPILE',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
 				{
-					name: 'Name Ipsum 5',
+					name: 'UT',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
 				{
-					name: 'Name Ipsum 6',
-					created_at: new Date().toDateString(),
-					updated_at: new Date().toDateString()
-				},
-				{
-					name: 'Name Ipsum 7',
-					created_at: new Date().toDateString(),
-					updated_at: new Date().toDateString()
-				},
-				{
-					name: 'Name Ipsum 8',
+					name: 'PM',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				}
