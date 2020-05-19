@@ -9,7 +9,6 @@ class NewPartsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required()
 				.allow('', null)
 				.optional(),
 			programs_id: JoiValidator.number()

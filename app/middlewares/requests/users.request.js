@@ -3,6 +3,7 @@ const { join } = require('path')
 const Request = require(join(__dirname, './request'))
 let body = {}
 let passwordRule = {}
+let projectRule = {}
 
 class UsersRequest extends Request {
 	#joiValidator = {}
@@ -13,7 +14,6 @@ class UsersRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required()
 				.allow('', null)
 				.optional(),
 			organizations_id: JoiValidator.number()
@@ -42,10 +42,25 @@ class UsersRequest extends Request {
 				.required()
 		}
 
+		// Reglas para el cambio de pasword
+		projectRule = {
+			users_id: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
+				.required(),
+			projects_id: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
+				.required()
+		}
+
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
 		this.#joiValidator = JoiValidator
 	}
 
+	// -----------------------------------------------------------------------
 	async update(req, res, next) {
 		delete body.password
 		if (req.method == 'PUT') {
@@ -55,9 +70,19 @@ class UsersRequest extends Request {
 		next()
 	}
 
+	// -----------------------------------------------------------------------
 	async password(req, res, next) {
 		if (req.method != 'GET' && req.method != 'DELETE') {
 			const bodyRes = await super.bodyValidator(req, passwordRule) // validacion de cuerpo
+			if (bodyRes != true) await super.errorHandle(bodyRes)
+		}
+		next()
+	}
+
+	// -----------------------------------------------------------------------
+	async projects(req, res, next) {
+		if (req.method == 'PATCH' && req.method == 'DELETE') {
+			const bodyRes = await super.bodyValidator(req, projectRule) // validacion de cuerpo
 			if (bodyRes != true) await super.errorHandle(bodyRes)
 		}
 		next()

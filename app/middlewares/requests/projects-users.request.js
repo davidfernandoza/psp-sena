@@ -9,7 +9,6 @@ class ProjectsUsersRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required()
 				.allow('', null)
 				.optional(),
 			projects_id: JoiValidator.number()

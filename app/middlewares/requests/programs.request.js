@@ -9,7 +9,6 @@ class ProgramsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required()
 				.allow('', null)
 				.optional(),
 			users_id: JoiValidator.number()

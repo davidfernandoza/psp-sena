@@ -9,7 +9,6 @@ class DefectLogRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required()
 				.allow('', null)
 				.optional(),
 			defect_log_chained_id: JoiValidator.number()

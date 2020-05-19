@@ -9,7 +9,6 @@ class AlgorithmsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required()
 				.allow('', null)
 				.optional(),
 			name: JoiValidator.string().min(8).max(225).required()
