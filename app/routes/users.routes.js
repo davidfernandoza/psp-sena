@@ -51,11 +51,11 @@ module.exports = ({
 	 * GET:
 	 */
 	router.get(
-		'/by-organization/:id',
+		'/',
 		requestPrivate,
 		auth,
 		politics,
-		controller.getAllAttribute.bind(controller)
+		controller.getAll.bind(controller)
 	)
 
 	router.get(

@@ -64,7 +64,7 @@ class DevPolitic extends Politic {
 			users: {
 				subRoutes: [
 					{
-						route: '/by-organization/:id',
+						route: '/',
 						method: 'GET',
 						status: 'disable'
 					},

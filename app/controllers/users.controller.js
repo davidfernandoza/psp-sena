@@ -21,10 +21,12 @@ class UsersController extends Controller {
 	}
 
 	// --------------------------------------------------------------------------
-	async getAllAttribute(req, res) {
-		let users = {}
-		const { id } = req.params
-		users = await super.getAllAttribute('organizations_id', id)
+	async getAll(req, res) {
+		const organizations_id = req.organization
+		const users = await super.getAllAttribute(
+			'organizations_id',
+			organizations_id
+		)
 		super.response(res, users, 'DON200L')
 	}
 }

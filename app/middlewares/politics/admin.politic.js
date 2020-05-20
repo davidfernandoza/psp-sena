@@ -63,7 +63,7 @@ class AdminPolitic extends Politic {
 			users: {
 				subRoutes: [
 					{
-						route: '/by-organization/:id',
+						route: '/',
 						method: 'GET',
 						status: 'enable'
 					},
