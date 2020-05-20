@@ -14,7 +14,7 @@ class UsersRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('', null)
+				.allow('', 'null', null)
 				.optional(),
 			organizations_id: JoiValidator.number()
 				.integer()
@@ -22,15 +22,15 @@ class UsersRequest extends Request {
 				.max(99999999990)
 				.allow('', null)
 				.optional(),
-			first_name: JoiValidator.string().min(3).max(225).required(),
-			last_name: JoiValidator.string().min(3).max(225).required(),
+			first_name: JoiValidator.string().min(1).max(225).required(),
+			last_name: JoiValidator.string().min(1).max(225).required(),
 			email: JoiValidator.string()
 				.email({ ignoreLength: true })
 				.min(8)
 				.max(100)
 				.required(),
-			phone: JoiValidator.string().min(6).max(15).required(),
-			password: JoiValidator.string().min(8).max(60).required(),
+			phone: JoiValidator.string().min(1).max(15).required(),
+			password: JoiValidator.string().min(1).max(60).required(),
 			rol: JoiValidator.any().valid('ADMIN', 'DEV').required()
 		}
 
@@ -80,7 +80,7 @@ class UsersRequest extends Request {
 	}
 
 	// -----------------------------------------------------------------------
-	async projects(req, res, next) {
+	async project(req, res, next) {
 		if (req.method == 'PATCH' && req.method == 'DELETE') {
 			const bodyRes = await super.bodyValidator(req, projectRule) // validacion de cuerpo
 			if (bodyRes != true) await super.errorHandle(bodyRes)

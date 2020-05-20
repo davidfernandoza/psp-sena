@@ -16,8 +16,8 @@ class ModulesRequest extends Request {
 				.min(0)
 				.max(99999999990)
 				.required(),
-			name: JoiValidator.string().min(2).max(225).required(),
-			description: JoiValidator.string().min(8).required(),
+			name: JoiValidator.string().min(1).max(225).required(),
+			description: JoiValidator.string().min(1).required(),
 			planning_date: JoiValidator.date().timestamp().required(),
 			start_date: JoiValidator.date().timestamp().allow('', null).optional(),
 			finish_date: JoiValidator.date().timestamp().allow('', null).optional()
