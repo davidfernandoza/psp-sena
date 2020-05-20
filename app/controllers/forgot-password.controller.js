@@ -55,6 +55,7 @@ class ForgotPasswordController extends Controller {
 			const cretedCsrfToken = await this.#JWTService.create(
 				recoverPassword.id,
 				null,
+				null,
 				this.config.CSRF_TOKEN
 			)
 			const objecWeb = {
@@ -75,6 +76,7 @@ class ForgotPasswordController extends Controller {
 
 		const cretedToken = await this.#JWTService.create(
 			user.id,
+			null,
 			null,
 			this.config.CSRF_TOKEN
 		)
@@ -160,14 +162,14 @@ class ForgotPasswordController extends Controller {
 
 	async sendEmail(token, user) {
 		const optionMail = {
-			from: `${this.app.toUpperCase()} Server <${this.config.MAIL.EMAIL}>`,
+			from: `${this.app} Server <${this.config.MAIL.EMAIL}>`,
 			to: user.email,
-			subject: `${this.app.toUpperCase()} - ¿Olvidaste tu contraseña?`,
+			subject: `${this.app} - ¿Olvidaste tu contraseña?`,
 			template: 'forgot-password-email',
 			context: {
 				url: `${this.config.BASE_URL}/recover-password/${token}`,
-				app: this.app.toUpperCase(),
-				appUp: this.app.toUpperCase()
+				app: this.app,
+				appUp: this.app
 			}
 		}
 

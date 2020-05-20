@@ -23,5 +23,17 @@ class ProjectsUsersRepository extends Repository {
 			return await this.errorHandle(error)
 		}
 	}
+
+	async delete(idProject, idUser) {
+		try {
+			const result = await this.db[this.entity].destroy({
+				where: { [Op.and]: [{ users_id: idUser }, { projects_id: idProject }] }
+			})
+			if (result == 0) return null
+			return result
+		} catch (error) {
+			await this.errorHandle(error)
+		}
+	}
 }
 module.exports = ProjectsUsersRepository

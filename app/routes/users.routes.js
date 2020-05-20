@@ -6,10 +6,11 @@ const { Router } = require('express')
  */
 
 module.exports = ({
+	ProjectsUsersController,
+	ProjectsRequest,
 	UsersController,
 	UsersRequest,
 	AuthMiddleware,
-	TokenAuth,
 	AdminPolitic,
 	DevPolitic
 }) => {
@@ -19,10 +20,12 @@ module.exports = ({
 	 * Request (Validadores):
 	 */
 	const requestPrivate = UsersRequest.private.bind(UsersRequest)
-	const requestPublic = UsersRequest.public.bind(UsersRequest)
 	const requestPassword = UsersRequest.password.bind(UsersRequest)
 	const requestUpdate = UsersRequest.update.bind(UsersRequest)
 	const requestBody = UsersRequest.body.bind(UsersRequest)
+	const requestProjects = UsersRequest.project.bind(UsersRequest)
+	const requestOrganization = UsersRequest.organization.bind(UsersRequest)
+	const requestProjectOwner = ProjectsRequest.owner.bind(ProjectsRequest)
 
 	/*
 	 * Politics:
@@ -41,26 +44,27 @@ module.exports = ({
 	 * Controller:
 	 */
 	const controller = UsersController
-	const newToken = TokenAuth.create.bind(TokenAuth)
+	const relationController = ProjectsUsersController
 
 	/*
 	 * -----------------------------------------------------------------------------------*
 	 * GET:
 	 */
 	router.get(
-		'/',
-		requestPublic,
-		auth,
-		politics,
-		controller.getAll.bind(controller)
-	)
-
-	router.get(
-		'/:id',
+		'/by-organization/:id',
 		requestPrivate,
 		auth,
 		politics,
-		controller.get.bind(controller)
+		controller.getAllAttribute.bind(controller)
+	)
+
+	router.get(
+		'/by-projects/:id',
+		requestPrivate,
+		auth,
+		politics,
+		requestProjectOwner,
+		controller.getAllByProject.bind(controller)
 	)
 
 	/*
@@ -76,7 +80,16 @@ module.exports = ({
 		controller.create.bind(controller)
 	)
 
-	router.post('/new-token', requestPrivate, auth, politics, newToken)
+	router.post(
+		'/projects',
+		requestPrivate,
+		auth,
+		politics,
+		requestProjects,
+		requestProjectOwner,
+		requestOrganization,
+		relationController.create.bind(relationController)
+	)
 
 	/*
 	 * -----------------------------------------------------------------------------------*
@@ -87,6 +100,7 @@ module.exports = ({
 		requestPrivate,
 		auth,
 		politics,
+		requestOrganization,
 		requestUpdate,
 		controller.update.bind(controller)
 	)
@@ -96,7 +110,7 @@ module.exports = ({
 	 * PATCH:
 	 */
 	router.patch(
-		'/new-password',
+		'/password',
 		requestPrivate,
 		auth,
 		politics,
@@ -109,11 +123,14 @@ module.exports = ({
 	 * DELETE:
 	 */
 	router.delete(
-		'/:id',
+		'/projects',
 		requestPrivate,
 		auth,
 		politics,
-		controller.delete.bind(controller)
+		requestProjects,
+		requestProjectOwner,
+		requestOrganization,
+		relationController.delete.bind(relationController)
 	)
 
 	return router

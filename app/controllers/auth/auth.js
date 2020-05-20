@@ -24,7 +24,8 @@ class Auth {
 		if (!result) throw new Error('ERR401')
 		const authToken = await this.JWTServices.create(
 			dataEntity.id,
-			dataEntity.rol
+			dataEntity.rol,
+			dataEntity.organizations_id
 		)
 
 		if (authToken.status != 200) throw new Error('ERR401')

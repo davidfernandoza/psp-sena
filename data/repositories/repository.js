@@ -59,6 +59,40 @@ class Repository {
 		}
 	}
 
+	async getAllAttributes(attribut, match, transaction, addSubDto) {
+		try {
+			const dto = await this.entityDto.repository(addSubDto)
+			const entities = await this.db[this.entity].findAll({
+				where: { [attribut]: match },
+				transaction: transaction
+			})
+			if (entities.length == 0) return null
+			return entities.map(item => morphism(dto, item))
+		} catch (error) {
+			await this.errorHandle(error)
+		}
+	}
+
+	async getAllByProject(idProject) {
+		try {
+			const dto = await this.entityDto.repository()
+			const entities = await this.db[this.entity].findAll({
+				include: [
+					{
+						model: this.db.projects,
+						as: 'projects',
+						where: { id: idProject },
+						required: true
+					}
+				]
+			})
+			if (entities.length === 0) return null
+			return entities.map(item => morphism(dto, item))
+		} catch (error) {
+			return await this.errorHandle(error)
+		}
+	}
+
 	async create(entity, transaction, addSubDto) {
 		try {
 			/*

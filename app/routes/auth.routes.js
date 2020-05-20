@@ -31,6 +31,7 @@ module.exports = ({
 
 	router.post('/login', requestPublic, requestBody, user.login.bind(user))
 	router.post('/logout', requestPrivate, auth, token.delete.bind(token))
+	router.post('/new-token', requestPrivate, auth, token.create.bind(token))
 	router.post(
 		'/forgot-password',
 		requestPublic,

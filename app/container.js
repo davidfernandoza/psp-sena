@@ -55,10 +55,6 @@ const PhasesRoutes = require(join(__dirname, './routes/phases.routes'))
 const PipRoutes = require(join(__dirname, './routes/pip.routes'))
 const PositionsRoutes = require(join(__dirname, './routes/positions.routes'))
 const ProgramsRoutes = require(join(__dirname, './routes/programs.routes'))
-const ProjectsUsersRoutes = require(join(
-	__dirname,
-	'./routes/projects-users.routes'
-))
 const ProjectsRoutes = require(join(__dirname, './routes/projects.routes'))
 const ReusablePartsRoutes = require(join(
 	__dirname,
@@ -282,7 +278,7 @@ container
 		PipRoutes: asFunction(PipRoutes).singleton(),
 		PositionsRoutes: asFunction(PositionsRoutes).singleton(),
 		ProgramsRoutes: asFunction(ProgramsRoutes).singleton(),
-		ProjectsUsersRoutes: asFunction(ProjectsUsersRoutes).singleton(),
+
 		ProjectsRoutes: asFunction(ProjectsRoutes).singleton(),
 		ReusablePartsRoutes: asFunction(ReusablePartsRoutes).singleton(),
 		StandardDefectsRoutes: asFunction(StandardDefectsRoutes).singleton(),

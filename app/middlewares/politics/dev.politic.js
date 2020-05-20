@@ -84,11 +84,6 @@ class DevPolitic extends Politic {
 						status: 'disable'
 					},
 					{
-						route: '/new-token',
-						method: 'POST',
-						status: 'enable'
-					},
-					{
 						route: '/:id',
 						method: 'PUT',
 						status: 'unique',

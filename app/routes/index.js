@@ -25,7 +25,6 @@ module.exports = ({
 	PipRoutes,
 	PositionsRoutes,
 	ProgramsRoutes,
-	ProjectsUsersRoutes,
 	ProjectsRoutes,
 	ReusablePartsRoutes,
 	StandardDefectsRoutes,
@@ -63,7 +62,6 @@ module.exports = ({
 	apiRoute.use('/pip', PipRoutes)
 	apiRoute.use('/positions', PositionsRoutes)
 	apiRoute.use('/programs', ProgramsRoutes)
-	apiRoute.use('/projects-users', ProjectsUsersRoutes)
 	apiRoute.use('/projects', ProjectsRoutes)
 	apiRoute.use('/reusable-parts', ReusablePartsRoutes)
 	apiRoute.use('/standard-defects', StandardDefectsRoutes)

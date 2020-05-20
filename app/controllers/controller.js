@@ -11,7 +11,7 @@ class Controller {
 
 		if (Config) {
 			this.config = Config
-			this.app = StringHelper.capitalize(Config.APP_NAME)
+			this.app = Config.APP_NAME.toUpperCase()
 		}
 
 		// Singleton manual
@@ -30,6 +30,12 @@ class Controller {
 			addSubDto
 		)
 		return entity
+	}
+
+	async getAllByProject(req, res) {
+		const { id: idProject } = req.params
+		let entities = await this.entityRepository.getAllByProject(idProject)
+		await this.response(res, entities, 'DON200L')
 	}
 
 	async getAllAttribute(attribut, match, transaction, addSubDto) {
@@ -111,12 +117,9 @@ class Controller {
 	}
 
 	async password(req, res) {
-		let { password } = req.body
 		const id = req.id
 		const transaction = !req.transaction ? null : req.transaction
-		const round = parseInt(this.config.ENCRYPTION_SALT)
-		const salt = await bcrypt.genSalt(round)
-		password = await bcrypt.hash(password, salt)
+		const password = await this.passwordEncryption(req)
 		const updated = await this.entityRepository.password(id, { password })
 		if (req.return || transaction) return updated
 		await this.response(res, updated, 'DON204', false)
@@ -139,7 +142,7 @@ class Controller {
 
 		// Respuesta WEB
 		if (code == 'OK') {
-			entity.app = this.app.toUpperCase()
+			entity.app = this.app
 			return res.render(entity.page, entity)
 		}
 
@@ -161,6 +164,14 @@ class Controller {
 		return res
 			.status(this.#doneString[code].status)
 			.send(this.#doneString[code])
+	}
+
+	// --------------------------------------------------------------
+	async passwordEncryption(req) {
+		let { password } = req.body
+		const round = parseInt(this.config.ENCRYPTION_SALT)
+		const salt = await bcrypt.genSalt(round)
+		return await bcrypt.hash(password, salt)
 	}
 }
 

@@ -28,8 +28,8 @@ class ProjectsRequest extends Request {
 		let idProject = req.params.id
 
 		if (
-			(req.method == 'POST' || req.method == 'PUT') &&
-			req.baseUrl == '/api/modules'
+			req.method != 'GET' &&
+			(req.baseUrl == '/api/modules' || req.baseUrl == '/api/users')
 		)
 			idProject = req.body.projects_id
 

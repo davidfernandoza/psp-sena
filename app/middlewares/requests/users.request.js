@@ -7,8 +7,9 @@ let projectRule = {}
 
 class UsersRequest extends Request {
 	#joiValidator = {}
+	#usersRepository = {}
 
-	constructor({ JoiValidator, Config, JWTService }) {
+	constructor({ JoiValidator, Config, JWTService, UsersRepository }) {
 		body = {
 			id: JoiValidator.number()
 				.integer()
@@ -58,6 +59,7 @@ class UsersRequest extends Request {
 
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
 		this.#joiValidator = JoiValidator
+		this.#usersRepository = UsersRepository
 	}
 
 	// -----------------------------------------------------------------------
@@ -81,10 +83,23 @@ class UsersRequest extends Request {
 
 	// -----------------------------------------------------------------------
 	async project(req, res, next) {
-		if (req.method == 'PATCH' && req.method == 'DELETE') {
+		if (req.method == 'POST' || req.method == 'DELETE') {
 			const bodyRes = await super.bodyValidator(req, projectRule) // validacion de cuerpo
 			if (bodyRes != true) await super.errorHandle(bodyRes)
 		}
+		next()
+	}
+
+	// -----------------------------------------------------------------------
+	async organization(req, res, next) {
+		let idUser = req.params.id
+
+		if (req.method != 'GET' && req.route.path == '/projects')
+			idUser = req.body.users_id
+
+		const user = await this.#usersRepository.get(idUser)
+		if (!user) throw new Error('ERR404')
+		if (user.organizations_id != req.organization) throw new Error('ERR403')
 		next()
 	}
 }

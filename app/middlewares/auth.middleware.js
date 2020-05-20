@@ -30,6 +30,7 @@ class AuthMiddleware {
 				}
 				req.id = responseToken.payload.id
 				req.rol = responseToken.payload.rol
+				req.organization = responseToken.payload.organization
 				next()
 			}
 		}

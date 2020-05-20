@@ -83,11 +83,6 @@ class AdminPolitic extends Politic {
 						status: 'enable'
 					},
 					{
-						route: '/new-token',
-						method: 'POST',
-						status: 'enable'
-					},
-					{
 						route: '/:id',
 						method: 'PUT',
 						status: 'enable'

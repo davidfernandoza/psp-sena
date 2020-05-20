@@ -18,7 +18,12 @@ class ProjectsUsersController extends Controller {
 			DoneString
 		)
 	}
-	// Logica diferente al CRUD base aqui:
+
+	async delete(req, res) {
+		const { projects_id: idProject, users_id: idUser } = req.body
+		const deleted = await this.entityRepository.delete(idProject, idUser)
+		await this.response(res, deleted, 'DON204', false)
+	}
 }
 
 module.exports = ProjectsUsersController
