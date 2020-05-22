@@ -16,7 +16,7 @@ class UsersController extends Controller {
 
 	// --------------------------------------------------------------------------
 	async update(req, res) {
-		req.body.password = await super.passwordEncryption(req)
+		delete req.body.password
 		return super.update(req, res)
 	}
 

@@ -11,7 +11,6 @@ class UsersDto extends Dto {
 			last_name: 'last_name',
 			email: 'email',
 			phone: 'phone',
-			password: 'password',
 			rol: 'rol'
 		}
 		super(schema)

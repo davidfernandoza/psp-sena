@@ -11,6 +11,5 @@ class UsersRepository extends Repository {
 	async password(id, password) {
 		return await super.update(id, password, { password: 'password' })
 	}
-	
 }
 module.exports = UsersRepository
