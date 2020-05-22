@@ -98,6 +98,25 @@ class AdminPolitic extends Politic {
 						status: 'enable'
 					}
 				]
+			},
+			languages: {
+				subRoutes: [
+					{
+						route: '/',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/',
+						method: 'POST',
+						status: 'enable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'enable'
+					}
+				]
 			}
 		}
 		super(rol, authRol, baseUrl, permissions)

@@ -100,6 +100,25 @@ class DevPolitic extends Politic {
 						status: 'disable'
 					}
 				]
+			},
+			languages: {
+				subRoutes: [
+					{
+						route: '/',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/',
+						method: 'POST',
+						status: 'disable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'disable'
+					}
+				]
 			}
 		}
 		super(rol, authRol, baseUrl, permissions)

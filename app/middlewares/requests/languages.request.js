@@ -11,7 +11,7 @@ class LanguagesRequest extends Request {
 				.max(99999999990)
 				.allow('', null)
 				.optional(),
-			name: JoiValidator.string().min(8).max(225).required()
+			name: JoiValidator.string().min(1).max(225).required()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
 	}
