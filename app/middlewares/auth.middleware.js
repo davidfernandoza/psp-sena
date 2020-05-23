@@ -24,10 +24,11 @@ class AuthMiddleware {
 				/*
 				 * Validar si el usuario existe
 				 */
-				if (responseToken.payload.rol == 'user') {
-					if (!(await this.usersRepository.get(responseToken.payload.id)))
-						throw new Error('ERR401')
-				}
+
+				if (!responseToken.payload.organization) throw new Error('ERR401')
+				if (!(await this.usersRepository.get(responseToken.payload.id)))
+					throw new Error('ERR401')
+
 				req.id = responseToken.payload.id
 				req.rol = responseToken.payload.rol
 				req.organization = responseToken.payload.organization

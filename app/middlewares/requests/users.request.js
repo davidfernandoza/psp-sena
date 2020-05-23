@@ -103,9 +103,18 @@ class UsersRequest extends Request {
 
 		const user = await this.#usersRepository.get(idUser)
 		if (!user) throw new Error('ERR404')
+
 		if (user.organizations_id) {
 			if (user.organizations_id != req.organization) throw new Error('ERR403')
+			if (
+				req.body.organizations_id != '' &&
+				req.body.organizations_id != null &&
+				req.body.organizations_id != req.organization
+			)
+				throw new Error('ERR403')
 		} else {
+			if (req.body.organizations_id != req.organization)
+				throw new Error('ERR403')
 			req.body.organizations_id = req.organization
 		}
 		next()
