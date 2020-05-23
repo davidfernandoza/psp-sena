@@ -6,9 +6,7 @@ class StandardDefectsDto extends Dto {
 	constructor() {
 		const schema = {
 			id: 'id',
-			name: 'name',
-			type: 'type',
-			description: 'description'
+			name: 'name'
 		}
 		super(schema)
 	}

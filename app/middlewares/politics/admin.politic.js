@@ -117,6 +117,15 @@ class AdminPolitic extends Politic {
 						status: 'enable'
 					}
 				]
+			},
+			'standard-defects': {
+				subRoutes: [
+					{
+						route: '/',
+						method: 'GET',
+						status: 'enable'
+					}
+				]
 			}
 		}
 		super(rol, authRol, baseUrl, permissions)

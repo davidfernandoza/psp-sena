@@ -10,8 +10,7 @@ module.exports = (sequelize, DataTypes) => {
 				autoIncrement: true,
 				isNumeric: true
 			},
-			name: { type: DataTypes.STRING, allowNull: false },
-			type: {
+			name: {
 				type: DataTypes.ENUM(
 					'DOCUMENTATION',
 					'SYNTAX',
@@ -25,9 +24,9 @@ module.exports = (sequelize, DataTypes) => {
 					'SYSTEM',
 					'ENVIRONMENT'
 				),
-				allowNull: false
-			},
-			description: { type: DataTypes.TEXT, allowNull: false }
+				allowNull: false,
+				unique: true
+			}
 		},
 		{
 			timestamps: true,

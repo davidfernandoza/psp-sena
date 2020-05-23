@@ -20,10 +20,6 @@ module.exports = ({
 	const requestPrivate = StandardDefectsRequest.private.bind(
 		StandardDefectsRequest
 	)
-	const requestPublic = StandardDefectsRequest.public.bind(
-		StandardDefectsRequest
-	)
-	const requestBody = StandardDefectsRequest.body.bind(StandardDefectsRequest)
 
 	/*
 	 * Politics:
@@ -49,56 +45,10 @@ module.exports = ({
 	 */
 	router.get(
 		'/',
-		requestPublic,
+		requestPrivate,
 		auth,
 		politics,
 		controller.getAll.bind(controller)
-	)
-
-	router.get(
-		'/:id',
-		requestPrivate,
-		auth,
-		politics,
-		controller.get.bind(controller)
-	)
-
-	/*
-	 * -----------------------------------------------------------------------------------*
-	 * POST:
-	 */
-	router.post(
-		'/',
-		requestPrivate,
-		auth,
-		politics,
-		requestBody,
-		controller.create.bind(controller)
-	)
-
-	/*
-	 * -----------------------------------------------------------------------------------*
-	 * PUT:
-	 */
-	router.put(
-		'/',
-		requestPrivate,
-		auth,
-		politics,
-		requestBody,
-		controller.update.bind(controller)
-	)
-
-	/*
-	 * -----------------------------------------------------------------------------------*
-	 * DELETE:
-	 */
-	router.delete(
-		'/',
-		requestPrivate,
-		auth,
-		politics,
-		controller.delete.bind(controller)
 	)
 
 	return router

@@ -8,8 +8,7 @@ module.exports = {
 				primaryKey: true,
 				autoIncrement: true
 			},
-			name: { type: Sequelize.STRING, allowNull: false },
-			type: {
+			name: {
 				type: Sequelize.ENUM(
 					'DOCUMENTATION',
 					'SYNTAX',
@@ -23,9 +22,9 @@ module.exports = {
 					'SYSTEM',
 					'ENVIRONMENT'
 				),
-				allowNull: false
+				allowNull: false,
+				unique: true
 			},
-			description: { type: Sequelize.TEXT, allowNull: false },
 			created_at: { allowNull: false, type: Sequelize.DATE },
 			updated_at: { allowNull: false, type: Sequelize.DATE }
 		})
