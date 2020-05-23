@@ -53,7 +53,6 @@ const OrganizationsRoutes = require(join(
 ))
 const PhasesRoutes = require(join(__dirname, './routes/phases.routes'))
 const PipRoutes = require(join(__dirname, './routes/pip.routes'))
-const PositionsRoutes = require(join(__dirname, './routes/positions.routes'))
 const ProgramsRoutes = require(join(__dirname, './routes/programs.routes'))
 const ProjectsRoutes = require(join(__dirname, './routes/projects.routes'))
 const ReusablePartsRoutes = require(join(
@@ -114,7 +113,6 @@ const {
 	OrganizationsRequest,
 	PhasesRequest,
 	PipRequest,
-	PositionsRequest,
 	ProgramsRequest,
 	ProjectsUsersRequest,
 	ProjectsRequest,
@@ -148,7 +146,6 @@ const {
 	OrganizationsController,
 	PhasesController,
 	PipController,
-	PositionsController,
 	ProgramsController,
 	ProjectsUsersController,
 	ProjectsController,
@@ -177,7 +174,6 @@ const {
 	OrganizationsRepository,
 	PhasesRepository,
 	PipRepository,
-	PositionsRepository,
 	ProgramsRepository,
 	ProjectsUsersRepository,
 	ProjectsRepository,
@@ -207,7 +203,6 @@ const {
 	OrganizationsDto,
 	PhasesDto,
 	PipDto,
-	PositionsDto,
 	ProgramsDto,
 	ProjectsUsersDto,
 	ProjectsDto,
@@ -276,7 +271,6 @@ container
 		OrganizationsRoutes: asFunction(OrganizationsRoutes).singleton(),
 		PhasesRoutes: asFunction(PhasesRoutes).singleton(),
 		PipRoutes: asFunction(PipRoutes).singleton(),
-		PositionsRoutes: asFunction(PositionsRoutes).singleton(),
 		ProgramsRoutes: asFunction(ProgramsRoutes).singleton(),
 
 		ProjectsRoutes: asFunction(ProjectsRoutes).singleton(),
@@ -347,7 +341,6 @@ container
 		OrganizationsController: asClass(OrganizationsController).singleton(),
 		PhasesController: asClass(PhasesController).singleton(),
 		PipController: asClass(PipController).singleton(),
-		PositionsController: asClass(PositionsController).singleton(),
 		ProgramsController: asClass(ProgramsController).singleton(),
 		ProjectsUsersController: asClass(ProjectsUsersController).singleton(),
 		ProjectsController: asClass(ProjectsController).singleton(),
@@ -398,7 +391,6 @@ container
 		OrganizationsRequest: asClass(OrganizationsRequest).singleton(),
 		PhasesRequest: asClass(PhasesRequest).singleton(),
 		PipRequest: asClass(PipRequest).singleton(),
-		PositionsRequest: asClass(PositionsRequest).singleton(),
 		ProgramsRequest: asClass(ProgramsRequest).singleton(),
 		ProjectsUsersRequest: asClass(ProjectsUsersRequest).singleton(),
 		ProjectsRequest: asClass(ProjectsRequest).singleton(),
@@ -431,7 +423,6 @@ container
 		OrganizationsRepository: asClass(OrganizationsRepository).singleton(),
 		PhasesRepository: asClass(PhasesRepository).singleton(),
 		PipRepository: asClass(PipRepository).singleton(),
-		PositionsRepository: asClass(PositionsRepository).singleton(),
 		ProgramsRepository: asClass(ProgramsRepository).singleton(),
 		ProjectsUsersRepository: asClass(ProjectsUsersRepository).singleton(),
 		ProjectsRepository: asClass(ProjectsRepository).singleton(),
@@ -461,7 +452,6 @@ container
 		OrganizationsDto: asClass(OrganizationsDto).singleton(),
 		PhasesDto: asClass(PhasesDto).singleton(),
 		PipDto: asClass(PipDto).singleton(),
-		PositionsDto: asClass(PositionsDto).singleton(),
 		ProgramsDto: asClass(ProgramsDto).singleton(),
 		ProjectsUsersDto: asClass(ProjectsUsersDto).singleton(),
 		ProjectsDto: asClass(ProjectsDto).singleton(),

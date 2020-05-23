@@ -3,19 +3,14 @@ module.exports = (sequelize, DataTypes) => {
 	const projects_users = sequelize.define(
 		'projects_users',
 		{
-			id: {
-				type: DataTypes.INTEGER,
-				allowNull: false,
-				primaryKey: true,
-				autoIncrement: true,
-				isNumeric: true
-			},
 			projects_id: {
+				primaryKey: true,
 				type: DataTypes.INTEGER,
 				allowNull: false,
 				isNumeric: true
 			},
 			users_id: {
+				primaryKey: true,
 				type: DataTypes.INTEGER,
 				allowNull: false,
 				isNumeric: true

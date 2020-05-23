@@ -23,7 +23,6 @@ module.exports = ({
 	OrganizationsRoutes,
 	PhasesRoutes,
 	PipRoutes,
-	PositionsRoutes,
 	ProgramsRoutes,
 	ProjectsRoutes,
 	ReusablePartsRoutes,
@@ -60,7 +59,6 @@ module.exports = ({
 	apiRoute.use('/organizations', OrganizationsRoutes)
 	apiRoute.use('/phases', PhasesRoutes)
 	apiRoute.use('/pip', PipRoutes)
-	apiRoute.use('/positions', PositionsRoutes)
 	apiRoute.use('/programs', ProgramsRoutes)
 	apiRoute.use('/projects', ProjectsRoutes)
 	apiRoute.use('/reusable-parts', ReusablePartsRoutes)

@@ -2,14 +2,9 @@
 module.exports = {
 	up: (queryInterface, Sequelize) => {
 		return queryInterface.createTable('projects_users', {
-			id: {
-				type: Sequelize.INTEGER,
-				allowNull: false,
-				primaryKey: true,
-				autoIncrement: true
-			},
 			projects_id: {
 				type: Sequelize.INTEGER,
+				primaryKey: true,
 				allowNull: false,
 				references: { model: 'projects', key: 'id' },
 				onUpdate: 'cascade',
@@ -17,6 +12,7 @@ module.exports = {
 			},
 			users_id: {
 				type: Sequelize.INTEGER,
+				primaryKey: true,
 				allowNull: false,
 				references: { model: 'users', key: 'id' },
 				onUpdate: 'cascade',

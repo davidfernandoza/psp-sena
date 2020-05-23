@@ -10,11 +10,6 @@ module.exports = (sequelize, DataTypes) => {
 				autoIncrement: true,
 				isNumeric: true
 			},
-			positions_id: {
-				type: DataTypes.INTEGER,
-				allowNull: false,
-				isNumeric: true
-			},
 			users_id: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
@@ -41,15 +36,8 @@ module.exports = (sequelize, DataTypes) => {
 
 	experiences.associate = function (models) {
 		/*
-		 * Un experiences tiene un positions (1:1)
+		 * Un experiences tiene un users (1:1)
 		 */
-		models.experiences.belongsTo(models.positions, {
-			foreignKey: 'positions_id', // a donde llega
-			targetKey: 'id', // de donde viene
-			as: 'positions-1'
-		})
-
-		// Un experiences tiene un users (1:1)
 		models.experiences.belongsTo(models.users, {
 			foreignKey: 'users_id', // a donde llega
 			targetKey: 'id', // de donde viene

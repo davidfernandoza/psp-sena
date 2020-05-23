@@ -7,7 +7,6 @@ module.exports = {
 			'experiences',
 			[
 				{
-					positions_id: 1,
 					users_id: 1,
 					organization: 'Organization Ipsum 1',
 					years_position: '3',
@@ -23,7 +22,6 @@ module.exports = {
 					updated_at: new Date().toDateString()
 				},
 				{
-					positions_id: 2,
 					users_id: 2,
 					organization: 'Organization Ipsum 2',
 					years_position: '4',
@@ -39,7 +37,6 @@ module.exports = {
 					updated_at: new Date().toDateString()
 				},
 				{
-					positions_id: 3,
 					users_id: 3,
 					organization: 'Organization Ipsum 3',
 					years_position: '9',
@@ -55,7 +52,6 @@ module.exports = {
 					updated_at: new Date().toDateString()
 				},
 				{
-					positions_id: 4,
 					users_id: 4,
 					organization: 'Organization Ipsum 4',
 					years_position: '5',
@@ -71,7 +67,6 @@ module.exports = {
 					updated_at: new Date().toDateString()
 				},
 				{
-					positions_id: 5,
 					users_id: 5,
 					organization: 'Organization Ipsum 5',
 					years_position: '6',
@@ -87,7 +82,6 @@ module.exports = {
 					updated_at: new Date().toDateString()
 				},
 				{
-					positions_id: 1,
 					users_id: 6,
 					organization: 'Organization Ipsum 6',
 					years_position: '6',
@@ -103,7 +97,6 @@ module.exports = {
 					updated_at: new Date().toDateString()
 				},
 				{
-					positions_id: 2,
 					users_id: 7,
 					organization: 'Organization Ipsum 7',
 					years_position: '5',
@@ -119,7 +112,6 @@ module.exports = {
 					updated_at: new Date().toDateString()
 				},
 				{
-					positions_id: 3,
 					users_id: 8,
 					organization: 'Organization Ipsum 8',
 					years_position: '4',
@@ -135,7 +127,6 @@ module.exports = {
 					updated_at: new Date().toDateString()
 				},
 				{
-					positions_id: 4,
 					users_id: 9,
 					organization: 'Organization Ipsum 9',
 					years_position: '3',
@@ -151,7 +142,6 @@ module.exports = {
 					updated_at: new Date().toDateString()
 				},
 				{
-					positions_id: 5,
 					users_id: 10,
 					organization: 'Organization Ipsum 10',
 					years_position: '3',

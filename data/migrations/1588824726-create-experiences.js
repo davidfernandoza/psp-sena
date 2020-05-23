@@ -8,13 +8,6 @@ module.exports = {
 				primaryKey: true,
 				autoIncrement: true
 			},
-			positions_id: {
-				type: Sequelize.INTEGER,
-				allowNull: false,
-				references: { model: 'positions', key: 'id' },
-				onUpdate: 'cascade',
-				onDelete: 'cascade'
-			},
 			users_id: {
 				type: Sequelize.INTEGER,
 				allowNull: false,
