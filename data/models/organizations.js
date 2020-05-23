@@ -29,6 +29,13 @@ module.exports = (sequelize, DataTypes) => {
 			sourceKey: 'id', // de donde se obtiene
 			as: 'users'
 		})
+
+		// Una organizations se registra en muchos estimates (1:M)
+		models.organizations.hasMany(models.estimates, {
+			foreignKey: 'organizations_id', // a donde va
+			sourceKey: 'id', // de donde se obtiene
+			as: 'estimates'
+		})
 	}
 
 	return organizations

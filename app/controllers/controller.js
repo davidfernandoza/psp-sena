@@ -88,7 +88,6 @@ class Controller {
 		const addSubDto = !req.addSubDto ? false : req.addSubDto
 		const transaction = !req.transaction ? null : req.transaction
 		const dto = !req.dto ? null : req.dto
-
 		const updated = await this.entityRepository.update(
 			id,
 			body,

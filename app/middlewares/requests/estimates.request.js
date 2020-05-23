@@ -21,6 +21,11 @@ class EstimatesRequest extends Request {
 				.min(0)
 				.max(99999999990)
 				.required(),
+			organizations_id: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
+				.required(),
 			code_lines: JoiValidator.number()
 				.integer()
 				.min(0)

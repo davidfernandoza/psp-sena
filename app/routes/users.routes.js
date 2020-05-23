@@ -59,6 +59,14 @@ module.exports = ({
 	)
 
 	router.get(
+		'/free',
+		requestPrivate,
+		auth,
+		politics,
+		controller.getAll.bind(controller)
+	)
+
+	router.get(
 		'/by-projects/:id',
 		requestPrivate,
 		auth,
@@ -81,7 +89,7 @@ module.exports = ({
 	)
 
 	router.post(
-		'/projects',
+		'/add-projects',
 		requestPrivate,
 		auth,
 		politics,
@@ -89,6 +97,17 @@ module.exports = ({
 		requestProjectOwner,
 		requestOrganization,
 		relationController.create.bind(relationController)
+	)
+
+	router.post(
+		'/remove-projects',
+		requestPrivate,
+		auth,
+		politics,
+		requestProjects,
+		requestProjectOwner,
+		requestOrganization,
+		relationController.delete.bind(relationController)
 	)
 
 	/*
@@ -116,21 +135,6 @@ module.exports = ({
 		politics,
 		requestPassword,
 		controller.password.bind(controller)
-	)
-
-	/*
-	 * -----------------------------------------------------------------------------------*
-	 * DELETE:
-	 */
-	router.delete(
-		'/projects',
-		requestPrivate,
-		auth,
-		politics,
-		requestProjects,
-		requestProjectOwner,
-		requestOrganization,
-		relationController.delete.bind(relationController)
 	)
 
 	return router

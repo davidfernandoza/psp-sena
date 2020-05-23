@@ -43,7 +43,7 @@ class UsersRequest extends Request {
 				.required()
 		}
 
-		// Reglas para el cambio de pasword
+		// Reglas para el procesamiento de proyecto
 		projectRule = {
 			users_id: JoiValidator.number()
 				.integer()
@@ -94,12 +94,20 @@ class UsersRequest extends Request {
 	async organization(req, res, next) {
 		let idUser = req.params.id
 
-		if (req.method != 'GET' && req.route.path == '/projects')
+		if (
+			req.method != 'GET' &&
+			(req.route.path == '/add-projects' ||
+				req.route.path == '/remove-projects')
+		)
 			idUser = req.body.users_id
 
 		const user = await this.#usersRepository.get(idUser)
 		if (!user) throw new Error('ERR404')
-		if (user.organizations_id != req.organization) throw new Error('ERR403')
+		if (user.organizations_id) {
+			if (user.organizations_id != req.organization) throw new Error('ERR403')
+		} else {
+			req.body.organizations_id = req.organization
+		}
 		next()
 	}
 }

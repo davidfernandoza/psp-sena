@@ -17,16 +17,17 @@ class UsersController extends Controller {
 	// --------------------------------------------------------------------------
 	async update(req, res) {
 		delete req.body.password
+		req.body.organizations_id =
+			!req.body.organizations_id || req.body.organizations_id == ''
+				? null
+				: req.body.organizations_id
 		return super.update(req, res)
 	}
 
 	// --------------------------------------------------------------------------
 	async getAll(req, res) {
-		const organizations_id = req.organization
-		const users = await super.getAllAttribute(
-			'organizations_id',
-			organizations_id
-		)
+		const machAttribute = req.route.path == '/free' ? null : req.organization
+		const users = await super.getAllAttribute('organizations_id', machAttribute)
 		super.response(res, users, 'DON200L')
 	}
 }

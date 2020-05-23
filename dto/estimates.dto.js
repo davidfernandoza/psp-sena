@@ -8,6 +8,7 @@ class EstimatesDto extends Dto {
 			id: 'id',
 			languages_id: 'languages_id',
 			algorithms_id: 'algorithms_id',
+			organizations_id: 'organizations_id',
 			code_lines: 'code_lines'
 		}
 		super(schema)

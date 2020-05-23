@@ -69,6 +69,11 @@ class DevPolitic extends Politic {
 						status: 'disable'
 					},
 					{
+						route: '/free',
+						method: 'GET',
+						status: 'disable'
+					},
+					{
 						route: '/by-projects/:id',
 						method: 'GET',
 						status: 'disable'
@@ -79,7 +84,7 @@ class DevPolitic extends Politic {
 						status: 'disable'
 					},
 					{
-						route: '/projects',
+						route: '/add-projects',
 						method: 'POST',
 						status: 'disable'
 					},
@@ -95,8 +100,8 @@ class DevPolitic extends Politic {
 						status: 'enable'
 					},
 					{
-						route: '/projects',
-						method: 'DELETE',
+						route: '/remove-projects',
+						method: 'POST',
 						status: 'disable'
 					}
 				]
