@@ -12,7 +12,30 @@ class EstimatesController extends Controller {
 	}) {
 		super(EstimatesRepository, EstimatesDto, Config, StringHelper, DoneString)
 	}
-	// Logica diferente al CRUD base aqui:
+
+	// --------------------------------------------------------------------------
+	async create(req, res) {
+		req.body.organizations_id = req.organization
+		return super.create(req, res)
+	}
+
+	// --------------------------------------------------------------------------
+	async update(req, res) {
+		req.body.organizations_id = req.organization
+		return super.update(req, res)
+	}
+
+	// -------------------------------------------------------------------------------*
+	// Get by language id
+	async getAllByLanguage(req, res) {
+		const { id: idLanguage } = req.params
+		const idOrganization = req.organization
+		let entities = await this.entityRepository.getAllByLanguage(
+			idLanguage,
+			idOrganization
+		)
+		return await this.response(res, entities, 'DON200L')
+	}
 }
 
 module.exports = EstimatesController

@@ -30,6 +30,16 @@ class UsersController extends Controller {
 		const users = await super.getAllAttribute('organizations_id', machAttribute)
 		super.response(res, users, 'DON200L')
 	}
+
+	// --------------------------------------------------------------------------
+	async getAllByInclude(req, res) {
+		const { id: idProject } = req.params
+		let entities = await this.entityRepository.getAllByInclude(
+			'projects',
+			idProject
+		)
+		return await this.response(res, entities, 'DON200L')
+	}
 }
 
 module.exports = UsersController

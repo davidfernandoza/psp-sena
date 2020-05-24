@@ -32,10 +32,16 @@ class Controller {
 		return entity
 	}
 
-	async getAllByProject(req, res) {
-		const { id: idProject } = req.params
-		let entities = await this.entityRepository.getAllByProject(idProject)
-		await this.response(res, entities, 'DON200L')
+	async getAllByInclude(include, idInclude, transaction, addSubDto) {
+		transaction = !transaction ? null : transaction
+		addSubDto = !addSubDto ? false : true
+		let entities = await this.entityRepository.getAllByInclude(
+			include,
+			idInclude,
+			transaction,
+			addSubDto
+		)
+		return entities
 	}
 
 	async getAllAttribute(attribut, match, transaction, addSubDto) {
@@ -69,7 +75,7 @@ class Controller {
 
 	async create(req, res) {
 		const { body } = req
-		if (body.id) delete body.id
+		if (body.id || body.id == '') delete body.id
 		const addSubDto = !req.addSubDto ? false : req.addSubDto
 		const transaction = !req.transaction ? null : req.transaction
 		let created = await this.entityRepository.create(
@@ -84,7 +90,7 @@ class Controller {
 	async update(req, res) {
 		const { body } = req
 		const { id } = req.params
-		if (body.id) delete body.id
+		if (body.id || body.id == '') delete body.id
 		const addSubDto = !req.addSubDto ? false : req.addSubDto
 		const transaction = !req.transaction ? null : req.transaction
 		const dto = !req.dto ? null : req.dto

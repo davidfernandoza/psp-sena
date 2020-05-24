@@ -73,7 +73,7 @@ class AdminPolitic extends Politic {
 						status: 'enable'
 					},
 					{
-						route: '/by-projects/:id',
+						route: '/by-project/:id',
 						method: 'GET',
 						status: 'enable'
 					},
@@ -83,7 +83,7 @@ class AdminPolitic extends Politic {
 						status: 'enable'
 					},
 					{
-						route: '/add-projects',
+						route: '/add-project',
 						method: 'POST',
 						status: 'enable'
 					},
@@ -98,7 +98,7 @@ class AdminPolitic extends Politic {
 						status: 'enable'
 					},
 					{
-						route: '/remove-projects',
+						route: '/remove-project',
 						method: 'POST',
 						status: 'enable'
 					}
@@ -128,6 +128,25 @@ class AdminPolitic extends Politic {
 					{
 						route: '/',
 						method: 'GET',
+						status: 'enable'
+					}
+				]
+			},
+			estimates: {
+				subRoutes: [
+					{
+						route: '/by-language/:id',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/',
+						method: 'POST',
+						status: 'enable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
 						status: 'enable'
 					}
 				]

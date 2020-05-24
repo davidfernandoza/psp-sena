@@ -50,7 +50,7 @@ module.exports = ({
 		auth,
 		politics,
 		requestOwner,
-		controller.getAllByProject.bind(controller)
+		controller.getAllByInclude.bind(controller)
 	)
 
 	/*

@@ -73,18 +73,19 @@ class Repository {
 		}
 	}
 
-	async getAllByProject(idProject) {
+	async getAllByInclude(include, idInclude, transaction, addSubDto) {
 		try {
-			const dto = await this.entityDto.repository()
+			const dto = await this.entityDto.repository(addSubDto)
 			const entities = await this.db[this.entity].findAll({
 				include: [
 					{
-						model: this.db.projects,
-						as: 'projects',
-						where: { id: idProject },
+						model: this.db[include],
+						as: include,
+						where: { id: idInclude },
 						required: true
 					}
-				]
+				],
+				transaction: transaction
 			})
 			if (entities.length === 0) return null
 			return entities.map(item => morphism(dto, item))
@@ -104,6 +105,7 @@ class Repository {
 
 			const dto = await this.entityDto.repository(addSubDto)
 			entity = morphism(dto, entity)
+
 			const created = await this.db[this.entity].create(entity, {
 				transaction: transaction
 			})

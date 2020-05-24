@@ -67,12 +67,12 @@ module.exports = ({
 	)
 
 	router.get(
-		'/by-projects/:id',
+		'/by-project/:id',
 		requestPrivate,
 		auth,
 		politics,
 		requestProjectOwner,
-		controller.getAllByProject.bind(controller)
+		controller.getAllByInclude.bind(controller)
 	)
 
 	/*
@@ -89,7 +89,7 @@ module.exports = ({
 	)
 
 	router.post(
-		'/add-projects',
+		'/add-project',
 		requestPrivate,
 		auth,
 		politics,
@@ -100,7 +100,7 @@ module.exports = ({
 	)
 
 	router.post(
-		'/remove-projects',
+		'/remove-project',
 		requestPrivate,
 		auth,
 		politics,

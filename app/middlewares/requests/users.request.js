@@ -92,14 +92,14 @@ class UsersRequest extends Request {
 	}
 
 	// -----------------------------------------------------------------------
+	// validacion de pertenencia de recurso por medio de la organizacion
 	async organization(req, res, next) {
 		let idUser = req.params.id
 
 		// Validacion de pertenencia del usuario en la organizacion, parga gregarle o quitarle un proyecto
 		if (
 			req.method != 'GET' &&
-			(req.route.path == '/add-projects' ||
-				req.route.path == '/remove-projects')
+			(req.route.path == '/add-project' || req.route.path == '/remove-project')
 		)
 			idUser = req.body.users_id
 

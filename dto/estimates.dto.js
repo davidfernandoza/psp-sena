@@ -6,8 +6,8 @@ class EstimatesDto extends Dto {
 	constructor() {
 		const schema = {
 			id: 'id',
-			languages_id: 'languages_id',
 			organizations_id: 'organizations_id',
+			languages_id: 'languages_id',
 			algorithm: 'algorithm',
 			code_lines: 'code_lines'
 		}

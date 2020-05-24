@@ -8,6 +8,7 @@ class ErrorString {
 			code: 'ERR400',
 			message: 'Request created incorrectly'
 		}
+
 		this.ERR401 = {
 			status: 401,
 			name: 'Unauthorized',
@@ -33,6 +34,11 @@ class ErrorString {
 			name: 'Internal Server Error',
 			code: 'ERR500',
 			message: 'Something went wrong, try again later'
+		}
+
+		this.REQ400EST = {
+			message: 'The attribute already exists',
+			path: 'estimate'
 		}
 	}
 }

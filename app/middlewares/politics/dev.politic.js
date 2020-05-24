@@ -74,7 +74,7 @@ class DevPolitic extends Politic {
 						status: 'disable'
 					},
 					{
-						route: '/by-projects/:id',
+						route: '/by-project/:id',
 						method: 'GET',
 						status: 'disable'
 					},
@@ -84,7 +84,7 @@ class DevPolitic extends Politic {
 						status: 'disable'
 					},
 					{
-						route: '/add-projects',
+						route: '/add-project',
 						method: 'POST',
 						status: 'disable'
 					},
@@ -100,7 +100,7 @@ class DevPolitic extends Politic {
 						status: 'enable'
 					},
 					{
-						route: '/remove-projects',
+						route: '/remove-project',
 						method: 'POST',
 						status: 'disable'
 					}
@@ -131,6 +131,25 @@ class DevPolitic extends Politic {
 						route: '/',
 						method: 'GET',
 						status: 'enable'
+					}
+				]
+			},
+			estimates: {
+				subRoutes: [
+					{
+						route: '/by-language/:id',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/',
+						method: 'POST',
+						status: 'disable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'disable'
 					}
 				]
 			}
