@@ -66,6 +66,7 @@ class UsersRequest extends Request {
 	async update(req, res, next) {
 		delete body.password
 		if (req.method == 'PUT') {
+			if (req.rol == 'DEV') req.body.rol = 'DEV'
 			const bodyRes = await super.bodyValidator(req, body)
 			if (bodyRes != true) await super.errorHandle(bodyRes)
 		}
@@ -94,6 +95,7 @@ class UsersRequest extends Request {
 	async organization(req, res, next) {
 		let idUser = req.params.id
 
+		// Validacion de pertenencia del usuario en la organizacion, parga gregarle o quitarle un proyecto
 		if (
 			req.method != 'GET' &&
 			(req.route.path == '/add-projects' ||
@@ -104,15 +106,27 @@ class UsersRequest extends Request {
 		const user = await this.#usersRepository.get(idUser)
 		if (!user) throw new Error('ERR404')
 
+		// Validacion de estado de trabajo de usuario, siesta sin o con organizacion
 		if (user.organizations_id) {
 			if (user.organizations_id != req.organization) throw new Error('ERR403')
+
+			// Validar si la organizacion que trae el cuerpo trae un nullo o un vacio y si es diferente al padre de la organizacion
 			if (
 				req.body.organizations_id != '' &&
 				req.body.organizations_id != null &&
 				req.body.organizations_id != req.organization
 			)
 				throw new Error('ERR403')
+
+			// No auto despedirce
+			if (
+				req.body.organizations_id == '' ||
+				req.body.organizations_id == null
+			) {
+				if (req.id == idUser) throw new Error('ERR403')
+			}
 		} else {
+			// validar si el admin actual tiene permisos con la organizacion del cuerpo
 			if (req.body.organizations_id != req.organization)
 				throw new Error('ERR403')
 			req.body.organizations_id = req.organization
