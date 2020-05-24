@@ -15,13 +15,12 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 				isNumeric: true
 			},
-			algorithms_id: {
-				type: DataTypes.INTEGER,
-				allowNull: false,
-				isNumeric: true
-			},
 			organizations_id: {
 				type: DataTypes.INTEGER,
+				allowNull: false
+			},
+			algorithm: {
+				type: DataTypes.STRING,
 				allowNull: false
 			},
 			code_lines: { type: DataTypes.INTEGER, allowNull: false }
@@ -49,13 +48,6 @@ module.exports = (sequelize, DataTypes) => {
 			foreignKey: 'organizations_id', // a donde llega
 			targetKey: 'id', // de donde viene
 			as: 'organizations'
-		})
-
-		// Un estimates tiene un algorithms (1:1)
-		models.estimates.belongsTo(models.algorithms, {
-			foreignKey: 'algorithms_id', // a donde llega
-			targetKey: 'id', // de donde viene
-			as: 'algorithms'
 		})
 
 		// Un estimates tiene muchas new_parts (1:M)

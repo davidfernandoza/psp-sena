@@ -7,8 +7,8 @@ class EstimatesDto extends Dto {
 		const schema = {
 			id: 'id',
 			languages_id: 'languages_id',
-			algorithms_id: 'algorithms_id',
 			organizations_id: 'organizations_id',
+			algorithm: 'algorithm',
 			code_lines: 'code_lines'
 		}
 		super(schema)

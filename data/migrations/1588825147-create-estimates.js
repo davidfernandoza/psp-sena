@@ -15,12 +15,9 @@ module.exports = {
 				onUpdate: 'cascade',
 				onDelete: 'cascade'
 			},
-			algorithms_id: {
-				type: Sequelize.INTEGER,
-				allowNull: false,
-				references: { model: 'algorithms', key: 'id' },
-				onUpdate: 'cascade',
-				onDelete: 'cascade'
+			algorithm: {
+				type: Sequelize.STRING,
+				allowNull: false
 			},
 			organizations_id: {
 				type: Sequelize.INTEGER,
