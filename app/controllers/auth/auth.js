@@ -17,7 +17,9 @@ class Auth {
 			this.dataEntity.attribute,
 			identity
 		)
+		// Validacion de existencia o despido de usuario
 		if (!dataEntity) throw new Error('ERR401')
+		if (!dataEntity.organizations_id) throw new Error('ERR401')
 
 		// Comparar el password del usuario o jugador
 		const result = await bcrypt.compare(password, dataEntity.password)
