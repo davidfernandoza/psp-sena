@@ -41,16 +41,17 @@ class JWTService {
 	}
 
 	// Metodo que decodifica el token:
-	decode(token, type) {
+	decode(token, type, status) {
 		try {
 			/*
 			 * status true -> no verifica la firma del token
 			 * status false -> si verifica la firma del token
 			 */
+			status = !status ? false : true
 			const payload = jwt.decode(
 				token,
 				this.#config.ENCRYPTION_KEY_TOKEN,
-				false
+				status
 			)
 
 			type = !type ? 'auth' : type

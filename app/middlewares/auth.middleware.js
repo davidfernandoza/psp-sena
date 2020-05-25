@@ -17,7 +17,13 @@ class AuthMiddleware {
 
 		if (invalid_token != null) throw new Error('ERR401')
 		else {
-			let responseToken = await this.JWTServices.decode(authToken)
+			let responseToken = ''
+			if (req.route.path == '/new-token') {
+				// Token sin firma.
+				responseToken = await this.JWTServices.decode(authToken, 'auth', true)
+			} else {
+				responseToken = await this.JWTServices.decode(authToken, 'auth')
+			}
 			if (responseToken.status === 401 || responseToken.status === 403) {
 				throw new Error('ERR401')
 			} else {
@@ -27,6 +33,7 @@ class AuthMiddleware {
 
 				//  Validar si el token tiene la organizacion en null
 				if (!responseToken.payload.organization) throw new Error('ERR401')
+
 				const user = await this.usersRepository.get(responseToken.payload.id)
 
 				// Validar si el usuario existe y no este despedido
