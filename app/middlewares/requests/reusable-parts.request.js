@@ -9,7 +9,7 @@ class ReusablePartsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('', null)
+				.allow(null)
 				.optional(),
 			programs_id: JoiValidator.number()
 				.integer()
@@ -30,7 +30,7 @@ class ReusablePartsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('', null)
+				.allow(null)
 				.optional()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)

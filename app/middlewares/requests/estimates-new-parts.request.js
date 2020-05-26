@@ -9,7 +9,7 @@ class EstimatesNewPartsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('', null)
+				.allow(null)
 				.optional(),
 			estimates_id: JoiValidator.number()
 				.integer()

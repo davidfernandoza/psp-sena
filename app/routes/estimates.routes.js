@@ -9,6 +9,7 @@ module.exports = ({
 	EstimatesController,
 	EstimatesRequest,
 	AuthMiddleware,
+	OwnersRequests,
 	AdminPolitic,
 	DevPolitic
 }) => {
@@ -18,9 +19,7 @@ module.exports = ({
 	 * Request:
 	 */
 	const requestPrivate = EstimatesRequest.private.bind(EstimatesRequest)
-	const requestOrganization = EstimatesRequest.findOrganization.bind(
-		EstimatesRequest
-	)
+	const requestOrganization = OwnersRequests.byEstimate.bind(OwnersRequests)
 	const requestBody = EstimatesRequest.body.bind(EstimatesRequest)
 
 	/*

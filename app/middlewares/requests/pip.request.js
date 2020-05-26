@@ -18,7 +18,7 @@ class PipRequest extends Request {
 				.required(),
 			description: JoiValidator.string().min(8).required(),
 			proposals: JoiValidator.string().min(8).required(),
-			comments: JoiValidator.string().min(8).allow('').optional(),
+			comments: JoiValidator.string().min(8).allow(null).optional(),
 			date: JoiValidator.date().timestamp().required()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)

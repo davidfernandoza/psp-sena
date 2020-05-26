@@ -20,12 +20,10 @@ module.exports = ({
 	ModulesRoutes,
 	NewPartsRoutes,
 	OrganizationsRoutes,
-	PhasesRoutes,
 	PipRoutes,
 	ProgramsRoutes,
 	ProjectsRoutes,
 	ReusablePartsRoutes,
-	StandardDefectsRoutes,
 	StringHelper,
 	TestReportsRoutes,
 	TimeLogRoutes,
@@ -46,7 +44,7 @@ module.exports = ({
 	// registro de las rutas
 	apiRoute.use('/auth', AuthRoutes)
 	apiRoute.use('/base-parts', BasePartsRoutes)
-	apiRoute.use('/defect-log', DefectLogRoutes)
+	apiRoute.use('/defect-logs', DefectLogRoutes)
 	apiRoute.use('/estimates-new-parts', EstimatesNewPartsRoutes)
 	apiRoute.use('/estimates', EstimatesRoutes)
 	apiRoute.use('/experiences-languages', ExperiencesLanguagesRoutes)
@@ -55,12 +53,10 @@ module.exports = ({
 	apiRoute.use('/modules', ModulesRoutes)
 	apiRoute.use('/new-parts', NewPartsRoutes)
 	apiRoute.use('/organizations', OrganizationsRoutes)
-	apiRoute.use('/phases', PhasesRoutes)
 	apiRoute.use('/pip', PipRoutes)
 	apiRoute.use('/programs', ProgramsRoutes)
 	apiRoute.use('/projects', ProjectsRoutes)
 	apiRoute.use('/reusable-parts', ReusablePartsRoutes)
-	apiRoute.use('/standard-defects', StandardDefectsRoutes)
 	apiRoute.use('/test-reports', TestReportsRoutes)
 	apiRoute.use('/time-log', TimeLogRoutes)
 	apiRoute.use('/users', UsersRoutes)

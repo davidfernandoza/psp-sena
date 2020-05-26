@@ -28,6 +28,21 @@ class ErrorString {
 			message: 'Resource not found'
 		}
 
+		this.REQ400EST = {
+			message: 'the attribute already exists',
+			path: 'estimate'
+		}
+
+		this.REQ403DEF = {
+			message: 'forbidden resource',
+			path: 'defect_log_chained_id'
+		}
+
+		this.REQ404DEF = {
+			message: 'the attribute not exists',
+			path: 'defect_log_chained_id'
+		}
+
 		this.ERR500 = {
 			status: 500,
 			name: 'Internal Server Error',

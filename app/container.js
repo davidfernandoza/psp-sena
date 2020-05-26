@@ -50,7 +50,6 @@ const OrganizationsRoutes = require(join(
 	__dirname,
 	'./routes/organizations.routes'
 ))
-const PhasesRoutes = require(join(__dirname, './routes/phases.routes'))
 const PipRoutes = require(join(__dirname, './routes/pip.routes'))
 const ProgramsRoutes = require(join(__dirname, './routes/programs.routes'))
 const ProjectsRoutes = require(join(__dirname, './routes/projects.routes'))
@@ -58,10 +57,7 @@ const ReusablePartsRoutes = require(join(
 	__dirname,
 	'./routes/reusable-parts.routes'
 ))
-const StandardDefectsRoutes = require(join(
-	__dirname,
-	'./routes/standard-defects.routes'
-))
+
 const TestReportsRoutes = require(join(
 	__dirname,
 	'./routes/test-reports.routes'
@@ -109,13 +105,12 @@ const {
 	ModulesRequest,
 	NewPartsRequest,
 	OrganizationsRequest,
-	PhasesRequest,
+	OwnersRequests,
 	PipRequest,
 	ProgramsRequest,
 	ProjectsUsersRequest,
 	ProjectsRequest,
 	ReusablePartsRequest,
-	StandardDefectsRequest,
 	TestReportsRequest,
 	TimeLogRequest,
 	UsersRequest
@@ -141,13 +136,11 @@ const {
 	ModulesController,
 	NewPartsController,
 	OrganizationsController,
-	PhasesController,
 	PipController,
 	ProgramsController,
 	ProjectsUsersController,
 	ProjectsController,
 	ReusablePartsController,
-	StandardDefectsController,
 	TestReportsController,
 	TimeLogController,
 	UsersController
@@ -263,13 +256,10 @@ container
 		ModulesRoutes: asFunction(ModulesRoutes).singleton(),
 		NewPartsRoutes: asFunction(NewPartsRoutes).singleton(),
 		OrganizationsRoutes: asFunction(OrganizationsRoutes).singleton(),
-		PhasesRoutes: asFunction(PhasesRoutes).singleton(),
 		PipRoutes: asFunction(PipRoutes).singleton(),
 		ProgramsRoutes: asFunction(ProgramsRoutes).singleton(),
-
 		ProjectsRoutes: asFunction(ProjectsRoutes).singleton(),
 		ReusablePartsRoutes: asFunction(ReusablePartsRoutes).singleton(),
-		StandardDefectsRoutes: asFunction(StandardDefectsRoutes).singleton(),
 		TestReportsRoutes: asFunction(TestReportsRoutes).singleton(),
 		TimeLogRoutes: asFunction(TimeLogRoutes).singleton(),
 		UsersRoutes: asFunction(UsersRoutes).singleton()
@@ -332,13 +322,11 @@ container
 		ModulesController: asClass(ModulesController).singleton(),
 		NewPartsController: asClass(NewPartsController).singleton(),
 		OrganizationsController: asClass(OrganizationsController).singleton(),
-		PhasesController: asClass(PhasesController).singleton(),
 		PipController: asClass(PipController).singleton(),
 		ProgramsController: asClass(ProgramsController).singleton(),
 		ProjectsUsersController: asClass(ProjectsUsersController).singleton(),
 		ProjectsController: asClass(ProjectsController).singleton(),
 		ReusablePartsController: asClass(ReusablePartsController).singleton(),
-		StandardDefectsController: asClass(StandardDefectsController).singleton(),
 		TestReportsController: asClass(TestReportsController).singleton(),
 		TimeLogController: asClass(TimeLogController).singleton(),
 		UsersController: asClass(UsersController).singleton()
@@ -381,13 +369,12 @@ container
 		ModulesRequest: asClass(ModulesRequest).singleton(),
 		NewPartsRequest: asClass(NewPartsRequest).singleton(),
 		OrganizationsRequest: asClass(OrganizationsRequest).singleton(),
-		PhasesRequest: asClass(PhasesRequest).singleton(),
+		OwnersRequests: asClass(OwnersRequests).singleton(),
 		PipRequest: asClass(PipRequest).singleton(),
 		ProgramsRequest: asClass(ProgramsRequest).singleton(),
 		ProjectsUsersRequest: asClass(ProjectsUsersRequest).singleton(),
 		ProjectsRequest: asClass(ProjectsRequest).singleton(),
 		ReusablePartsRequest: asClass(ReusablePartsRequest).singleton(),
-		StandardDefectsRequest: asClass(StandardDefectsRequest).singleton(),
 		TestReportsRequest: asClass(TestReportsRequest).singleton(),
 		TimeLogRequest: asClass(TimeLogRequest).singleton(),
 		UsersRequest: asClass(UsersRequest).singleton()

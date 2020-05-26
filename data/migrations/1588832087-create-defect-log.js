@@ -36,7 +36,6 @@ module.exports = {
 			},
 			phase_removed_id: {
 				type: Sequelize.INTEGER,
-				allowNull: false,
 				references: { model: 'phases', key: 'id' },
 				onUpdate: 'cascade',
 				onDelete: 'cascade'
@@ -44,7 +43,7 @@ module.exports = {
 			description: { type: Sequelize.TEXT, allowNull: false },
 			solution: { type: Sequelize.TEXT },
 			start_date: { type: Sequelize.BIGINT, allowNull: false },
-			finish_date: { type: Sequelize.BIGINT, allowNull: false },
+			finish_date: { type: Sequelize.BIGINT },
 			time_for_repair: { type: Sequelize.INTEGER },
 			created_at: { allowNull: false, type: Sequelize.DATE },
 			updated_at: { allowNull: false, type: Sequelize.DATE }

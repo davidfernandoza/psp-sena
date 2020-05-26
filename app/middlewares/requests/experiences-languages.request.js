@@ -9,7 +9,7 @@ class ExperiencesLanguagesRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('', null)
+				.allow(null)
 				.optional(),
 			experiences_id: JoiValidator.number()
 				.integer()

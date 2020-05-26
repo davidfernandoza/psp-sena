@@ -18,7 +18,7 @@ class EstimatesRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('', null)
+				.allow(null)
 				.optional(),
 			languages_id: JoiValidator.number()
 				.integer()
@@ -29,7 +29,7 @@ class EstimatesRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('', null)
+				.allow(null)
 				.optional(),
 			algorithm: JoiValidator.string().min(1).max(225).required(),
 			code_lines: JoiValidator.number()
@@ -43,30 +43,6 @@ class EstimatesRequest extends Request {
 		this.#errorString = ErrorString
 	}
 
-	// -----------------------------------------------------------------------
-	// Validacion de existencia de estimacion para una organizacion
-	async findOrganization(req, res, next) {
-		const idOrganizations = req.organization
-		let estimates = await this.#estimatesRepository.findOrganization(
-			idOrganizations,
-			req.body.languages_id,
-			req.body.algorithm
-		)
 
-		if (estimates) {
-			if (req.method == 'PUT') {
-				if (estimates.length > 1)
-					return super.errorHandle(null, this.#errorString.REQ400EST)
-
-				// Validacion de pertenencia de la organizacion
-				estimates = await this.#estimatesRepository.getValidate(
-					req.params.id,
-					idOrganizations
-				)
-				if (!estimates) throw new Error('ERR403')
-			}
-		}
-		next()
-	}
 }
 module.exports = EstimatesRequest

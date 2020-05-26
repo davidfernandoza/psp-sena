@@ -9,7 +9,7 @@ class ModulesRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('', null)
+				.allow(null)
 				.optional(),
 			projects_id: JoiValidator.number()
 				.integer()
@@ -19,8 +19,8 @@ class ModulesRequest extends Request {
 			name: JoiValidator.string().min(1).max(225).required(),
 			description: JoiValidator.string().min(1).required(),
 			planning_date: JoiValidator.date().timestamp().required(),
-			start_date: JoiValidator.date().timestamp().allow('', null).optional(),
-			finish_date: JoiValidator.date().timestamp().allow('', null).optional()
+			start_date: JoiValidator.date().timestamp().allow(null).optional(),
+			finish_date: JoiValidator.date().timestamp().allow(null).optional()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
 	}

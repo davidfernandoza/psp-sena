@@ -8,6 +8,7 @@ const { Router } = require('express')
 module.exports = ({
 	ProjectsController,
 	ProjectsRequest,
+	OwnersRequests,
 	AuthMiddleware,
 	AdminPolitic,
 	DevPolitic
@@ -18,9 +19,8 @@ module.exports = ({
 	 * Request:
 	 */
 	const requestPrivate = ProjectsRequest.private.bind(ProjectsRequest)
-	// const requestPublic = ProjectsRequest.public.bind(ProjectsRequest)
 	const requestBody = ProjectsRequest.body.bind(ProjectsRequest)
-	const requestOwner = ProjectsRequest.owner.bind(ProjectsRequest)
+	const requestOwner = OwnersRequests.byProject.bind(OwnersRequests)
 
 	/*
 	 * Politics:

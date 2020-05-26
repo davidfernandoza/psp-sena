@@ -9,7 +9,7 @@ class LanguagesRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('', null)
+				.allow(null)
 				.optional(),
 			name: JoiValidator.string().min(1).max(225).required()
 		}

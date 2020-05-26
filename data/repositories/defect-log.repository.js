@@ -4,7 +4,7 @@ const Repository = require(join(__dirname, './repository'))
 
 class DefectLogRepository extends Repository {
 	constructor({ DB, DefectLogDto, Config }) {
-		super(DB, DefectLogDto, Config, 'defect_logs')
+		super(DB, DefectLogDto, Config, 'defect_log')
 		this.db = DB
 	}
 	// Aqui van las consultas especializadas

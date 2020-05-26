@@ -7,10 +7,10 @@ const { Router } = require('express')
 
 module.exports = ({
 	ProjectsUsersController,
-	ProjectsRequest,
 	UsersController,
-	UsersRequest,
+	OwnersRequests,
 	AuthMiddleware,
+	UsersRequest,
 	AdminPolitic,
 	DevPolitic
 }) => {
@@ -24,8 +24,8 @@ module.exports = ({
 	const requestUpdate = UsersRequest.update.bind(UsersRequest)
 	const requestBody = UsersRequest.body.bind(UsersRequest)
 	const requestProjects = UsersRequest.project.bind(UsersRequest)
-	const requestOrganization = UsersRequest.organization.bind(UsersRequest)
-	const requestProjectOwner = ProjectsRequest.owner.bind(ProjectsRequest)
+	const requestOrganization = OwnersRequests.byOrganization.bind(OwnersRequests)
+	const requestProjectOwner = OwnersRequests.byProject.bind(OwnersRequests)
 
 	/*
 	 * Politics:

@@ -6,10 +6,7 @@ let passwordRule = {}
 let projectRule = {}
 
 class UsersRequest extends Request {
-	#joiValidator = {}
-	#usersRepository = {}
-
-	constructor({ JoiValidator, Config, JWTService, UsersRepository }) {
+	constructor({ JoiValidator, Config, JWTService }) {
 		body = {
 			id: JoiValidator.number()
 				.integer()
@@ -21,7 +18,7 @@ class UsersRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('', null)
+				.allow(null)
 				.optional(),
 			first_name: JoiValidator.string().min(1).max(225).required(),
 			last_name: JoiValidator.string().min(1).max(225).required(),
@@ -58,8 +55,6 @@ class UsersRequest extends Request {
 		}
 
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
-		this.#joiValidator = JoiValidator
-		this.#usersRepository = UsersRepository
 	}
 
 	// -----------------------------------------------------------------------
@@ -87,49 +82,6 @@ class UsersRequest extends Request {
 		if (req.method == 'POST' || req.method == 'DELETE') {
 			const bodyRes = await super.bodyValidator(req, projectRule) // validacion de cuerpo
 			if (bodyRes != true) await super.errorHandle(bodyRes)
-		}
-		next()
-	}
-
-	// -----------------------------------------------------------------------
-	// validacion de pertenencia de recurso por medio de la organizacion
-	async organization(req, res, next) {
-		let idUser = req.params.id
-
-		// Validacion de pertenencia del usuario en la organizacion, parga gregarle o quitarle un proyecto
-		if (
-			req.method != 'GET' &&
-			(req.route.path == '/add-project' || req.route.path == '/remove-project')
-		)
-			idUser = req.body.users_id
-
-		const user = await this.#usersRepository.get(idUser)
-		if (!user) throw new Error('ERR404')
-
-		// Validacion de estado de trabajo de usuario, siesta sin o con organizacion
-		if (user.organizations_id) {
-			if (user.organizations_id != req.organization) throw new Error('ERR403')
-
-			// Validar si la organizacion que trae el cuerpo trae un nullo o un vacio y si es diferente al padre de la organizacion
-			if (
-				req.body.organizations_id != '' &&
-				req.body.organizations_id != null &&
-				req.body.organizations_id != req.organization
-			)
-				throw new Error('ERR403')
-
-			// No auto despedirce
-			if (
-				req.body.organizations_id == '' ||
-				req.body.organizations_id == null
-			) {
-				if (req.id == idUser) throw new Error('ERR403')
-			}
-		} else {
-			// validar si el admin actual tiene permisos con la organizacion del cuerpo
-			if (req.body.organizations_id != req.organization)
-				throw new Error('ERR403')
-			req.body.organizations_id = req.organization
 		}
 		next()
 	}

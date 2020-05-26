@@ -30,13 +30,12 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			phase_removed_id: {
 				type: DataTypes.INTEGER,
-				allowNull: false,
 				isNumeric: true
 			},
 			description: { type: DataTypes.TEXT, allowNull: false },
 			solution: { type: DataTypes.TEXT },
 			start_date: { type: DataTypes.BIGINT, allowNull: false },
-			finish_date: { type: DataTypes.BIGINT, allowNull: false },
+			finish_date: { type: DataTypes.BIGINT },
 			time_for_repair: { type: DataTypes.INTEGER }
 		},
 		{

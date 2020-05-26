@@ -123,15 +123,6 @@ class AdminPolitic extends Politic {
 					}
 				]
 			},
-			'standard-defects': {
-				subRoutes: [
-					{
-						route: '/',
-						method: 'GET',
-						status: 'enable'
-					}
-				]
-			},
 			estimates: {
 				subRoutes: [
 					{
@@ -148,6 +139,25 @@ class AdminPolitic extends Politic {
 						route: '/:id',
 						method: 'PUT',
 						status: 'enable'
+					}
+				]
+			},
+			'defect-logs': {
+				subRoutes: [
+					{
+						route: '/by-program/:id',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/',
+						method: 'POST',
+						status: 'disable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'disable'
 					}
 				]
 			}

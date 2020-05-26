@@ -9,7 +9,7 @@ class BasePartsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('', null)
+				.allow(null)
 				.optional(),
 			programs_id: JoiValidator.number()
 				.integer()
@@ -45,25 +45,25 @@ class BasePartsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('', null)
+				.allow(null)
 				.optional(),
 			current_lines_deleted: JoiValidator.number()
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('', null)
+				.allow(null)
 				.optional(),
 			current_lines_edits: JoiValidator.number()
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('', null)
+				.allow(null)
 				.optional(),
 			current_lines_added: JoiValidator.number()
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.allow('', null)
+				.allow(null)
 				.optional()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)

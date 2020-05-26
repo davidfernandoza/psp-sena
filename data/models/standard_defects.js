@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 				primaryKey: true,
-				autoIncrement: true,
 				isNumeric: true
 			},
 			name: {
@@ -16,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
 					'SYNTAX',
 					'BUILD',
 					'PACKAGE',
-					'ASSIGMENT',
+					'ASSIGNMENT',
 					'INTERFACE',
 					'CHECKING',
 					'DATA',
