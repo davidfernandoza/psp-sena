@@ -30,7 +30,7 @@ class TimeLogRequest extends Request {
 				.max(99999999990)
 				.allow(null)
 				.optional(),
-			comments: JoiValidator.string().min(8).allow(null).optional()
+			comments: JoiValidator.string().min(1).allow(null).optional()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
 	}

@@ -39,8 +39,8 @@ class DefectLogRequest extends Request {
 				.max(99999999990)
 				.allow(null)
 				.optional(),
-			description: JoiValidator.string().min(8).required(),
-			solution: JoiValidator.string().min(8).allow(null).optional(),
+			description: JoiValidator.string().min(1).required(),
+			solution: JoiValidator.string().min(1).allow(null).optional(),
 			start_date: JoiValidator.date().timestamp().required(),
 			finish_date: JoiValidator.date().timestamp().allow(null).optional(),
 			time_for_repair: JoiValidator.number()
