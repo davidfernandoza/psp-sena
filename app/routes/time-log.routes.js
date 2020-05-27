@@ -9,6 +9,7 @@ module.exports = ({
 	TimeLogController,
 	TimeLogRequest,
 	AuthMiddleware,
+	OwnersRequests,
 	AdminPolitic,
 	DevPolitic
 }) => {
@@ -18,8 +19,8 @@ module.exports = ({
 	 * Request:
 	 */
 	const requestPrivate = TimeLogRequest.private.bind(TimeLogRequest)
-	const requestPublic = TimeLogRequest.public.bind(TimeLogRequest)
 	const requestBody = TimeLogRequest.body.bind(TimeLogRequest)
+	const requestOwner = OwnersRequests.byProgram.bind(OwnersRequests)
 
 	/*
 	 * Politics:
@@ -44,19 +45,12 @@ module.exports = ({
 	 * GET:
 	 */
 	router.get(
-		'/',
-		requestPublic,
-		auth,
-		politics,
-		controller.getAll.bind(controller)
-	)
-
-	router.get(
-		'/:id',
+		'/by-program/:id',
 		requestPrivate,
 		auth,
 		politics,
-		controller.get.bind(controller)
+		requestOwner,
+		controller.getAllAttribute.bind(controller)
 	)
 
 	/*
@@ -69,6 +63,7 @@ module.exports = ({
 		auth,
 		politics,
 		requestBody,
+		requestOwner,
 		controller.create.bind(controller)
 	)
 
@@ -77,24 +72,13 @@ module.exports = ({
 	 * PUT:
 	 */
 	router.put(
-		'/',
+		'/:id',
 		requestPrivate,
 		auth,
 		politics,
 		requestBody,
+		requestOwner,
 		controller.update.bind(controller)
-	)
-
-	/*
-	 * -----------------------------------------------------------------------------------*
-	 * DELETE:
-	 */
-	router.delete(
-		'/',
-		requestPrivate,
-		auth,
-		politics,
-		controller.delete.bind(controller)
 	)
 
 	return router

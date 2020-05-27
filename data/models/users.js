@@ -70,7 +70,7 @@ module.exports = (sequelize, DataTypes) => {
 		})
 
 		// Un users tiene un organizatios (1:1)
-		models.time_log.belongsTo(models.organizations, {
+		models.users.belongsTo(models.organizations, {
 			foreignKey: 'organizations_id', // a donde llega
 			targetKey: 'id', // de donde viene
 			as: 'organizations'

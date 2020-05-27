@@ -25,7 +25,7 @@ module.exports = {
 			start_date: { type: Sequelize.BIGINT, allowNull: false },
 			delta_time: { type: Sequelize.DOUBLE },
 			finish_date: { type: Sequelize.BIGINT },
-			interruption: { type: Sequelize.INTEGER },
+			interruption: { type: Sequelize.INTEGER, allowNull: false },
 			comments: { type: Sequelize.TEXT },
 			created_at: { allowNull: false, type: Sequelize.DATE },
 			updated_at: { allowNull: false, type: Sequelize.DATE }

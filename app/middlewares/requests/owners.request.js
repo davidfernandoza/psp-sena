@@ -63,6 +63,7 @@ class OwnersRequests extends Request {
 		const idProgram = req.method == 'GET' ? req.params.id : req.body.programs_id
 		const program = await this.#programsRepository.get(idProgram)
 		const idUser = req.id
+
 		if (!program) throw new Error('ERR404')
 
 		if (req.rol == 'DEV') {
@@ -75,16 +76,21 @@ class OwnersRequests extends Request {
 				/*
 				 * le pertenecer el defect log, o el log de tiempos?
 				 */
-
 				let dataLog = {}
 				if (req.method == 'PUT') {
 					if (req.baseUrl == '/api/time-logs') {
-						dataLog = await this.#timeLogRepository.get(req.params.id)
+						dataLog = await this.#timeLogRepository.getByProgram(
+							req.params.id,
+							idUser
+						)
 					} else {
-						dataLog = await this.#defectLogRepository.get(req.params.id)
+						dataLog = await this.#defectLogRepository.getByProgram(
+							req.params.id,
+							idUser
+						)
 					}
+
 					if (!dataLog) throw new Error('ERR404')
-					else if (dataLog.programs_id != idProgram) throw new Error('ERR403')
 				}
 
 				// validacion del defecto escalonado

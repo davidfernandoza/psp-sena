@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
 		models.phases.hasMany(models.time_log, {
 			foreignKey: 'phases_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'time_log-1'
+			as: 'time_log'
 		})
 
 		// Un phases se registra en muchos defect_log (1:M

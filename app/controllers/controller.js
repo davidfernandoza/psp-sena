@@ -90,6 +90,8 @@ class Controller {
 	async update(req, res) {
 		const { body } = req
 		const { id } = req.params
+		console.log('sisi')
+
 		delete body.id
 		const addSubDto = !req.addSubDto ? false : req.addSubDto
 		const transaction = !req.transaction ? null : req.transaction

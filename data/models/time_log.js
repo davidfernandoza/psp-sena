@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 				isNumeric: true
 			},
 			finish_date: { type: DataTypes.BIGINT },
-			interruption: { type: DataTypes.INTEGER },
+			interruption: { type: DataTypes.INTEGER, allowNull: false },
 			comments: { type: DataTypes.TEXT }
 		},
 		{
@@ -44,14 +44,14 @@ module.exports = (sequelize, DataTypes) => {
 		models.time_log.belongsTo(models.programs, {
 			foreignKey: 'programs_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'programs-2'
+			as: 'programs'
 		})
 
 		// Un time_log tiene un phases (1:1)
 		models.time_log.belongsTo(models.phases, {
 			foreignKey: 'phases_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'phases-1'
+			as: 'phases'
 		})
 	}
 

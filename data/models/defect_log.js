@@ -53,21 +53,21 @@ module.exports = (sequelize, DataTypes) => {
 		models.defect_log.hasMany(models.defect_log, {
 			foreignKey: 'defect_log_chained_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'defect_log_chained-1'
+			as: 'defect_log_chained_1'
 		})
 
 		// Un defect_log tiene un defect_log (1:1)
 		models.defect_log.belongsTo(models.defect_log, {
 			foreignKey: 'defect_log_chained_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'defect_log_chained-2'
+			as: 'defect_log_chained_2'
 		})
 
 		// Un defect_log tiene un programs (1:1)
 		models.defect_log.belongsTo(models.programs, {
 			foreignKey: 'programs_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'programs-1'
+			as: 'programs_2'
 		})
 
 		// Un defect_log tiene un standard_defects (1:1)

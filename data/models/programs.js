@@ -48,56 +48,56 @@ module.exports = (sequelize, DataTypes) => {
 		models.programs.hasMany(models.defect_log, {
 			foreignKey: 'programs_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'defect_log-1'
+			as: 'defect_log'
 		})
 
 		// Un programs se registra en muchos new_parts (1:M)
 		models.programs.hasMany(models.new_parts, {
 			foreignKey: 'programs_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'new_parts-1'
+			as: 'new_parts'
 		})
 
 		// Un programs se registra en muchos pip (1:M)
 		models.programs.hasMany(models.pip, {
 			foreignKey: 'programs_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'pip-1'
+			as: 'pip'
 		})
 
 		// Un programs se registra en muchos test_reports (1:M)
 		models.programs.hasMany(models.test_reports, {
 			foreignKey: 'programs_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'test_reports-1'
+			as: 'test_reports'
 		})
 
 		// Un programs se registra en muchos time_log (1:M)
 		models.programs.hasMany(models.time_log, {
 			foreignKey: 'programs_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'time_log-1'
+			as: 'time_log'
 		})
 
 		// Un programs tiene un users (1:1)
 		models.programs.belongsTo(models.users, {
 			foreignKey: 'users_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'users-1'
+			as: 'users'
 		})
 
 		// Un programs tiene un modules (1:1)
 		models.programs.belongsTo(models.languages, {
 			foreignKey: 'languages_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'languages-1'
+			as: 'languages'
 		})
 
 		// Un programs tiene un modules (1:1)
 		models.programs.belongsTo(models.modules, {
 			foreignKey: 'modules_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'modules-1'
+			as: 'modules'
 		})
 
 		// Un programs tiene muchas programs (base_parts) (1:M)

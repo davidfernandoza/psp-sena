@@ -12,7 +12,11 @@ class TimeLogController extends Controller {
 	}) {
 		super(TimeLogRepository, TimeLogDto, Config, StringHelper, DoneString)
 	}
-	// Logica diferente al CRUD base aqui:
+
+	async getAllAttribute(req, res) {
+		let defects = await super.getAllAttribute('programs_id', req.params.id)
+		return await super.response(res, defects, 'DON200L')
+	}
 }
 
 module.exports = TimeLogController

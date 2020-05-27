@@ -160,8 +160,28 @@ class AdminPolitic extends Politic {
 						status: 'disable'
 					}
 				]
+			},
+			'time-logs': {
+				subRoutes: [
+					{
+						route: '/by-program/:id',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/',
+						method: 'POST',
+						status: 'disable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'disable'
+					}
+				]
 			}
 		}
+
 		super(rol, authRol, baseUrl, permissions)
 	}
 
