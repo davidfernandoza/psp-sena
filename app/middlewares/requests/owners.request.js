@@ -10,12 +10,16 @@ class OwnersRequests extends Request {
 	#defectLogRepository = {}
 	#estimatesRepository = {}
 	#errorString = {}
+	#timeLogRepository = {}
+	#projectsRepository = {}
 
 	constructor({
 		ProjectsUsersRepository,
 		EstimatesRepository,
 		DefectLogRepository,
+		ProjectsRepository,
 		ProgramsRepository,
+		TimeLogRepository,
 		UsersRepository,
 		JoiValidator,
 		ErrorString,
@@ -28,7 +32,9 @@ class OwnersRequests extends Request {
 		this.#programsRepository = ProgramsRepository
 		this.#defectLogRepository = DefectLogRepository
 		this.#estimatesRepository = EstimatesRepository
+		this.#timeLogRepository = TimeLogRepository
 		this.#errorString = ErrorString
+		this.#projectsRepository = ProjectsRepository
 	}
 
 	//------------------------------------------------------------------------------
@@ -54,23 +60,50 @@ class OwnersRequests extends Request {
 	//------------------------------------------------------------------------------
 	// validar si un programa le pertenece a un usuario
 	async byProgram(req, res, next) {
-		let idProgram = req.body.programs_id
-		const idUser = req.id
-
+		const idProgram = req.method == 'GET' ? req.params.id : req.body.programs_id
 		const program = await this.#programsRepository.get(idProgram)
+		const idUser = req.id
 		if (!program) throw new Error('ERR404')
-		if (program.users_id != idUser) throw new Error('ERR403')
 
-		// validacion de log de defectos
-		if (req.urlBase == '/api/defect-logs') {
-			const chainedId = req.body.defect_log_chained_id
-			if (chainedId) {
-				const defectLog = await this.#defectLogRepository.get(chainedId)
-				if (!defectLog)
-					return await super.errorHandle(null, this.#errorString.REQ404DEF)
-				else if (defectLog.programs_id != idProgram)
-					super.errorHandle(null, this.#errorString.REQ403DEF)
+		if (req.rol == 'DEV') {
+			if (program.users_id != idUser) throw new Error('ERR403')
+
+			if (
+				req.baseUrl == '/api/defect-logs' ||
+				req.baseUrl == '/api/time-logs'
+			) {
+				/*
+				 * le pertenecer el defect log, o el log de tiempos?
+				 */
+
+				let dataLog = {}
+				if (req.method == 'PUT') {
+					if (req.baseUrl == '/api/time-logs') {
+						dataLog = await this.#timeLogRepository.get(req.params.id)
+					} else {
+						dataLog = await this.#defectLogRepository.get(req.params.id)
+					}
+					if (!dataLog) throw new Error('ERR404')
+					else if (dataLog.programs_id != idProgram) throw new Error('ERR403')
+				}
+
+				// validacion del defecto escalonado
+				if (req.body.defect_log_chained_id) {
+					const chainedId = req.body.defect_log_chained_id
+					const defectLog = await this.#defectLogRepository.get(chainedId)
+					if (!defectLog) throw new Error('ERR404')
+					else if (defectLog.programs_id != idProgram) throw new Error('ERR403')
+				}
 			}
+		} else {
+			/*
+			 * Valida si al admin le pertenece el proyecto padre del programa para poder verlo
+			 */
+			const dataProject = await this.#projectsRepository.getAllByUser(
+				program.users_id,
+				idUser
+			)
+			if (!dataProject) throw new Error('ERR403')
 		}
 
 		next()

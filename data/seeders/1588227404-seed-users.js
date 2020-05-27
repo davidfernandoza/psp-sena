@@ -152,6 +152,18 @@ module.exports = {
 					phone: '+573893279811',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
+				},
+				{
+					// table_id: 14,
+					organizations_id: 2,
+					first_name: 'Name Ipsum 14',
+					last_name: 'Lastname Ipsum 14',
+					email: 'puemfok_14@gmail.com',
+					password: hash,
+					rol: 'DEV',
+					phone: '+573893279884',
+					created_at: new Date().toDateString(),
+					updated_at: new Date().toDateString()
 				}
 			],
 			{}

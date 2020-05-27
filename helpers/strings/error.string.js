@@ -36,9 +36,12 @@ class ErrorString {
 			message: 'Something went wrong, try again later'
 		}
 
-		this.REQ400EST = {
-			message: 'The attribute already exists',
-			path: 'estimate'
+		this.REQ404 = {
+			message: 'The attribute already exists'
+		}
+
+		this.REQ403 = {
+			message: 'Forbidden attribute'
 		}
 	}
 }

@@ -58,7 +58,7 @@ module.exports = ({
 	apiRoute.use('/projects', ProjectsRoutes)
 	apiRoute.use('/reusable-parts', ReusablePartsRoutes)
 	apiRoute.use('/test-reports', TestReportsRoutes)
-	apiRoute.use('/time-log', TimeLogRoutes)
+	apiRoute.use('/time-logs', TimeLogRoutes)
 	apiRoute.use('/users', UsersRoutes)
 	apiRoute.use('/forgot-password', ForgotPasswordRoutes)
 	routers.use('/api', apiRoute)

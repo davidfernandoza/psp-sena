@@ -49,6 +49,7 @@ module.exports = ({
 		requestPrivate,
 		auth,
 		politics,
+		requestOwner,
 		controller.getAllAttribute.bind(controller)
 	)
 

@@ -23,7 +23,7 @@ module.exports = {
 					updated_at: new Date().toDateString()
 				},
 				{
-					defect_log_chained_id: 1,
+					defect_log_chained_id: null,
 					programs_id: 2,
 					standard_defects_id: 2,
 					phase_added_id: 2,
@@ -87,7 +87,7 @@ module.exports = {
 					updated_at: new Date().toDateString()
 				},
 				{
-					defect_log_chained_id: 3,
+					defect_log_chained_id: null,
 					programs_id: 6,
 					standard_defects_id: 2,
 					phase_added_id: 6,
@@ -119,7 +119,7 @@ module.exports = {
 					updated_at: new Date().toDateString()
 				},
 				{
-					defect_log_chained_id: 8,
+					defect_log_chained_id: null,
 					programs_id: 8,
 					standard_defects_id: 4,
 					phase_added_id: 1,
@@ -135,7 +135,7 @@ module.exports = {
 					updated_at: new Date().toDateString()
 				},
 				{
-					defect_log_chained_id: 4,
+					defect_log_chained_id: null,
 					programs_id: 9,
 					standard_defects_id: 3,
 					phase_added_id: 5,
@@ -183,7 +183,7 @@ module.exports = {
 					updated_at: new Date().toDateString()
 				},
 				{
-					defect_log_chained_id: 3,
+					defect_log_chained_id: null,
 					programs_id: 12,
 					standard_defects_id: 3,
 					phase_added_id: 1,

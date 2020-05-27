@@ -71,6 +71,18 @@ module.exports = {
 					users_id: 10,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
+				},
+				{
+					projects_id: 3,
+					users_id: 3,
+					created_at: new Date().toDateString(),
+					updated_at: new Date().toDateString()
+				},
+				{
+					projects_id: 3,
+					users_id: 1,
+					created_at: new Date().toDateString(),
+					updated_at: new Date().toDateString()
 				}
 			],
 			{}
