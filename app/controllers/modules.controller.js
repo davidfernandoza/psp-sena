@@ -3,23 +3,21 @@ const { join } = require('path')
 const Controller = require(join(__dirname, './controller'))
 
 class ModulesController extends Controller {
-	constructor({
-		ModulesRepository,
-		ModulesDto,
-		Config,
-		StringHelper,
-		DoneString
-	}) {
-		super(ModulesRepository, ModulesDto, Config, StringHelper, DoneString)
+	#data = {}
+
+	constructor({ ModulesRepository, ModulesDto, Config, DoneString }) {
+		super(ModulesRepository, ModulesDto, Config, DoneString)
 	}
 
-	async getAllByInclude(req, res) {
-		const { id: idProject } = req.params
-		let entities = await this.entityRepository.getAllByInclude(
-			'projects',
-			idProject
-		)
-		return await this.response(res, entities, 'DON200L')
+	async getAllByProject(req, res) {
+		this.#data = await this.entityRepository.getByInclude({
+			includeEntity: 'projects',
+			includeAlias: 'projects',
+			includeRequired: true,
+			includeWhere: { id: req.params.id },
+			type: 'all'
+		})
+		return await this.response(res, this.#data, 'DON200L')
 	}
 }
 

@@ -67,27 +67,27 @@ module.exports = (sequelize, DataTypes) => {
 		models.defect_log.belongsTo(models.programs, {
 			foreignKey: 'programs_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'programs_2'
+			as: 'programs'
 		})
 
 		// Un defect_log tiene un standard_defects (1:1)
 		models.defect_log.belongsTo(models.standard_defects, {
 			foreignKey: 'standard_defects_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'standard_defects-1'
+			as: 'standard_defects'
 		})
 		// Un defect_log tiene un phase_added (1:1)
 		models.defect_log.belongsTo(models.phases, {
 			foreignKey: 'phase_added_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'phases_added-1'
+			as: 'phases_added'
 		})
 
 		// Un defect_log tiene un phase_removed (1:1)
 		models.defect_log.belongsTo(models.phases, {
 			foreignKey: 'phase_removed_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'phases_removed-1'
+			as: 'phases_removed'
 		})
 	}
 

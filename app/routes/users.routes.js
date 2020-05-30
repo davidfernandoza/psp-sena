@@ -19,13 +19,13 @@ module.exports = ({
 	/*
 	 * Request (Validadores):
 	 */
-	const requestPrivate = UsersRequest.private.bind(UsersRequest)
-	const requestPassword = UsersRequest.password.bind(UsersRequest)
-	const requestUpdate = UsersRequest.update.bind(UsersRequest)
-	const requestBody = UsersRequest.body.bind(UsersRequest)
-	const requestProjects = UsersRequest.project.bind(UsersRequest)
-	const requestOrganization = OwnersRequests.byOrganization.bind(OwnersRequests)
-	const requestProjectOwner = OwnersRequests.byProject.bind(OwnersRequests)
+	const reqPrivate = UsersRequest.private.bind(UsersRequest)
+	const reqBody = UsersRequest.body.bind(UsersRequest)
+	const reqPassword = UsersRequest.bodyPassword.bind(UsersRequest)
+	const reqUpdate = UsersRequest.bodyUpdate.bind(UsersRequest)
+	const reqInclude = UsersRequest.bodyIncludeToProject.bind(UsersRequest)
+	const organizationOwner = OwnersRequests.byOrganization.bind(OwnersRequests)
+	const projectOwner = OwnersRequests.byProject.bind(OwnersRequests)
 
 	/*
 	 * Politics:
@@ -52,27 +52,27 @@ module.exports = ({
 	 */
 	router.get(
 		'/',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		controller.getAll.bind(controller)
+		controller.getAllByOrganization.bind(controller)
 	)
 
 	router.get(
 		'/free',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		controller.getAll.bind(controller)
+		controller.getAllByOrganization.bind(controller)
 	)
 
 	router.get(
 		'/by-project/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestProjectOwner,
-		controller.getAllByInclude.bind(controller)
+		projectOwner,
+		controller.getAllByProject.bind(controller)
 	)
 
 	/*
@@ -81,32 +81,32 @@ module.exports = ({
 	 */
 	router.post(
 		'/',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
+		reqBody,
 		controller.create.bind(controller)
 	)
 
 	router.post(
 		'/add-project',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestProjects,
-		requestProjectOwner,
-		requestOrganization,
+		reqInclude,
+		projectOwner,
+		organizationOwner,
 		relationController.create.bind(relationController)
 	)
 
 	router.post(
 		'/remove-project',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestProjects,
-		requestProjectOwner,
-		requestOrganization,
+		reqInclude,
+		projectOwner,
+		organizationOwner,
 		relationController.delete.bind(relationController)
 	)
 
@@ -116,11 +116,11 @@ module.exports = ({
 	 */
 	router.put(
 		'/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestOrganization,
-		requestUpdate,
+		organizationOwner,
+		reqUpdate,
 		controller.update.bind(controller)
 	)
 
@@ -130,11 +130,11 @@ module.exports = ({
 	 */
 	router.patch(
 		'/password',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestPassword,
-		controller.password.bind(controller)
+		reqPassword,
+		controller.changePassword.bind(controller)
 	)
 
 	return router

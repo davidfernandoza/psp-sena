@@ -1,11 +1,15 @@
 'use strict'
-const bcrypt = require('bcrypt')
 const { morphism } = require('morphism')
 
 class Controller {
 	#doneString = null
+	#data = {}
+	#transaction = {}
+	#addSubDto = {}
+	#options = {}
+	#code = ''
 
-	constructor(EntityRepository, EntityDto, Config, StringHelper, DoneString) {
+	constructor(EntityRepository, EntityDto, Config, DoneString) {
 		this.entityRepository = EntityRepository
 		this.entityDto = EntityDto
 
@@ -14,122 +18,136 @@ class Controller {
 			this.app = Config.APP_NAME.toUpperCase()
 		}
 
-		// Singleton manual
+		// Singleton manual del objeto de mensajes
 		if (!this.#doneString) {
 			this.#doneString = DoneString
 		}
 	}
 
-	async getAttribute(attribut, match, transaction, addSubDto) {
-		transaction = !transaction ? null : transaction
-		addSubDto = !addSubDto ? false : true
-		let entity = await this.entityRepository.getAttributes(
-			attribut,
-			match,
-			transaction,
-			addSubDto
+	async getByAttribute(options, addSubDto, transaction) {
+		this.#transaction = !transaction ? null : transaction
+		this.#addSubDto = !addSubDto ? false : true
+		this.#options = {
+			data: {
+				attribute: options.attribute,
+				value: options.value
+			},
+			type: options.type,
+			dto: options.dto
+		}
+
+		this.#data = await this.entityRepository.getByAttribute(
+			this.#options,
+			this.#addSubDto,
+			this.#transaction
 		)
-		return entity
+
+		if (options.return || this.#transaction) return this.#data
+		switch (options.type) {
+			case 'all':
+				this.#code = 'DON200L'
+				break
+			default:
+				this.#code = 'DON200'
+		}
+		await this.response(options.res, this.#data, this.#code, this.#addSubDto)
 	}
 
-	async getAllByInclude(include, idInclude, transaction, addSubDto) {
-		transaction = !transaction ? null : transaction
-		addSubDto = !addSubDto ? false : true
-		let entities = await this.entityRepository.getAllByInclude(
-			include,
-			idInclude,
-			transaction,
-			addSubDto
-		)
-		return entities
-	}
-
-	async getAllAttribute(attribut, match, transaction, addSubDto) {
-		transaction = !transaction ? null : transaction
-		addSubDto = !addSubDto ? false : true
-		let entity = await this.entityRepository.getAllAttributes(
-			attribut,
-			match,
-			transaction,
-			addSubDto
-		)
-		return entity
-	}
+	// ------------------------------------------------------------------------------
 
 	async getAll(req, res) {
-		const addSubDto = !req.addSubDto ? true : req.addSubDto
-		const transaction = !req.transaction ? null : req.transaction
-		let entities = await this.entityRepository.getAll(transaction, addSubDto)
-		if (req.return || transaction) return entities
-		await this.response(res, entities, 'DON200L', addSubDto)
+		this.#transaction = !req.transaction ? null : req.transaction
+		this.#addSubDto = !req.addSubDto ? false : true
+		this.#code = 'DON200L'
+		if (req.options) this.#options = req.options
+		else {
+			this.#options = {}
+		}
+
+		this.#data = await this.entityRepository.getAll(
+			this.#options,
+			this.#addSubDto,
+			this.#transaction
+		)
+
+		if (req.return || this.#transaction) return this.#data
+		await this.response(res, this.#data, this.#code, this.#addSubDto)
 	}
 
 	async get(req, res) {
-		const { id } = req.params
-		const addSubDto = !req.addSubDto ? true : req.addSubDto
-		const transaction = !req.transaction ? null : req.transaction
-		let entity = await this.entityRepository.get(id, transaction, addSubDto)
-		if (req.return || transaction) return entity
-		await this.response(res, entity, 'DON200', addSubDto)
+		this.#transaction = !req.transaction ? null : req.transaction
+		this.#addSubDto = !req.addSubDto ? false : true
+		this.#code = 'DON200'
+		if (req.options) this.#options = req.options
+		else {
+			this.#options.id = req.params.id
+		}
+
+		this.#data = await this.entityRepository.get(
+			this.#options,
+			this.#addSubDto,
+			this.#transaction
+		)
+		if (req.return || this.#transaction) return this.#data
+		await this.response(res, this.#data, this.#code, this.#addSubDto)
 	}
 
 	async create(req, res) {
-		const { body } = req
-		delete body.id
-		const addSubDto = !req.addSubDto ? false : req.addSubDto
-		const transaction = !req.transaction ? null : req.transaction
-		let created = await this.entityRepository.create(
-			body,
-			transaction,
-			addSubDto
+		this.#transaction = !req.transaction ? null : req.transaction
+		this.#addSubDto = !req.addSubDto ? false : true
+		this.#code = 'DON201'
+		if (req.options) this.#options = req.options
+		else {
+			this.#options.data = req.body
+		}
+		delete this.#options.data.id
+
+		this.#data = await this.entityRepository.create(
+			this.#options,
+			this.#addSubDto,
+			this.#transaction
 		)
-		if (req.return || transaction) return created
-		await this.response(res, created, 'DON201', addSubDto)
+		if (req.return || this.#transaction) return this.#data
+		await this.response(res, this.#data, this.#code, this.#addSubDto)
 	}
 
 	async update(req, res) {
-		const { body } = req
-		const { id } = req.params
-		console.log('sisi')
-
-		delete body.id
-		const addSubDto = !req.addSubDto ? false : req.addSubDto
-		const transaction = !req.transaction ? null : req.transaction
-		const dto = !req.dto ? null : req.dto
-		const updated = await this.entityRepository.update(
-			id,
-			body,
-			dto,
-			transaction,
-			addSubDto
+		this.#transaction = !req.transaction ? null : req.transaction
+		this.#addSubDto = !req.addSubDto ? false : true
+		this.#code = 'DON204'
+		if (req.options) this.#options = req.options
+		else {
+			this.#options = {
+				id: req.params.id,
+				data: req.body,
+				dto: req.dto
+			}
+		}
+		delete this.#options.data.id
+		this.#data = await this.entityRepository.update(
+			this.#options,
+			this.#addSubDto,
+			this.#transaction
 		)
-		if (req.return || transaction) return updated
-		await this.response(res, updated, 'DON204', addSubDto)
+		if (req.return || this.#transaction) return this.#data
+		await this.response(res, this.#data, this.#code, this.#addSubDto)
 	}
 
 	async delete(req, res) {
-		const { id } = req.params
-		const transaction = !req.transaction ? null : req.transaction
-		const deleted = await this.entityRepository.delete(id, transaction)
-		await this.response(res, deleted, 'DON204', false)
-	}
+		this.#transaction = !req.transaction ? null : req.transaction
+		this.#addSubDto = !req.addSubDto ? false : true
+		this.#code = 'DON204'
+		if (req.options) this.#options = req.options
+		else {
+			this.#options.id = req.params.id
+		}
 
-	async deleteForAttribute(attribut, match, transaction) {
-		transaction = !transaction ? null : transaction
-		return await this.entityRepository.deleteForAttribute(
-			attribut,
-			match,
-			transaction
+		this.#data = await this.entityRepository.delete(
+			this.#options,
+			this.#transaction
 		)
-	}
-
-	async password(req, res) {
-		const id = req.id
-		const transaction = !req.transaction ? null : req.transaction
-		const password = await this.passwordEncryption(req)
-		const updated = await this.entityRepository.password(id, { password })
-		if (req.return || transaction) return updated
-		await this.response(res, updated, 'DON204', false)
+		if (req.return || this.#transaction) return this.#data
+		await this.response(res, this.#data, this.#code, this.#addSubDto)
 	}
 
 	// ----------------------------------------------------------------------
@@ -171,14 +189,6 @@ class Controller {
 		return res
 			.status(this.#doneString[code].status)
 			.send(this.#doneString[code])
-	}
-
-	// --------------------------------------------------------------
-	async passwordEncryption(req) {
-		let { password } = req.body
-		const round = parseInt(this.config.ENCRYPTION_SALT)
-		const salt = await bcrypt.genSalt(round)
-		return await bcrypt.hash(password, salt)
 	}
 }
 

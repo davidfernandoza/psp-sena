@@ -18,9 +18,9 @@ module.exports = ({
 	/*
 	 * Request:
 	 */
-	const requestPrivate = TimeLogRequest.private.bind(TimeLogRequest)
-	const requestBody = TimeLogRequest.body.bind(TimeLogRequest)
-	const requestOwner = OwnersRequests.byProgram.bind(OwnersRequests)
+	const reqPrivate = TimeLogRequest.private.bind(TimeLogRequest)
+	const reqBody = TimeLogRequest.body.bind(TimeLogRequest)
+	const programOwner = OwnersRequests.byProgram.bind(OwnersRequests)
 
 	/*
 	 * Politics:
@@ -46,11 +46,11 @@ module.exports = ({
 	 */
 	router.get(
 		'/by-program/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestOwner,
-		controller.getAllAttribute.bind(controller)
+		programOwner,
+		controller.getAllByProgram.bind(controller)
 	)
 
 	/*
@@ -59,11 +59,11 @@ module.exports = ({
 	 */
 	router.post(
 		'/',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
-		requestOwner,
+		reqBody,
+		programOwner,
 		controller.create.bind(controller)
 	)
 
@@ -73,11 +73,11 @@ module.exports = ({
 	 */
 	router.put(
 		'/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
-		requestOwner,
+		reqBody,
+		programOwner,
 		controller.update.bind(controller)
 	)
 

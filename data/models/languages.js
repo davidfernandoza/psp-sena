@@ -27,14 +27,14 @@ module.exports = (sequelize, DataTypes) => {
 		models.languages.hasMany(models.estimates, {
 			foreignKey: 'languages_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'estimates-1'
+			as: 'estimates'
 		})
 
 		// Un languages se registra en muchos programs (1:M)
 		models.languages.hasMany(models.programs, {
 			foreignKey: 'languages_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'programs-1'
+			as: 'programs'
 		})
 
 		// Un languages tiene muchas null (1:M)
@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
 			through: models.experiences_languages, // Tabla pivote
 			foreignKey: 'languages_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'experiences-1'
+			as: 'experiences'
 		})
 	}
 

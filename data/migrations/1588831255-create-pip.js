@@ -11,6 +11,7 @@ module.exports = {
 			programs_id: {
 				type: Sequelize.INTEGER,
 				allowNull: false,
+				unique: true,
 				references: { model: 'programs', key: 'id' },
 				onUpdate: 'cascade',
 				onDelete: 'cascade'

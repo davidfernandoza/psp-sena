@@ -7,14 +7,12 @@ class ExperiencesLanguagesController extends Controller {
 		ExperiencesLanguagesRepository,
 		ExperiencesLanguagesDto,
 		Config,
-		StringHelper,
 		DoneString
 	}) {
 		super(
 			ExperiencesLanguagesRepository,
 			ExperiencesLanguagesDto,
 			Config,
-			StringHelper,
 			DoneString
 		)
 	}

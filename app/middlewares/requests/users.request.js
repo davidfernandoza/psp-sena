@@ -58,7 +58,7 @@ class UsersRequest extends Request {
 	}
 
 	// -----------------------------------------------------------------------
-	async update(req, res, next) {
+	async bodyUpdate(req, res, next) {
 		delete body.password
 		if (req.method == 'PUT') {
 			if (req.rol == 'DEV') req.body.rol = 'DEV'
@@ -69,7 +69,7 @@ class UsersRequest extends Request {
 	}
 
 	// -----------------------------------------------------------------------
-	async password(req, res, next) {
+	async bodyPassword(req, res, next) {
 		if (req.method != 'GET' && req.method != 'DELETE') {
 			const bodyRes = await super.bodyValidator(req, passwordRule) // validacion de cuerpo
 			if (bodyRes != true) await super.errorHandle(bodyRes)
@@ -78,7 +78,7 @@ class UsersRequest extends Request {
 	}
 
 	// -----------------------------------------------------------------------
-	async project(req, res, next) {
+	async bodyIncludeToProject(req, res, next) {
 		if (req.method == 'POST' || req.method == 'DELETE') {
 			const bodyRes = await super.bodyValidator(req, projectRule) // validacion de cuerpo
 			if (bodyRes != true) await super.errorHandle(bodyRes)

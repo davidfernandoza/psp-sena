@@ -105,7 +105,7 @@ module.exports = (sequelize, DataTypes) => {
 			through: models.base_parts, // Tabla pivote
 			foreignKey: 'programs_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'base_parts-1'
+			as: 'base_parts_1'
 		})
 
 		// Un programs tiene muchas programs (base_parts) (1:M)
@@ -113,7 +113,7 @@ module.exports = (sequelize, DataTypes) => {
 			through: models.base_parts, // Tabla pivote
 			foreignKey: 'programs_base_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'base_parts-2'
+			as: 'base_parts_2'
 		})
 
 		// Un programs tiene muchas programs (reusable_parts) (1:M)
@@ -121,7 +121,7 @@ module.exports = (sequelize, DataTypes) => {
 			through: models.reusable_parts, // Tabla pivote
 			foreignKey: 'programs_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'reusable_parts-1'
+			as: 'reusable_parts_1'
 		})
 
 		// Un programs tiene muchas programs (reusable_parts) (1:M)
@@ -129,7 +129,7 @@ module.exports = (sequelize, DataTypes) => {
 			through: models.reusable_parts, // Tabla pivote
 			foreignKey: 'programs_reusables_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'reusable_parts-2'
+			as: 'reusable_parts_2'
 		})
 	}
 

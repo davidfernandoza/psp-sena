@@ -17,13 +17,13 @@ module.exports = ({
 	/*
 	 * Request:
 	 */
-	const requestPrivate = ExperiencesLanguagesRequest.private.bind(
+	const reqPrivate = ExperiencesLanguagesRequest.private.bind(
 		ExperiencesLanguagesRequest
 	)
-	const requestPublic = ExperiencesLanguagesRequest.public.bind(
+	const reqPublic = ExperiencesLanguagesRequest.public.bind(
 		ExperiencesLanguagesRequest
 	)
-	const requestBody = ExperiencesLanguagesRequest.body.bind(
+	const reqBody = ExperiencesLanguagesRequest.body.bind(
 		ExperiencesLanguagesRequest
 	)
 
@@ -49,17 +49,11 @@ module.exports = ({
 	 * -----------------------------------------------------------------------------------*
 	 * GET:
 	 */
-	router.get(
-		'/',
-		requestPublic,
-		auth,
-		politics,
-		controller.getAll.bind(controller)
-	)
+	router.get('/', reqPublic, auth, politics, controller.getAll.bind(controller))
 
 	router.get(
 		'/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
 		controller.get.bind(controller)
@@ -71,10 +65,10 @@ module.exports = ({
 	 */
 	router.post(
 		'/',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
+		reqBody,
 		controller.create.bind(controller)
 	)
 
@@ -84,10 +78,10 @@ module.exports = ({
 	 */
 	router.put(
 		'/',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
+		reqBody,
 		controller.update.bind(controller)
 	)
 
@@ -97,7 +91,7 @@ module.exports = ({
 	 */
 	router.delete(
 		'/',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
 		controller.delete.bind(controller)

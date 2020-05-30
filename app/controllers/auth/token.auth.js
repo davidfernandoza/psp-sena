@@ -11,59 +11,58 @@ class TokenAuth extends Controller {
 	constructor({
 		TokenBlackListRepository,
 		TokenBlackListDto,
-		StringHelper,
 		DoneString,
-		JWTService
+		JWTService,
+		Config
 	}) {
-		super(
-			TokenBlackListRepository,
-			TokenBlackListDto,
-			null,
-			StringHelper,
-			DoneString
-		)
+		super(TokenBlackListRepository, TokenBlackListDto, Config, DoneString)
 		this.JWTServices = JWTService
 		this.tokenBlackListRepository = TokenBlackListRepository
 	}
 
-	// Nuevo token
+	// Nuevo token ---------------------------------------------------------------+
+
 	async create(req, res) {
 		const { id, rol, organization } = req
 		const { http_auth_token } = req.headers
 		const newToken = await this.JWTServices.create(id, rol, organization)
 		if (newToken.status === 200) {
-			const oldToken = {
-				token: http_auth_token
-			}
-			const created = await this.tokenBlackListRepository.create(oldToken)
-			await this.tokenBlackListRepository.delete(
-				moment().subtract(7, 'days').toISOString()
-			)
-			if (created) {
+			if (await this.addBlackList(http_auth_token)) {
 				return await super.response(res, newToken.payload, 'DON200')
 			}
 		}
 		await super.response(res, null, 'DON404')
 	}
 
-	// Eliminar token (logout)
+	// Eliminar token (logout) ----------------------------------------------------+
+
 	async delete(req, res) {
 		const { http_auth_token } = req.headers
 		const token = await this.JWTServices.decode(http_auth_token)
 		if (token.status === 200) {
-			const oldToken = {
-				token: http_auth_token
-			}
-			const created = await this.tokenBlackListRepository.create(oldToken)
-			this.tokenBlackListRepository.delete(
-				moment().subtract(7, 'days').toISOString()
-			)
-			if (created) {
-				await super.response(res, {}, 'DON204')
-				return true
+			if (await this.addBlackList(http_auth_token)) {
+				return await super.response(res, {}, 'DON204')
 			}
 		}
 		return await super.response(res, null, 'DON404')
+	}
+
+	// Crear token viejo en lista negra --------------------------------------------+
+
+	async addBlackList(token) {
+		const created = await this.tokenBlackListRepository.create({
+			data: { token: token }
+		})
+
+		// Eliminar tokenes caducados
+		await this.tokenBlackListRepository.delete(
+			moment().subtract(7, 'days').toISOString()
+		)
+
+		if (created) {
+			return true
+		}
+		return false
 	}
 }
 

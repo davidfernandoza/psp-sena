@@ -11,9 +11,9 @@ module.exports = ({ ForgotPasswordController, ForgotPasswordRequest }) => {
 	/*
 	 * Request:
 	 */
-	const requestPublic = ForgotPasswordRequest.public.bind(ForgotPasswordRequest)
-	const requestPhone = ForgotPasswordRequest.phone.bind(ForgotPasswordRequest)
-	const requestBody = ForgotPasswordRequest.body.bind(ForgotPasswordRequest)
+	const reqPublic = ForgotPasswordRequest.public.bind(ForgotPasswordRequest)
+	const reqPhone = ForgotPasswordRequest.phone.bind(ForgotPasswordRequest)
+	const reqBody = ForgotPasswordRequest.body.bind(ForgotPasswordRequest)
 
 	/*
 	 * Controller:
@@ -25,18 +25,8 @@ module.exports = ({ ForgotPasswordController, ForgotPasswordRequest }) => {
 	 * POST:
 	 */
 
-	router.post(
-		'/email',
-		requestPublic,
-		requestBody,
-		controller.create.bind(controller)
-	)
-	router.post(
-		'/phone',
-		requestPublic,
-		requestPhone,
-		controller.create.bind(controller)
-	)
+	router.post('/email', reqPublic, reqBody, controller.create.bind(controller))
+	router.post('/phone', reqPublic, reqPhone, controller.create.bind(controller))
 
 	return router
 }

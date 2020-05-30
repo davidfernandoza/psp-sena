@@ -3,14 +3,8 @@ const { join } = require('path')
 const Controller = require(join(__dirname, './controller'))
 
 class EstimatesController extends Controller {
-	constructor({
-		EstimatesRepository,
-		EstimatesDto,
-		Config,
-		StringHelper,
-		DoneString
-	}) {
-		super(EstimatesRepository, EstimatesDto, Config, StringHelper, DoneString)
+	constructor({ EstimatesRepository, EstimatesDto, Config, DoneString }) {
+		super(EstimatesRepository, EstimatesDto, Config, DoneString)
 	}
 
 	// --------------------------------------------------------------------------
@@ -26,7 +20,6 @@ class EstimatesController extends Controller {
 	}
 
 	// -------------------------------------------------------------------------------*
-	// Get by language id
 	async getAllByLanguage(req, res) {
 		const { id: idLanguage } = req.params
 		const idOrganization = req.organization

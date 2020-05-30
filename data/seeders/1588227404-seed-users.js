@@ -17,7 +17,7 @@ module.exports = {
 					email: 'fernando.zapata.live@gmail.com',
 					password: hash,
 					rol: 'ADMIN',
-					phone: '+573107148905',
+					phone: '+57-3107148905',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -29,7 +29,7 @@ module.exports = {
 					email: 'jjdnezc_2@gmail.com',
 					password: hash,
 					rol: 'DEV',
-					phone: '+573893279842',
+					phone: '+57-3893279842',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -41,7 +41,7 @@ module.exports = {
 					email: 'nvntlku_3@gmail.com',
 					password: hash,
 					rol: 'DEV',
-					phone: '+573893279843',
+					phone: '+57-3893279843',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -53,7 +53,7 @@ module.exports = {
 					email: 'zijbkel_4@gmail.com',
 					password: hash,
 					rol: 'DEV',
-					phone: '+573893279844',
+					phone: '+57-3893279844',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -65,7 +65,7 @@ module.exports = {
 					email: 'ekcmtmm_5@gmail.com',
 					password: hash,
 					rol: 'DEV',
-					phone: '+573893279845',
+					phone: '+57-3893279845',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -77,7 +77,7 @@ module.exports = {
 					email: 'lqkvaik_6@gmail.com',
 					password: hash,
 					rol: 'DEV',
-					phone: '+573893279846',
+					phone: '+57-3893279846',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -89,7 +89,7 @@ module.exports = {
 					email: 'ibbdnzp_7@gmail.com',
 					password: hash,
 					rol: 'DEV',
-					phone: '+573893279847',
+					phone: '+57-3893279847',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -101,7 +101,7 @@ module.exports = {
 					email: 'vdtbicc_8@gmail.com',
 					password: hash,
 					rol: 'DEV',
-					phone: '+573893279848',
+					phone: '+57-3893279848',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -113,7 +113,7 @@ module.exports = {
 					email: 'ymjrper_9@gmail.com',
 					password: hash,
 					rol: 'DEV',
-					phone: '+573893279849',
+					phone: '+57-3893279849',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -125,7 +125,7 @@ module.exports = {
 					email: 'puemfok_11@gmail.com',
 					password: hash,
 					rol: 'ADMIN',
-					phone: '+573893279814',
+					phone: '+57-3893279814',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -137,7 +137,7 @@ module.exports = {
 					email: 'puemfok_12@gmail.com',
 					password: hash,
 					rol: 'ADMIN',
-					phone: '+573893279812',
+					phone: '+57-3893279812',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -149,7 +149,7 @@ module.exports = {
 					email: 'puemfok_13@gmail.com',
 					password: hash,
 					rol: 'ADMIN',
-					phone: '+573893279811',
+					phone: '+57-3893279811',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -161,7 +161,7 @@ module.exports = {
 					email: 'puemfok_14@gmail.com',
 					password: hash,
 					rol: 'DEV',
-					phone: '+573893279884',
+					phone: '+57-3893279884',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				}

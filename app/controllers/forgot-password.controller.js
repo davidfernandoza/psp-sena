@@ -16,7 +16,6 @@ class ForgotPasswordController extends Controller {
 		ForgotPasswordRepository,
 		ForgotPasswordDto,
 		UsersController,
-		StringHelper,
 		MailService,
 		DoneString,
 		SmsService,
@@ -25,13 +24,7 @@ class ForgotPasswordController extends Controller {
 		Config,
 		DB
 	}) {
-		super(
-			ForgotPasswordRepository,
-			ForgotPasswordDto,
-			Config,
-			StringHelper,
-			DoneString
-		)
+		super(ForgotPasswordRepository, ForgotPasswordDto, Config, DoneString)
 		this.#usersController = UsersController
 		this.#JWTService = JWTService
 		this.#forgotPasswordRepository = ForgotPasswordRepository
@@ -43,15 +36,24 @@ class ForgotPasswordController extends Controller {
 		this.#sequelize = DB.sequelize
 	}
 
-	// Muestra la Vista
+	// --------------------------------------------------------------------
+
+	// Renderizado de vista que carga el formulario
 	async index(req, res) {
-		const { token } = req.params
-		const recoverPassword = await super.getAttribute('token', token)
+		const recoverPassword = await super.getByAttribute({
+			attribute: 'token',
+			value: req.params.token,
+			type: 'one',
+			return: true,
+			res: res
+		})
 
 		// Existencia de token de recuperacion
-		if (!recoverPassword) {
-			throw new Error('403')
-		} else {
+		if (!recoverPassword) throw new Error('403')
+		else {
+			/*
+			 * CSRF token para la vista de recuperacion
+			 */
 			const cretedCsrfToken = await this.#JWTService.create(
 				recoverPassword.id,
 				null,
@@ -63,6 +65,7 @@ class ForgotPasswordController extends Controller {
 				title: 'Recuperar Contraseña',
 				csrfToken: cretedCsrfToken.payload.token
 			}
+			// Renderizar vista
 			return await super.response(res, objecWeb, 'OK')
 		}
 	}
@@ -71,9 +74,12 @@ class ForgotPasswordController extends Controller {
 
 	// Creacion de requerimiento de cambio de contraseña
 	async create(req, res) {
-		const user = await this.getForType(req)
+		const user = await this.getForType(req, res) // Obtiene el metodo de envio (EMAIL, SMS)
 		if (!user) throw new Error('ERR404')
 
+		/*
+		 * Token de recuperacion
+		 */
 		const cretedToken = await this.#JWTService.create(
 			user.id,
 			null,
@@ -81,6 +87,7 @@ class ForgotPasswordController extends Controller {
 			this.config.CSRF_TOKEN
 		)
 
+		// Cuerpo de un registro para la tabla ForgotPassword
 		req.body = {
 			users_id: user.id,
 			token: cretedToken.payload.token,
@@ -88,7 +95,15 @@ class ForgotPasswordController extends Controller {
 				.add(parseInt(this.config.TOKEN_TIME_MINUTES), 'minutes')
 				.toISOString()
 		}
-		await super.deleteForAttribute('users_id', user.id)
+		req.return = true
+
+		// Elimina algun registro viejo
+		await super.delete(
+			{ options: { query: { where: { users_id: user.id } } }, return: true },
+			res
+		)
+
+		// Crea el nuevo registro y lo manda por SMS o EMAIL
 		await super.create(req, res)
 		const send = await this[user.sendType](cretedToken.payload.token, user)
 
@@ -100,33 +115,37 @@ class ForgotPasswordController extends Controller {
 
 	// Metodo que crea la contraseña - WEB
 	async recoverPassword(req, res) {
-		const { token } = req.params
-		const responseToken = await this.#JWTService.decode(token)
+		const { token } = req.params,
+			responseToken = await this.#JWTService.decode(token)
 
 		// validacion de token
 		if (responseToken.status != 200) throw new Error('403')
 		if (responseToken.payload.token != this.config.CSRF_TOKEN)
 			throw new Error('403')
-
 		try {
-			// Cambio de password
+			/*
+			 * Cambio de password usuando el controlador del usuario
+			 */
 			req.id = responseToken.payload.id // id de usuario
 			req.transaction = await this.#sequelize.transaction()
-			await this.#usersController.password(req)
+			await this.#usersController.changePassword(req)
 
 			// Eliminacion de token para el cambio del password
-			const deleted = await this.#forgotPasswordRepository.delete(
+			const deleted = await this.#forgotPasswordRepository.deleteByToken(
 				token,
 				req.transaction
 			)
+
+			// Commitiar los cambios
 			if (!deleted) throw new Error('403')
 			await req.transaction.commit()
-
 			const objecWeb = {
 				page: '200',
 				title: 'Contraseña Cambiada',
 				message: 'Contraseña Cambiada'
 			}
+
+			// Renderizar mensaje en vista
 			return await super.response(res, objecWeb, 'OK')
 		} catch (error) {
 			await req.transaction.rollback()
@@ -140,21 +159,31 @@ class ForgotPasswordController extends Controller {
 
 	//  ------------------------------------------------------------
 
-	async getForType(req) {
-		let user = null
-		req.return = true
+	async getForType(req, res) {
+		let user = null,
+			options = {
+				return: true,
+				type: 'one',
+				res: res
+			}
 
 		// tipo de envio de mensaje
-		if (req.path == '/email') {
-			const { email } = req.body
-			user = await this.#usersController.getAttribute('email', email)
-			if (user) user.sendType = 'sendEmail'
-		} else {
-			const { phone } = req.body
-			user = await this.#usersController.getAttribute('phone', phone)
-			if (user) user.sendType = 'sendSms'
+		switch (req.path) {
+			case '/email': {
+				options.attribute = 'email'
+				options.value = req.body.email
+				user = await this.#usersController.getByAttribute(options)
+				if (user) user.sendType = 'sendEmail'
+				break
+			}
+			default: {
+				options.attribute = 'phone'
+				options.value = req.body.phone
+				user = await this.#usersController.getByAttribute(options)
+				if (user) user.sendType = 'sendSms'
+				break
+			}
 		}
-
 		return user
 	}
 
@@ -176,19 +205,19 @@ class ForgotPasswordController extends Controller {
 		return await this.#mailService.send(optionMail)
 	}
 
-	async sendSms(token, user) {
-		// await this.#smsService
+	//  ------------------------------------------------------------
 
-		let message = this.#smsString.MSG01.message.replace(
-			/#1/g,
-			this.app.toUpperCase()
-		)
+	async sendSms(token, user) {
+		let message = this.#smsString.MSG01.message.replace(/#1/g, this.app),
+			phone = user.phone.replace(/-/g, '')
+
 		message = message.replace(
 			/#2/g,
 			`${this.config.DOMAIN}/recover-password/${token}`
 		)
+
 		const optionSms = {
-			to: user.phone,
+			to: phone,
 			body: message
 		}
 

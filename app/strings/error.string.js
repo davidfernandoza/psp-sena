@@ -29,7 +29,7 @@ class ErrorString {
 		}
 
 		this.REQ400EST = {
-			message: 'the attribute already exists',
+			message: 'the estimate already exists',
 			path: 'estimate'
 		}
 

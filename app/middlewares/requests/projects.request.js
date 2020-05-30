@@ -3,8 +3,7 @@ const { join } = require('path')
 const Request = require(join(__dirname, './request'))
 
 class ProjectsRequest extends Request {
-	#projectsUsersRepository = {}
-	constructor({ JoiValidator, Config, JWTService, ProjectsUsersRepository }) {
+	constructor({ JoiValidator, Config, JWTService }) {
 		const body = {
 			id: JoiValidator.number()
 				.integer()
@@ -19,8 +18,6 @@ class ProjectsRequest extends Request {
 			finish_date: JoiValidator.date().timestamp().allow(null).optional()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
-		this.#projectsUsersRepository = ProjectsUsersRepository
 	}
-
 }
 module.exports = ProjectsRequest

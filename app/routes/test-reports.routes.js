@@ -9,6 +9,7 @@ module.exports = ({
 	TestReportsController,
 	TestReportsRequest,
 	AuthMiddleware,
+	OwnersRequests,
 	AdminPolitic,
 	DevPolitic
 }) => {
@@ -17,9 +18,9 @@ module.exports = ({
 	/*
 	 * Request:
 	 */
-	const requestPrivate = TestReportsRequest.private.bind(TestReportsRequest)
-	const requestPublic = TestReportsRequest.public.bind(TestReportsRequest)
-	const requestBody = TestReportsRequest.body.bind(TestReportsRequest)
+	const reqPrivate = TestReportsRequest.private.bind(TestReportsRequest)
+	const reqBody = TestReportsRequest.body.bind(TestReportsRequest)
+	const programOwner = OwnersRequests.byProgram.bind(OwnersRequests)
 
 	/*
 	 * Politics:
@@ -44,19 +45,12 @@ module.exports = ({
 	 * GET:
 	 */
 	router.get(
-		'/',
-		requestPublic,
+		'/by-program/:id',
+		reqPrivate,
 		auth,
 		politics,
-		controller.getAll.bind(controller)
-	)
-
-	router.get(
-		'/:id',
-		requestPrivate,
-		auth,
-		politics,
-		controller.get.bind(controller)
+		programOwner,
+		controller.getAllByProgram.bind(controller)
 	)
 
 	/*
@@ -65,10 +59,11 @@ module.exports = ({
 	 */
 	router.post(
 		'/',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
+		reqBody,
+		programOwner,
 		controller.create.bind(controller)
 	)
 
@@ -77,24 +72,13 @@ module.exports = ({
 	 * PUT:
 	 */
 	router.put(
-		'/',
-		requestPrivate,
+		'/:id',
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
+		reqBody,
+		programOwner,
 		controller.update.bind(controller)
-	)
-
-	/*
-	 * -----------------------------------------------------------------------------------*
-	 * DELETE:
-	 */
-	router.delete(
-		'/',
-		requestPrivate,
-		auth,
-		politics,
-		controller.delete.bind(controller)
 	)
 
 	return router

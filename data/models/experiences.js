@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
 		models.experiences.belongsTo(models.users, {
 			foreignKey: 'users_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'users-1'
+			as: 'users'
 		})
 
 		// Un experiences tiene muchas languages (1:M)
@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
 			through: models.experiences_languages, // Tabla pivote
 			foreignKey: 'experiences_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'languages-1'
+			as: 'languages'
 		})
 	}
 

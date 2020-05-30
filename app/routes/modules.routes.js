@@ -18,9 +18,9 @@ module.exports = ({
 	/*
 	 * Request:
 	 */
-	const requestPrivate = ModulesRequest.private.bind(ModulesRequest)
-	const requestBody = ModulesRequest.body.bind(ModulesRequest)
-	const requestOwner = OwnersRequests.byProject.bind(OwnersRequests)
+	const reqPrivate = ModulesRequest.private.bind(ModulesRequest)
+	const reqBody = ModulesRequest.body.bind(ModulesRequest)
+	const projectOwner = OwnersRequests.byProject.bind(OwnersRequests)
 
 	/*
 	 * Politics:
@@ -46,11 +46,11 @@ module.exports = ({
 	 */
 	router.get(
 		'/by-project/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestOwner,
-		controller.getAllByInclude.bind(controller)
+		projectOwner,
+		controller.getAllByProject.bind(controller)
 	)
 
 	/*
@@ -59,11 +59,11 @@ module.exports = ({
 	 */
 	router.post(
 		'/',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
-		requestOwner,
+		reqBody,
+		projectOwner,
 		controller.create.bind(controller)
 	)
 
@@ -73,11 +73,11 @@ module.exports = ({
 	 */
 	router.put(
 		'/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
-		requestOwner,
+		reqBody,
+		projectOwner,
 		controller.update.bind(controller)
 	)
 

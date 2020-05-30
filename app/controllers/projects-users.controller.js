@@ -7,21 +7,14 @@ class ProjectsUsersController extends Controller {
 		ProjectsUsersRepository,
 		ProjectsUsersDto,
 		Config,
-		StringHelper,
 		DoneString
 	}) {
-		super(
-			ProjectsUsersRepository,
-			ProjectsUsersDto,
-			Config,
-			StringHelper,
-			DoneString
-		)
+		super(ProjectsUsersRepository, ProjectsUsersDto, Config, DoneString)
 	}
 
 	async delete(req, res) {
-		const { projects_id: idProject, users_id: idUser } = req.body
-		const deleted = await this.entityRepository.delete(idProject, idUser)
+		const { projects_id: idProject, users_id: idUser } = req.body,
+			deleted = await this.entityRepository.delete(idProject, idUser)
 		await this.response(res, deleted, 'DON204', false)
 	}
 }

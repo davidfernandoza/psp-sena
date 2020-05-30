@@ -17,7 +17,10 @@ const container = createContainer()
 /* -----------------------------------------------------*/
 /* Helpers:																							*/
 /*------------------------------------------------------*/
-const { StringHelper } = require(join(__dirname, '../helpers'))
+const { StringHelper, EncryptionHelper } = require(join(
+	__dirname,
+	'../helpers'
+))
 
 /* -----------------------------------------------------*/
 /* Routes: 																							*/
@@ -273,7 +276,8 @@ container
 	 * Helpers:
 	 */
 	.register({
-		StringHelper: asClass(StringHelper).singleton()
+		StringHelper: asClass(StringHelper).singleton(),
+		EncryptionHelper: asClass(EncryptionHelper).singleton()
 	})
 
 	/*

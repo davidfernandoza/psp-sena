@@ -24,7 +24,7 @@ class TestReportsRequest extends Request {
 			test_name: JoiValidator.string().min(8).max(225).required(),
 			conditions: JoiValidator.string().min(8).required(),
 			expected_result: JoiValidator.string().min(8).required(),
-			current_result: JoiValidator.string().min(8).required(),
+			current_result: JoiValidator.string().min(8).allow(null).optional(),
 			description: JoiValidator.string().min(8).allow(null).optional(),
 			objective: JoiValidator.string().min(8).required()
 		}

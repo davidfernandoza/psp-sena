@@ -12,9 +12,9 @@ module.exports = ({
 	/*
 	 * Request:
 	 */
-	const requestPublic = AuthRequest.public.bind(AuthRequest)
-	const requestPrivate = AuthRequest.private.bind(AuthRequest)
-	const requestBody = AuthRequest.body.bind(AuthRequest)
+	const reqPublic = AuthRequest.public.bind(AuthRequest)
+	const reqPrivate = AuthRequest.private.bind(AuthRequest)
+	const reqBody = AuthRequest.body.bind(AuthRequest)
 
 	/*
 	 * Middlewares:
@@ -29,13 +29,13 @@ module.exports = ({
 	const token = TokenAuth
 	const router = Router()
 
-	router.post('/login', requestPublic, requestBody, user.login.bind(user))
-	router.post('/logout', requestPrivate, auth, token.delete.bind(token))
-	router.post('/new-token', requestPrivate, auth, token.create.bind(token))
+	router.post('/login', reqPublic, reqBody, user.login.bind(user))
+	router.post('/logout', reqPrivate, auth, token.delete.bind(token))
+	router.post('/new-token', reqPrivate, auth, token.create.bind(token))
 	router.post(
 		'/forgot-password',
-		requestPublic,
-		requestBody,
+		reqPublic,
+		reqBody,
 		forgotPassword.create.bind(forgotPassword)
 	)
 

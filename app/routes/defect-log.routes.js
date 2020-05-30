@@ -18,9 +18,9 @@ module.exports = ({
 	/*
 	 * Request:
 	 */
-	const requestPrivate = DefectLogRequest.private.bind(DefectLogRequest)
-	const requestBody = DefectLogRequest.body.bind(DefectLogRequest)
-	const requestOwner = OwnersRequests.byProgram.bind(OwnersRequests)
+	const reqPrivate = DefectLogRequest.private.bind(DefectLogRequest)
+	const reqBody = DefectLogRequest.body.bind(DefectLogRequest)
+	const programOwner = OwnersRequests.byProgram.bind(OwnersRequests)
 
 	/*
 	 * Politics:
@@ -46,11 +46,11 @@ module.exports = ({
 	 */
 	router.get(
 		'/by-program/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestOwner,
-		controller.getAllAttribute.bind(controller)
+		programOwner,
+		controller.getAllByProgram.bind(controller)
 	)
 
 	/*
@@ -59,11 +59,11 @@ module.exports = ({
 	 */
 	router.post(
 		'/',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
-		requestOwner,
+		reqBody,
+		programOwner,
 		controller.create.bind(controller)
 	)
 
@@ -73,11 +73,11 @@ module.exports = ({
 	 */
 	router.put(
 		'/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
-		requestOwner,
+		reqBody,
+		programOwner,
 		controller.update.bind(controller)
 	)
 

@@ -3,19 +3,17 @@ const { join } = require('path')
 const Controller = require(join(__dirname, './controller'))
 
 class DefectLogController extends Controller {
-	constructor({
-		DefectLogRepository,
-		DefectLogDto,
-		Config,
-		StringHelper,
-		DoneString
-	}) {
-		super(DefectLogRepository, DefectLogDto, Config, StringHelper, DoneString)
+	constructor({ DefectLogRepository, DefectLogDto, Config, DoneString }) {
+		super(DefectLogRepository, DefectLogDto, Config, DoneString)
 	}
 
-	async getAllAttribute(req, res) {
-		let defects = await super.getAllAttribute('programs_id', req.params.id)
-		return await super.response(res, defects, 'DON200L')
+	async getAllByProgram(req, res) {
+		await super.getByAttribute({
+			attribute: 'programs_id',
+			value: req.params.id,
+			type: 'all',
+			res: res
+		})
 	}
 }
 

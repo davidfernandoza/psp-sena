@@ -36,12 +36,8 @@ class ErrorString {
 			message: 'Something went wrong, try again later'
 		}
 
-		this.REQ404 = {
-			message: 'The attribute already exists'
-		}
-
 		this.REQ403 = {
-			message: 'Forbidden attribute'
+			message: 'The #1 already exists'
 		}
 	}
 }

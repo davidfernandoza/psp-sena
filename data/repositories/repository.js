@@ -1,9 +1,14 @@
 'use strict'
 const { morphism } = require('morphism')
+const { QueryTypes } = require('sequelize')
 /*
  * Manejador de consultas a la base de datos
  */
 class Repository {
+	#query = null
+	#dto = {}
+	#data = {}
+
 	constructor(db, entityDto, config, entity) {
 		this.db = db
 		this.entity = entity
@@ -18,83 +23,140 @@ class Repository {
 		}
 	}
 
-	async getAll(transaction, addSubDto) {
+	async getByAttribute(options, addSubDto, transaction) {
 		try {
-			const dto = await this.entityDto.repository(addSubDto)
-			const entities = await this.db[this.entity].findAll({
+			this.#dto = await this.entityDto.repository(addSubDto)
+			this.#query = {
+				where: { [options.data.attribute]: options.data.value },
 				transaction: transaction
-			})
-			if (entities.length === 0) return null
-			return entities.map(item => morphism(dto, item))
+			}
+			if (options.dto) this.#dto = options.dto
+
+			switch (options.type) {
+				case 'all':
+					this.#data = await this.db[this.entity].findAll(this.#query)
+					if (this.#data.length === 0) return null
+					return this.#data.map(item => morphism(this.#dto, item))
+
+				default:
+					if (options.dto) this.#dto = options.dto
+					this.#data = await this.db[this.entity].findOne(this.#query)
+					if (!this.#data) return null
+					return morphism(this.#dto, this.#data)
+			}
 		} catch (error) {
 			await this.errorHandle(error)
 		}
 	}
 
-	async get(id, transaction, addSubDto) {
+	async getByInclude(options, addSubDto, transaction) {
 		try {
-			const dto = await this.entityDto.repository(addSubDto)
-			const entity = await this.db[this.entity].findOne({
-				where: { id },
-				transaction: transaction
-			})
-			if (!entity) return null
-			return morphism(dto, entity)
-		} catch (error) {
-			await this.errorHandle(error)
-		}
-	}
-
-	async getAttributes(attribut, match, transaction, addSubDto) {
-		try {
-			const dto = await this.entityDto.repository(addSubDto)
-			const entity = await this.db[this.entity].findOne({
-				where: { [attribut]: match },
-				transaction: transaction
-			})
-			if (!entity) return null
-			return morphism(dto, entity)
-		} catch (error) {
-			await this.errorHandle(error)
-		}
-	}
-
-	async getAllAttributes(attribut, match, transaction, addSubDto) {
-		try {
-			const dto = await this.entityDto.repository(addSubDto)
-			const entities = await this.db[this.entity].findAll({
-				where: { [attribut]: match },
-				transaction: transaction
-			})
-			if (entities.length == 0) return null
-			return entities.map(item => morphism(dto, item))
-		} catch (error) {
-			await this.errorHandle(error)
-		}
-	}
-
-	async getAllByInclude(include, idInclude, transaction, addSubDto) {
-		try {
-			const dto = await this.entityDto.repository(addSubDto)
-			const entities = await this.db[this.entity].findAll({
+			this.#dto = await this.entityDto.repository(addSubDto)
+			this.#query = {
 				include: [
 					{
-						model: this.db[include],
-						as: include,
-						where: { id: idInclude },
-						required: true
+						model: this.db[options.includeEntity],
+						as: options.includeAlias,
+						required: options.includeRequired
 					}
 				],
 				transaction: transaction
+			}
+
+			// Ajustando los where para las consultas
+			if (options.where) {
+				this.#query.where = options.where
+			}
+
+			if (options.includeWhere) {
+				this.#query.include[0].where = options.includeWhere
+			}
+
+			if (options.dto) this.#dto = options.dto
+
+			switch (options.type) {
+				case 'all':
+					this.#data = await this.db[this.entity].findAll(this.#query)
+					if (this.#data.length === 0) return null
+					return this.#data.map(item => morphism(this.#dto, item))
+
+				default:
+					if (options.dto) this.#dto = options.dto
+					this.#data = await this.db[this.entity].findOne(this.#query)
+					if (!this.#data) return null
+					return morphism(this.#dto, this.#data)
+			}
+		} catch (error) {
+			await this.errorHandle(error)
+		}
+	}
+
+	//  ---------------------------------------------------------------------------+
+
+	async getBySql(options, addSubDto, transaction) {
+		try {
+			this.#dto = await this.entityDto.repository(addSubDto)
+			if (options.dto) this.#dto = options.dto
+
+			this.#data = await this.db.sequelize.query(options.query, {
+				replacements: options.replace,
+				type: QueryTypes.SELECT,
+				transaction: transaction
 			})
-			if (entities.length === 0) return null
-			return entities.map(item => morphism(dto, item))
+
+			switch (options.type) {
+				case 'all':
+					if (this.#data.length === 0) return null
+					return this.#data.map(item => morphism(this.#dto, item))
+				default:
+					if (!this.#data) return null
+					return morphism(this.#dto, this.#data)
+			}
 		} catch (error) {
 			return await this.errorHandle(error)
 		}
 	}
 
-	async create(entity, transaction, addSubDto) {
+	async getAll(options, addSubDto, transaction) {
+		try {
+			this.#dto = await this.entityDto.repository(addSubDto)
+			if (options.query) this.#query = options.query
+			else {
+				this.#query = {
+					transaction: transaction
+				}
+			}
+
+			if (options.dto) this.#dto = options.dto
+
+			this.#data = await this.db[this.entity].findAll(this.#query)
+			if (this.#data.length === 0) return null
+			return this.#data.map(item => morphism(this.#dto, item))
+		} catch (error) {
+			await this.errorHandle(error)
+		}
+	}
+
+	async get(options, addSubDto, transaction) {
+		try {
+			this.#dto = await this.entityDto.repository(addSubDto)
+			if (options.query) this.#query = options.query
+			else {
+				this.#query = {
+					where: { id: options.id },
+					transaction: transaction
+				}
+			}
+			if (options.dto) this.#dto = options.dto
+			this.#data = await this.db[this.entity].findOne(this.#query)
+			if (!this.#data) return null
+			return morphism(this.#dto, this.#data)
+		} catch (error) {
+			await this.errorHandle(error)
+		}
+	}
+
+	async create(options, addSubDto, transaction) {
 		try {
 			/*
 			 * Por lo general el addSubDto viene en false en el create
@@ -102,80 +164,72 @@ class Repository {
 			 * las consultas, y cuando se guarda en una tabla en general
 			 * no se guardan sub-JSON
 			 */
+			let baseDto = await this.entityDto.repository(addSubDto)
+			this.#dto = options.dtoIn ? options.dtoIn : baseDto
+			options.data = morphism(this.#dto, options.data)
 
-			const dto = await this.entityDto.repository(addSubDto)
-			entity = morphism(dto, entity)
-
-			const created = await this.db[this.entity].create(entity, {
+			this.#data = await this.db[this.entity].create(options.data, {
 				transaction: transaction
 			})
-			return morphism(dto, created)
+
+			this.#dto = options.dtoOut ? options.dtoOut : baseDto
+			return morphism(this.#dto, this.#data)
 		} catch (error) {
 			await this.errorHandle(error)
 		}
 	}
 
-	async update(id, entity, dto, transaction, addSubDto) {
+	async update(options, addSubDto, transaction) {
 		try {
-			if (!dto) {
-				dto = await this.entityDto.repository(addSubDto)
+			this.#dto = await this.entityDto.repository(addSubDto)
+
+			// Query diferente
+			if (options.query) this.#query = options.query
+			else {
+				this.#query = {
+					where: { id: options.id },
+					transaction: transaction
+				}
 			}
-			entity.id = id
-			entity = morphism(dto, entity)
-			entity = await this.deleteAts(entity)
-			const result = await this.db[this.entity].update(entity, {
-				where: { id },
-				transaction: transaction
-			})
-			if (result[0] == 0) return null
-			return result[0]
+
+			// DTO editado para persistir la data (se usa para el pach tambien)
+			if (options.dto) this.#dto = options.dto
+
+			// Procesamiento de la data
+			options.data.id = options.id
+			options.data = morphism(this.#dto, options.data)
+			options.data = await this.deleteTimestamp(options.data)
+
+			this.#data = await this.db[this.entity].update(options.data, this.#query)
+			if (this.#data[0] == 0) return null
+			return this.#data[0]
 		} catch (error) {
 			await this.errorHandle(error)
 		}
 	}
 
-	async patch(id, entity, dto, transaction) {
+	async delete(options, transaction) {
 		try {
-			entity = morphism(dto, entity)
-			entity = await this.deleteAts(entity)
-			const result = await this.db[this.entity].update(entity, {
-				where: { id },
-				transaction: transaction
-			})
-			if (result[0] == 0) return null
-			return result[0]
+			// Query diferente
+			if (options.query) this.#query = options.query
+			else {
+				this.#query = {
+					where: { id: options.id },
+					transaction: transaction
+				}
+			}
+
+			this.#data = await this.db[this.entity].destroy(this.#query)
+			if (this.#data == 0) return null
+			return this.#data
 		} catch (error) {
 			await this.errorHandle(error)
 		}
 	}
 
-	async delete(id, transaction) {
-		try {
-			const result = await this.db[this.entity].destroy({
-				where: { id },
-				transaction: transaction
-			})
-			if (result == 0) return null
-			return result
-		} catch (error) {
-			await this.errorHandle(error)
-		}
-	}
+	//  ---------------------------------------------------------------------------+
 
-	async deleteForAttribute(attribute, mach, transaction) {
-		try {
-			const result = await this.db[this.entity].destroy({
-				where: { [attribute]: mach },
-				transaction: transaction
-			})
-			if (result == 0) return null
-			return result
-		} catch (error) {
-			await this.errorHandle(error)
-		}
-	}
-
-	async deleteAts(entity) {
+	async deleteTimestamp(entity) {
 		delete entity.created_at
 		delete entity.updated_at
 		return entity

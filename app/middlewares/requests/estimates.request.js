@@ -6,13 +6,7 @@ class EstimatesRequest extends Request {
 	#estimatesRepository = {}
 	#errorString = {}
 
-	constructor({
-		JoiValidator,
-		Config,
-		JWTService,
-		EstimatesRepository,
-		ErrorString
-	}) {
+	constructor({ JoiValidator, Config, JWTService }) {
 		const body = {
 			id: JoiValidator.number()
 				.integer()
@@ -39,10 +33,6 @@ class EstimatesRequest extends Request {
 				.required()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
-		this.#estimatesRepository = EstimatesRepository
-		this.#errorString = ErrorString
 	}
-
-
 }
 module.exports = EstimatesRequest

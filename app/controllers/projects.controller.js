@@ -9,13 +9,12 @@ class ProjectsController extends Controller {
 	constructor({
 		ProjectsUsersRepository,
 		ProjectsRepository,
-		StringHelper,
 		ProjectsDto,
 		DoneString,
 		Config,
 		DB
 	}) {
-		super(ProjectsRepository, ProjectsDto, Config, StringHelper, DoneString)
+		super(ProjectsRepository, ProjectsDto, Config, DoneString)
 		this.#sequelize = DB.sequelize
 		this.#projectsUsersRepository = ProjectsUsersRepository
 	}
@@ -23,9 +22,10 @@ class ProjectsController extends Controller {
 	// -------------------------------------------------------------------------------*
 	// Get by user id
 	async getAllByUser(req, res) {
-		const idUser = req.id
-		const idFind = req.params.id
-		let entities = await this.entityRepository.getAllByUser(idFind, idUser)
+		const entities = await this.entityRepository.getAllByUser(
+			req.params.id,
+			req.id
+		)
 		return await this.response(res, entities, 'DON200L')
 	}
 
@@ -34,12 +34,18 @@ class ProjectsController extends Controller {
 	async create(req, res) {
 		try {
 			req.transaction = await this.#sequelize.transaction()
+			req.addSubDto = null
+
 			const created = await super.create(req, res)
 			const dataRelation = {
 				projects_id: created.id,
 				users_id: req.id
 			}
-			await this.#projectsUsersRepository.create(dataRelation, req.transaction)
+			await this.#projectsUsersRepository.create(
+				{ data: dataRelation },
+				req.addSubDto,
+				req.transaction
+			)
 			await req.transaction.commit()
 			await super.response(res, created, 'DON201')
 		} catch (error) {

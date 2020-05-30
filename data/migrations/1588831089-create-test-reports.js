@@ -19,7 +19,7 @@ module.exports = {
 			test_name: { type: Sequelize.STRING, allowNull: false },
 			conditions: { type: Sequelize.TEXT, allowNull: false },
 			expected_result: { type: Sequelize.TEXT, allowNull: false },
-			current_result: { type: Sequelize.TEXT, allowNull: false },
+			current_result: { type: Sequelize.TEXT },
 			description: { type: Sequelize.TEXT },
 			objective: { type: Sequelize.TEXT, allowNull: false },
 			created_at: { allowNull: false, type: Sequelize.DATE },

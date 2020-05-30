@@ -36,14 +36,14 @@ module.exports = (sequelize, DataTypes) => {
 		models.experiences_languages.belongsTo(models.experiences, {
 			foreignKey: 'experiences_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'experiences-1'
+			as: 'experiences'
 		})
 
 		// Un experiences_languages tiene un languages (1:1)
 		models.experiences_languages.belongsTo(models.languages, {
 			foreignKey: 'languages_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'languages-1'
+			as: 'languages'
 		})
 	}
 

@@ -7,16 +7,9 @@ class EstimatesNewPartsController extends Controller {
 		EstimatesNewPartsRepository,
 		EstimatesNewPartsDto,
 		Config,
-		StringHelper,
 		DoneString
 	}) {
-		super(
-			EstimatesNewPartsRepository,
-			EstimatesNewPartsDto,
-			Config,
-			StringHelper,
-			DoneString
-		)
+		super(EstimatesNewPartsRepository, EstimatesNewPartsDto, Config, DoneString)
 	}
 	// Logica diferente al CRUD base aqui:
 }

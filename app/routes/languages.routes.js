@@ -17,8 +17,8 @@ module.exports = ({
 	/*
 	 * Request:
 	 */
-	const requestPrivate = LanguagesRequest.private.bind(LanguagesRequest)
-	const requestBody = LanguagesRequest.body.bind(LanguagesRequest)
+	const reqPrivate = LanguagesRequest.private.bind(LanguagesRequest)
+	const reqBody = LanguagesRequest.body.bind(LanguagesRequest)
 
 	/*
 	 * Politics:
@@ -44,7 +44,7 @@ module.exports = ({
 	 */
 	router.get(
 		'/',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
 		controller.getAll.bind(controller)
@@ -56,10 +56,10 @@ module.exports = ({
 	 */
 	router.post(
 		'/',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
+		reqBody,
 		controller.create.bind(controller)
 	)
 
@@ -69,10 +69,10 @@ module.exports = ({
 	 */
 	router.put(
 		'/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
+		reqBody,
 		controller.update.bind(controller)
 	)
 

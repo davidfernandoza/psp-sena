@@ -18,9 +18,9 @@ module.exports = ({
 	/*
 	 * Request:
 	 */
-	const requestPrivate = EstimatesRequest.private.bind(EstimatesRequest)
-	const requestOrganization = OwnersRequests.byEstimate.bind(OwnersRequests)
-	const requestBody = EstimatesRequest.body.bind(EstimatesRequest)
+	const reqPrivate = EstimatesRequest.private.bind(EstimatesRequest)
+	const reqBody = EstimatesRequest.body.bind(EstimatesRequest)
+	const etimateExist = OwnersRequests.byEstimate.bind(OwnersRequests)
 
 	/*
 	 * Politics:
@@ -46,7 +46,7 @@ module.exports = ({
 	 */
 	router.get(
 		'/by-language/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
 		controller.getAllByLanguage.bind(controller)
@@ -58,11 +58,11 @@ module.exports = ({
 	 */
 	router.post(
 		'/',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
-		requestOrganization,
+		reqBody,
+		etimateExist,
 		controller.create.bind(controller)
 	)
 
@@ -72,11 +72,11 @@ module.exports = ({
 	 */
 	router.put(
 		'/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
-		requestOrganization,
+		reqBody,
+		etimateExist,
 		controller.update.bind(controller)
 	)
 

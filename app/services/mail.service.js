@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer')
 const hbs = require('nodemailer-express-handlebars')
 
 class MailService {
-	#logo = 'https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/BeeProAgency/539628_520652/logo.png'
+	#logo = 'https://i.ibb.co/g9MzKwb/PSP-COMPLETO-ADMIN-1024-X-1440.png'
 	#config = {}
 
 	constructor({ Config }) {

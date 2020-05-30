@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
 			test_name: { type: DataTypes.STRING, allowNull: false },
 			conditions: { type: DataTypes.TEXT, allowNull: false },
 			expected_result: { type: DataTypes.TEXT, allowNull: false },
-			current_result: { type: DataTypes.TEXT, allowNull: false },
+			current_result: { type: DataTypes.TEXT },
 			description: { type: DataTypes.TEXT },
 			objective: { type: DataTypes.TEXT, allowNull: false }
 		},
@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
 		models.test_reports.belongsTo(models.programs, {
 			foreignKey: 'programs_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'programs-1'
+			as: 'programs'
 		})
 	}
 

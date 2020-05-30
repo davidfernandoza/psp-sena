@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
 		models.standard_defects.hasMany(models.defect_log, {
 			foreignKey: 'standard_defects_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'defect_log-1'
+			as: 'defect_log'
 		})
 	}
 

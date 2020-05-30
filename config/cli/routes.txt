@@ -17,9 +17,9 @@ module.exports = ({
 	/*
 	 * Request:
 	 */
-	const requestBody = #2Request.body.bind(#2Request)
-	const requestPublic = #2Request.public.bind(#2Request)
-	const requestPrivate = #2Request.private.bind(#2Request)
+	const reqBody = #2Request.body.bind(#2Request)
+	const reqPublic = #2Request.public.bind(#2Request)
+	const reqPrivate = #2Request.private.bind(#2Request)
 
 	/*
 	 * Politics:
@@ -46,7 +46,7 @@ module.exports = ({
 	 */
 	router.get(
 		'/',
-		requestPublic,
+		reqPublic,
 		auth,
 		politics,
 		controller.getAll.bind(controller)
@@ -54,7 +54,7 @@ module.exports = ({
 
 	router.get(
 		'/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
 		controller.get.bind(controller)
@@ -66,10 +66,10 @@ module.exports = ({
 	 */
 	router.post(
 		'/',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
+		reqBody,
 		controller.create.bind(controller)
 	)
 
@@ -79,10 +79,10 @@ module.exports = ({
 	 */
 	router.put(
 		'/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
+		reqBody,
 		controller.update.bind(controller)
 	)
 
@@ -93,7 +93,7 @@ module.exports = ({
 	 */
 	router.delete(
 		'/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
 		controller.delete.bind(controller)

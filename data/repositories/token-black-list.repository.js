@@ -9,13 +9,19 @@ class TokenBlackListRepository extends Repository {
 		this.db = DB
 	}
 
-	get(token) {
-		return this.db[this.entity].findOne({ where: { token } })
+	async get(token) {
+		return await super.get({
+			query: {
+				where: { token }
+			}
+		})
 	}
 
 	async delete(date) {
-		await this.db[this.entity].destroy({
-			where: { created_at: { [Op.lte]: date } }
+		await super.delete({
+			query: {
+				where: { created_at: { [Op.lte]: date } }
+			}
 		})
 	}
 }

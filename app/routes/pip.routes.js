@@ -6,10 +6,11 @@ const { Router } = require('express')
  */
 
 module.exports = ({
-	PipController,
-	PipRequest,
 	AuthMiddleware,
+	OwnersRequests,
+	PipController,
 	AdminPolitic,
+	PipRequest,
 	DevPolitic
 }) => {
 	const router = Router()
@@ -17,9 +18,9 @@ module.exports = ({
 	/*
 	 * Request:
 	 */
-	const requestPrivate = PipRequest.private.bind(PipRequest)
-	const requestPublic = PipRequest.public.bind(PipRequest)
-	const requestBody = PipRequest.body.bind(PipRequest)
+	const reqPrivate = PipRequest.private.bind(PipRequest)
+	const reqBody = PipRequest.body.bind(PipRequest)
+	const programOwner = OwnersRequests.byProgram.bind(OwnersRequests)
 
 	/*
 	 * Politics:
@@ -44,19 +45,12 @@ module.exports = ({
 	 * GET:
 	 */
 	router.get(
-		'/',
-		requestPublic,
+		'/by-program/:id',
+		reqPrivate,
 		auth,
 		politics,
-		controller.getAll.bind(controller)
-	)
-
-	router.get(
-		'/:id',
-		requestPrivate,
-		auth,
-		politics,
-		controller.get.bind(controller)
+		programOwner,
+		controller.getAllByProgram.bind(controller)
 	)
 
 	/*
@@ -65,10 +59,11 @@ module.exports = ({
 	 */
 	router.post(
 		'/',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
+		reqBody,
+		programOwner,
 		controller.create.bind(controller)
 	)
 
@@ -77,24 +72,13 @@ module.exports = ({
 	 * PUT:
 	 */
 	router.put(
-		'/',
-		requestPrivate,
+		'/:id',
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
+		reqBody,
+		programOwner,
 		controller.update.bind(controller)
-	)
-
-	/*
-	 * -----------------------------------------------------------------------------------*
-	 * DELETE:
-	 */
-	router.delete(
-		'/',
-		requestPrivate,
-		auth,
-		politics,
-		controller.delete.bind(controller)
 	)
 
 	return router

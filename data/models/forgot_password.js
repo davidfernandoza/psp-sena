@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
 		models.forgot_password.belongsTo(models.users, {
 			foreignKey: 'users_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'users-2'
+			as: 'users'
 		})
 	}
 

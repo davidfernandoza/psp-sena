@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 			programs_id: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
+				unique: true,
 				isNumeric: true
 			},
 			description: { type: DataTypes.TEXT, allowNull: false },
@@ -35,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
 		models.pip.belongsTo(models.programs, {
 			foreignKey: 'programs_id', // a donde llega
 			targetKey: 'id', // de donde viene
-			as: 'programs-1'
+			as: 'programs'
 		})
 	}
 

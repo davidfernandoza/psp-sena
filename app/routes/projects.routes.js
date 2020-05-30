@@ -18,9 +18,10 @@ module.exports = ({
 	/*
 	 * Request:
 	 */
-	const requestPrivate = ProjectsRequest.private.bind(ProjectsRequest)
-	const requestBody = ProjectsRequest.body.bind(ProjectsRequest)
-	const requestOwner = OwnersRequests.byProject.bind(OwnersRequests)
+	const reqPrivate = ProjectsRequest.private.bind(ProjectsRequest)
+	const reqBody = ProjectsRequest.body.bind(ProjectsRequest)
+	const projectOwner = OwnersRequests.byProject.bind(OwnersRequests)
+	const usersOwner = OwnersRequests.byUser.bind(OwnersRequests)
 
 	/*
 	 * Politics:
@@ -46,9 +47,10 @@ module.exports = ({
 	 */
 	router.get(
 		'/by-user/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
+		usersOwner,
 		controller.getAllByUser.bind(controller)
 	)
 
@@ -58,10 +60,10 @@ module.exports = ({
 	 */
 	router.post(
 		'/',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestBody,
+		reqBody,
 		controller.create.bind(controller)
 	)
 
@@ -71,11 +73,11 @@ module.exports = ({
 	 */
 	router.put(
 		'/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestOwner,
-		requestBody,
+		projectOwner,
+		reqBody,
 		controller.update.bind(controller)
 	)
 
@@ -85,10 +87,10 @@ module.exports = ({
 	 */
 	router.delete(
 		'/:id',
-		requestPrivate,
+		reqPrivate,
 		auth,
 		politics,
-		requestOwner,
+		projectOwner,
 		controller.delete.bind(controller)
 	)
 

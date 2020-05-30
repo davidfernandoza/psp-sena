@@ -32,7 +32,7 @@ module.exports = {
 					planning_date: 1589754486,
 					start_date: 1589754486,
 					update_date: 1589754486,
-					delivery_date: 1589754486,
+					delivery_date: null,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},

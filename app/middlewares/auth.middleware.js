@@ -34,7 +34,9 @@ class AuthMiddleware {
 				//  Validar si el token tiene la organizacion en null
 				if (!responseToken.payload.organization) throw new Error('ERR401')
 
-				const user = await this.usersRepository.get(responseToken.payload.id)
+				const user = await this.usersRepository.get({
+					id: responseToken.payload.id
+				})
 
 				// Validar si el usuario existe y no este despedido
 				if (!user) throw new Error('ERR401')

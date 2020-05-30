@@ -7,16 +7,9 @@ class ReusablePartsController extends Controller {
 		ReusablePartsRepository,
 		ReusablePartsDto,
 		Config,
-		StringHelper,
 		DoneString
 	}) {
-		super(
-			ReusablePartsRepository,
-			ReusablePartsDto,
-			Config,
-			StringHelper,
-			DoneString
-		)
+		super(ReusablePartsRepository, ReusablePartsDto, Config, DoneString)
 	}
 	// Logica diferente al CRUD base aqui:
 }
