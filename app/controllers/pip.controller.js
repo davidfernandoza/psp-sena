@@ -7,11 +7,11 @@ class PipController extends Controller {
 		super(PipRepository, PipDto, Config, DoneString)
 	}
 
-	async getAllByProgram(req, res) {
+	async getByProgram(req, res) {
 		await super.getByAttribute({
 			attribute: 'programs_id',
 			value: req.params.id,
-			type: 'all',
+			type: 'one',
 			res: res
 		})
 	}

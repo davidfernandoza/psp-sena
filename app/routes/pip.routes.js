@@ -50,7 +50,7 @@ module.exports = ({
 		auth,
 		politics,
 		programOwner,
-		controller.getAllByProgram.bind(controller)
+		controller.getByProgram.bind(controller)
 	)
 
 	/*
