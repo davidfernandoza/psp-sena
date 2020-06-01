@@ -57,7 +57,7 @@ function run(message) {
 			{
 				name: 'amount',
 				default: 0,
-				message: 'Number of seeders (only seeder):',
+				message: 'Number of seeders (only seeders):',
 				validate: input => {
 					let number = parseInt(input)
 					return validate(number, true)
@@ -565,7 +565,15 @@ function run(message) {
 
 							file = file.replace(/#1/g, nameClassFull)
 							file = file.replace(/#2/g, nameClass)
-							file = file.replace(/#3/g, nameModule)
+							if (
+								item == 'seeders' ||
+								item == 'migrations' ||
+								item == 'models' ||
+								item == 'repository'
+							) {
+								nameModule = nameModule.replace(/-/g, '_')
+								file = file.replace(/#3/g, nameModule)
+							}
 							file = file.replace(/#4/g, JSON.stringify(objAtributes))
 							file = file.replace(/#5/g, foreignKey_5)
 							file = file.replace(/#p/g, password_p)

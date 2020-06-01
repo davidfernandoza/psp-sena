@@ -79,6 +79,7 @@ class OwnersRequests extends Request {
 		const program = await this.programsRepository.get({ id: idProgram })
 		const idUser = req.id
 
+		// Valida si el programa existe
 		if (!program) throw new Error('ERR404')
 
 		if (req.rol == 'DEV') {
@@ -109,11 +110,24 @@ class OwnersRequests extends Request {
 								id: chainedId
 							})
 
-							if (!defectLog) throw new Error('ERR404')
-							/*
-							 * valida que el defecto escalonado sea del nuevo programa
-							 */ else if (defectLog.programs_id != idProgram)
-								throw new Error('ERR403')
+							if (!defectLog) {
+								this.#errorString.REQ403.message = this.#errorString.REQ404.message.replace(
+									/#1/g,
+									'defect_log_chained_id'
+								)
+								this.#errorString.REQ403.path = 'defect_log_chained_id'
+								return super.errorHandle(null, this.#errorString.REQ403)
+							} else if (defectLog.programs_id != idProgram) {
+								/*
+								 * valida que el defecto escalonado sea del nuevo programa
+								 */
+								this.#errorString.REQ403.message = this.#errorString.REQ403.message.replace(
+									/#1/g,
+									'defect_log_chained_id is not from the program'
+								)
+								this.#errorString.REQ403.path = 'programs_id'
+								return super.errorHandle(null, this.#errorString.REQ403)
+							}
 						}
 						this.#entityReposytory = 'defectLogRepository'
 						break
@@ -122,7 +136,14 @@ class OwnersRequests extends Request {
 						/*
 						 * Validar si ya esta terminado el programa
 						 */
-						if (!program.delivery_date) throw new Error('ERR403')
+						if (!program.delivery_date) {
+							this.#errorString.REQ403.message = this.#errorString.REQ403.message.replace(
+								/#1/g,
+								'program is not complete'
+							)
+							this.#errorString.REQ403.path = 'programs_id'
+							return super.errorHandle(null, this.#errorString.REQ403)
+						}
 						this.#entityReposytory = 'pipRepository'
 						break
 					}
@@ -133,15 +154,17 @@ class OwnersRequests extends Request {
 						const testRepository = await this.testReportsRepository.getAll({
 							query: { where: { test_number: req.body.test_number } }
 						})
-						this.#errorString.REQ403.message = this.#errorString.REQ403.message.replace(
+						this.#errorString.REQ403EXT.message = this.#errorString.REQ403EXT.message.replace(
 							/#1/g,
 							'test report'
 						)
 
-						if (req.method == 'POST' && testRepository.length > 0)
-							return super.errorHandle(null, this.#errorString.REQ403)
-						else if (req.method == 'PUT' && testRepository.length > 1)
-							return super.errorHandle(null, this.#errorString.REQ403)
+						if (testRepository) {
+							if (req.method == 'POST' && testRepository.length > 0)
+								return super.errorHandle(null, this.#errorString.REQ403EXT)
+							else if (req.method == 'PUT' && testRepository.length > 1)
+								return super.errorHandle(null, this.#errorString.REQ403EXT)
+						}
 
 						this.#entityReposytory = 'pipRepository'
 						break
@@ -239,7 +262,7 @@ class OwnersRequests extends Request {
 			req.body.algorithm
 		)
 
-		this.#errorString.REQ403.message = this.#errorString.REQ403.message.replace(
+		this.#errorString.REQ403EXT.message = this.#errorString.REQ403EXT.message.replace(
 			/#1/g,
 			'estimate'
 		)
@@ -250,7 +273,7 @@ class OwnersRequests extends Request {
 				 * Existe mas de una estimacion
 				 */
 				if (estimates.length > 1)
-					return super.errorHandle(null, this.#errorString.REQ403)
+					return super.errorHandle(null, this.#errorString.REQ403EXT)
 
 				// Validar si la estimacion le pertenencia de la organizacion
 				estimates = await this.estimatesRepository.getByOwner(
@@ -259,7 +282,7 @@ class OwnersRequests extends Request {
 				)
 				if (!estimates) throw new Error('ERR403')
 			} else {
-				return super.errorHandle(null, this.#errorString.REQ403)
+				return super.errorHandle(null, this.#errorString.REQ403EXT)
 			}
 		}
 		next()

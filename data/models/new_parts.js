@@ -15,13 +15,14 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 				isNumeric: true
 			},
+			types_sizes_id: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+				isNumeric: true
+			},
 			name: { type: DataTypes.STRING, allowNull: false },
 			planned_lines: { type: DataTypes.INTEGER, allowNull: false },
 			number_methods_planned: { type: DataTypes.INTEGER, allowNull: false },
-			size_planned: {
-				type: DataTypes.ENUM('XS', 'S', 'M', 'L', 'XL'),
-				allowNull: false
-			},
 			current_lines: { type: DataTypes.INTEGER },
 			number_methods_current: { type: DataTypes.INTEGER }
 		},
@@ -41,6 +42,13 @@ module.exports = (sequelize, DataTypes) => {
 			foreignKey: 'programs_id', // a donde llega
 			targetKey: 'id', // de donde viene
 			as: 'programs'
+		})
+
+		// Un new_parts tiene un types_sizes (1:1)
+		models.new_parts.belongsTo(models.types_sizes, {
+			foreignKey: 'types_sizes_id', // a donde llega
+			targetKey: 'id', // de donde viene
+			as: 'types_sizes'
 		})
 
 		// Un new_parts tiene muchas programs (1:M)

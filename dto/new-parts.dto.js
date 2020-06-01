@@ -7,6 +7,7 @@ class NewPartsDto extends Dto {
 		const schema = {
 			id: 'id',
 			programs_id: 'programs_id',
+			types_sizes_id: 'types_sizes_id',
 			name: 'name',
 			planned_lines: 'planned_lines',
 			number_methods_planned: 'number_methods_planned',

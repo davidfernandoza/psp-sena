@@ -36,8 +36,16 @@ class ErrorString {
 			message: 'Something went wrong, try again later'
 		}
 
-		this.REQ403 = {
+		this.REQ403EXT = {
 			message: 'The #1 already exists'
+		}
+
+		this.REQ403 = {
+			message: 'The #1'
+		}
+
+		this.REQ404 = {
+			message: 'The #1 is not exists'
 		}
 	}
 }
