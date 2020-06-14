@@ -17,7 +17,8 @@ class ProgramsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required(),
+				.allow(null)
+				.optional(),
 			programs_reusables_id: JoiValidator.number()
 				.integer()
 				.min(0)
@@ -49,7 +50,8 @@ class ProgramsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required(),
+				.allow(null)
+				.optional(),
 			programs_base_id: JoiValidator.number()
 				.integer()
 				.min(0)
@@ -114,9 +116,10 @@ class ProgramsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required(),
+				.allow(null)
+				.optional(),
 			types_sizes_id: JoiValidator.number().integer().min(1).max(30).required(),
-			name: JoiValidator.string().min(8).max(225).required(),
+			name: JoiValidator.string().min(1).max(225).required(),
 			planned_lines: JoiValidator.number()
 				.integer()
 				.min(0)
@@ -154,7 +157,8 @@ class ProgramsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required(),
+				.allow(null)
+				.optional(),
 			languages_id: JoiValidator.number()
 				.integer()
 				.min(0)
@@ -165,8 +169,8 @@ class ProgramsRequest extends Request {
 				.min(0)
 				.max(99999999990)
 				.required(),
-			name: JoiValidator.string().min(8).max(225).required(),
-			description: JoiValidator.string().min(8).required(),
+			name: JoiValidator.string().min(1).max(225).required(),
+			description: JoiValidator.string().min(1).required(),
 			total_lines: JoiValidator.number()
 				.integer()
 				.min(0)
@@ -177,9 +181,9 @@ class ProgramsRequest extends Request {
 			start_date: JoiValidator.date().timestamp().required(),
 			update_date: JoiValidator.date().timestamp().allow(null).optional(),
 			delivery_date: JoiValidator.date().timestamp().allow(null).optional(),
-			base_parts: JoiValidator.array().ordered(baseParts),
-			reusable_parts: JoiValidator.array().ordered(reusableParts),
-			new_parts: JoiValidator.array().ordered(newParts)
+			base_parts: JoiValidator.array().items(baseParts),
+			reusable_parts: JoiValidator.array().items(reusableParts),
+			new_parts: JoiValidator.array().items(newParts)
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
 	}

@@ -18,7 +18,6 @@ module.exports = ({
 	 * Request:
 	 */
 	const reqPrivate = ProgramsRequest.private.bind(ProgramsRequest)
-	const reqPublic = ProgramsRequest.public.bind(ProgramsRequest)
 	const reqBody = ProgramsRequest.body.bind(ProgramsRequest)
 
 	/*
@@ -45,10 +44,18 @@ module.exports = ({
 	 */
 	router.get(
 		'/by-module/:id',
-		reqPublic,
+		reqPrivate,
 		auth,
 		politics,
 		controller.getAllByModule.bind(controller)
+	)
+
+	router.get(
+		'/by-organization/:id',
+		reqPrivate,
+		auth,
+		politics,
+		controller.getAllByOrganization.bind(controller)
 	)
 
 	/*
@@ -69,11 +76,11 @@ module.exports = ({
 	 * PUT:
 	 */
 	router.put(
-		'/',
+		'/:id',
 		reqPrivate,
 		auth,
 		politics,
-		reqBody,
+		// reqBody,
 		controller.update.bind(controller)
 	)
 

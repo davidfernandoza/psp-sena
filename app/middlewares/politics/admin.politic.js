@@ -217,6 +217,30 @@ class AdminPolitic extends Politic {
 						status: 'disable'
 					}
 				]
+			},
+			programs: {
+				subRoutes: [
+					{
+						route: '/by-module/:id',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/by-organization/:id',
+						method: 'GET',
+						status: 'disable'
+					},
+					{
+						route: '/',
+						method: 'POST',
+						status: 'disable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'disable'
+					}
+				]
 			}
 		}
 

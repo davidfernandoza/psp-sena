@@ -219,6 +219,30 @@ class DevPolitic extends Politic {
 						status: 'enable'
 					}
 				]
+			},
+			programs: {
+				subRoutes: [
+					{
+						route: '/by-module/:id',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/by-organization/:id',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/',
+						method: 'POST',
+						status: 'enable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'enable'
+					}
+				]
 			}
 		}
 		super(rol, authRol, baseUrl, permissions)

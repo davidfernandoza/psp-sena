@@ -172,19 +172,23 @@ class Controller {
 		}
 
 		// Atributo OK
-		else if (code == 'DON200' || code == 'DON201' || code == 'DON200L') {
+		else if (
+			code == 'DON200' ||
+			code == 'DON201' ||
+			code == 'DON200L' ||
+			code == 'DON201L'
+		) {
 			addSubDto = !addSubDto ? null : addSubDto
 			const dto = !typeDto
 				? await this.entityDto.api(addSubDto)
 				: await this.entityDto[typeDto](addSubDto)
-			if (code == 'DON200L') {
+			if (code == 'DON200L' || code == 'DON201L') {
 				entity = entity.map(item => morphism(dto, item))
-				code = 'DON200'
+				code = code == 'DON200L' ? 'DON200' : 'DON201'
 			} else {
 				entity = morphism(dto, entity)
 			}
 		}
-
 		this.#doneString[code].payload = entity
 		return res
 			.status(this.#doneString[code].status)

@@ -18,7 +18,7 @@ class AuthMiddleware {
 		if (invalid_token != null) throw new Error('ERR401')
 		else {
 			let responseToken = ''
-			if (req.route.path == '/new-token') {
+			if (req.route.path == '/new-token' || req.route.path == '/logout') {
 				// Token sin firma.
 				responseToken = await this.JWTServices.decode(authToken, 'auth', true)
 			} else {

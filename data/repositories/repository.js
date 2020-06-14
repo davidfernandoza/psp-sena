@@ -133,6 +133,8 @@ class Repository {
 			if (this.#data.length === 0) return null
 			return this.#data.map(item => morphism(this.#dto, item))
 		} catch (error) {
+			console.log(error)
+
 			await this.errorHandle(error)
 		}
 	}

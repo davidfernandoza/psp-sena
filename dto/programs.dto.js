@@ -19,6 +19,21 @@ class ProgramsDto extends Dto {
 		}
 		super(schema)
 	}
+
+	async api(addSubDto) {
+		const schema = await super.api(addSubDto)
+		schema.base_parts = 'base_parts'
+		schema.reusable_parts = 'reusable_parts'
+		schema.new_parts = 'new_parts'
+		return schema
+	}
+
+	async byOrganization() {
+		return {
+			id: 'id',
+			name: 'name'
+		}
+	}
 }
 
 module.exports = ProgramsDto
