@@ -53,13 +53,9 @@ class ProgramsController extends Controller {
 
 	async getAllByOrganization(req, res) {
 		const { organization: idOrganization } = req
-		const program = await super.getByAttribute({
-			attribute: 'modules_id',
-			value: idOrganization,
-			type: 'all',
-			return: true,
-			res: res
-		})
+		const program = await this.entityRepository.getAllByOrganization(
+			idOrganization
+		)
 		return await super.response(res, program, 'DON200L', null, 'byOrganization')
 	}
 

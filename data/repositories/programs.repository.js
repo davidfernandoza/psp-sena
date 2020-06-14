@@ -5,9 +5,12 @@ const { Op } = require('sequelize')
 // morphism(dto, entity)
 
 class ProgramsRepository extends Repository {
-	constructor({ DB, ProgramsDto, Config }) {
+	#queriesString = {}
+
+	constructor({ DB, ProgramsDto, Config, QueriesString }) {
 		super(DB, ProgramsDto, Config, 'programs')
 		this.db = DB
+		this.#queriesString = QueriesString.ProgramsRepository
 	}
 
 	async getAllByModulesFromDev(idUser, idModules, transaction) {
@@ -16,6 +19,14 @@ class ProgramsRepository extends Repository {
 				where: { [Op.and]: [{ users_id: idUser }, { modules_id: idModules }] }
 			},
 			transaction
+		})
+	}
+
+	async getAllByOrganization(idOrganization) {
+		return await super.getBySql({
+			query: this.#queriesString.getAllByOrganization,
+			replace: { idOrganization: idOrganization },
+			type: 'all'
 		})
 	}
 }
