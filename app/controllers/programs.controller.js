@@ -52,9 +52,10 @@ class ProgramsController extends Controller {
 	// -------------------------------------------------------------------------+
 
 	async getAllByOrganization(req, res) {
+		const { organization: idOrganization } = req
 		const program = await super.getByAttribute({
 			attribute: 'modules_id',
-			value: req.params.id,
+			value: idOrganization,
 			type: 'all',
 			return: true,
 			res: res

@@ -51,7 +51,7 @@ module.exports = ({
 	)
 
 	router.get(
-		'/by-organization/:id',
+		'/by-organization',
 		reqPrivate,
 		auth,
 		politics,
@@ -80,7 +80,7 @@ module.exports = ({
 		reqPrivate,
 		auth,
 		politics,
-		// reqBody,
+		reqBody,
 		controller.update.bind(controller)
 	)
 

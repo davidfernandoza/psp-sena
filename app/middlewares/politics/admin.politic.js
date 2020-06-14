@@ -226,7 +226,7 @@ class AdminPolitic extends Politic {
 						status: 'enable'
 					},
 					{
-						route: '/by-organization/:id',
+						route: '/by-organization',
 						method: 'GET',
 						status: 'disable'
 					},
