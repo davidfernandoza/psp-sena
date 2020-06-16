@@ -86,7 +86,7 @@ class ProgramsController extends Controller {
 			temp.res.reusable_parts = await this.#reusablePartsController.create(temp)
 
 			temp.transaction.commit()
-			await this.response(res, temp.res, code)
+			await super.response(res, temp.res, code)
 		} catch (error) {
 			await temp.transaction.rollback()
 
