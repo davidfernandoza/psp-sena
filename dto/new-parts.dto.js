@@ -11,7 +11,6 @@ class NewPartsDto extends Dto {
 			name: 'name',
 			planned_lines: 'planned_lines',
 			number_methods_planned: 'number_methods_planned',
-			size_planned: 'size_planned',
 			current_lines: 'current_lines',
 			number_methods_current: 'number_methods_current'
 		}

@@ -243,6 +243,48 @@ class DevPolitic extends Politic {
 						status: 'enable'
 					}
 				]
+			},
+			'base-parts': {
+				subRoutes: [
+					{
+						route: '/by-program/:id',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'enable'
+					}
+				]
+			},
+			'new-parts': {
+				subRoutes: [
+					{
+						route: '/by-program/:id',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'enable'
+					}
+				]
+			},
+			'reusable-parts': {
+				subRoutes: [
+					{
+						route: '/by-program/:id',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'enable'
+					}
+				]
 			}
 		}
 		super(rol, authRol, baseUrl, permissions)

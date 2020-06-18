@@ -241,6 +241,48 @@ class AdminPolitic extends Politic {
 						status: 'disable'
 					}
 				]
+			},
+			'base-parts': {
+				subRoutes: [
+					{
+						route: '/by-program/:id',
+						method: 'GET',
+						status: 'disable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'disable'
+					}
+				]
+			},
+			'new-parts': {
+				subRoutes: [
+					{
+						route: '/by-program/:id',
+						method: 'GET',
+						status: 'disable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'disable'
+					}
+				]
+			},
+			'reusable-parts': {
+				subRoutes: [
+					{
+						route: '/by-program/:id',
+						method: 'GET',
+						status: 'disable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'disable'
+					}
+				]
 			}
 		}
 

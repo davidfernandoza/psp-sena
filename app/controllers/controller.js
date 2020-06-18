@@ -123,6 +123,8 @@ class Controller {
 				dto: req.dto
 			}
 		}
+		console.log(req)
+
 		delete this.#options.data.id
 		this.#data = await this.entityRepository.update(
 			this.#options,

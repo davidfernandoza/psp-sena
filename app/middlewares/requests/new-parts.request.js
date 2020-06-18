@@ -15,6 +15,12 @@ class NewPartsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
+				.allow(null)
+				.optional(),
+			types_sizes_id: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
 				.required(),
 			name: JoiValidator.string().min(8).max(225).required(),
 			planned_lines: JoiValidator.number()
@@ -26,9 +32,6 @@ class NewPartsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required(),
-			size_planned: JoiValidator.any()
-				.valid('XS', 'S', 'M', 'L', 'XL')
 				.required(),
 			current_lines: JoiValidator.number()
 				.integer()

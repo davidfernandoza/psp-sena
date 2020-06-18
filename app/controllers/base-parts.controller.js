@@ -8,6 +8,8 @@ class BasePartsController extends Controller {
 		super(BasePartsRepository, BasePartsDto, Config, DoneString)
 	}
 
+	// -----------------------------------------------------------------------
+
 	async create(req, res) {
 		const basePartsArray = [],
 			transaction = !req.transaction ? null : req.transaction
@@ -24,6 +26,16 @@ class BasePartsController extends Controller {
 		if (transaction)
 			return basePartsArray.map(item => morphism(this.entityDto.schema, item))
 		await this.response(res, basePartsArray, 'DON201L')
+	}
+
+	// -----------------------------------------------------------------------
+	async getAllByProgram(req, res) {
+		await super.getByAttribute({
+			attribute: 'programs_id',
+			value: req.params.id,
+			type: 'all',
+			res: res
+		})
 	}
 }
 

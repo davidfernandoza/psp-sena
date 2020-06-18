@@ -18,7 +18,6 @@ module.exports = ({
 	 * Request:
 	 */
 	const reqPrivate = NewPartsRequest.private.bind(NewPartsRequest)
-	const reqPublic = NewPartsRequest.public.bind(NewPartsRequest)
 	const reqBody = NewPartsRequest.body.bind(NewPartsRequest)
 
 	/*
@@ -43,27 +42,13 @@ module.exports = ({
 	 * -----------------------------------------------------------------------------------*
 	 * GET:
 	 */
-	router.get('/', reqPublic, auth, politics, controller.getAll.bind(controller))
 
 	router.get(
-		'/:id',
+		'/by-program/:id',
 		reqPrivate,
 		auth,
 		politics,
-		controller.get.bind(controller)
-	)
-
-	/*
-	 * -----------------------------------------------------------------------------------*
-	 * POST:
-	 */
-	router.post(
-		'/',
-		reqPrivate,
-		auth,
-		politics,
-		reqBody,
-		controller.create.bind(controller)
+		controller.getAllByProgram.bind(controller)
 	)
 
 	/*
@@ -71,7 +56,7 @@ module.exports = ({
 	 * PUT:
 	 */
 	router.put(
-		'/',
+		'/:id',
 		reqPrivate,
 		auth,
 		politics,
@@ -79,16 +64,5 @@ module.exports = ({
 		controller.update.bind(controller)
 	)
 
-	/*
-	 * -----------------------------------------------------------------------------------*
-	 * DELETE:
-	 */
-	router.delete(
-		'/',
-		reqPrivate,
-		auth,
-		politics,
-		controller.delete.bind(controller)
-	)
 	return router
 }

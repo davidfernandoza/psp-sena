@@ -14,6 +14,8 @@ class ReusablePartsController extends Controller {
 		super(ReusablePartsRepository, ReusablePartsDto, Config, DoneString)
 	}
 
+	// -------------------------------------------------------------------
+
 	async create(req, res) {
 		const reusablePartsArray = [],
 			transaction = !req.transaction ? null : req.transaction
@@ -34,6 +36,17 @@ class ReusablePartsController extends Controller {
 			)
 
 		await this.response(res, reusablePartsArray, 'DON201L')
+	}
+
+	// -------------------------------------------------------------------
+
+	async getAllByProgram(req, res) {
+		await super.getByAttribute({
+			attribute: 'programs_id',
+			value: req.params.id,
+			type: 'all',
+			res: res
+		})
 	}
 }
 
