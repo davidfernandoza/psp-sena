@@ -13,7 +13,7 @@ class DefectLogController extends Controller {
 			value: req.params.id,
 			type: 'all',
 			res: res
-		})
+		})		
 	}
 }
 

@@ -228,12 +228,12 @@ class AdminPolitic extends Politic {
 					{
 						route: '/by-organization',
 						method: 'GET',
-						status: 'disable'
+						status: 'enable'
 					},
 					{
 						route: '/',
 						method: 'POST',
-						status: 'disable'
+						status: 'enable'
 					},
 					{
 						route: '/:id',
@@ -247,7 +247,7 @@ class AdminPolitic extends Politic {
 					{
 						route: '/by-program/:id',
 						method: 'GET',
-						status: 'disable'
+						status: 'enable'
 					},
 					{
 						route: '/:id',
@@ -261,7 +261,7 @@ class AdminPolitic extends Politic {
 					{
 						route: '/by-program/:id',
 						method: 'GET',
-						status: 'disable'
+						status: 'enable'
 					},
 					{
 						route: '/:id',
@@ -275,7 +275,7 @@ class AdminPolitic extends Politic {
 					{
 						route: '/by-program/:id',
 						method: 'GET',
-						status: 'disable'
+						status: 'enable'
 					},
 					{
 						route: '/:id',
