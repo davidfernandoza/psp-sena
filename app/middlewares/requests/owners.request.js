@@ -166,7 +166,7 @@ class OwnersRequests extends Request {
 								return super.errorHandle(null, this.#errorString.REQ403EXT)
 						}
 
-						this.#entityReposytory = 'pipRepository'
+						this.#entityReposytory = 'testReportsRepository'
 						break
 					}
 					default:
@@ -191,6 +191,7 @@ class OwnersRequests extends Request {
 						dataUpdate = await this[this.#entityReposytory].getByInclude(
 							getByProgram
 						)
+
 					if (!dataUpdate) throw new Error('ERR404')
 				}
 			}

@@ -11,7 +11,7 @@ const Server = require(join(__dirname, './server'))
 const RoutesApi = require(join(__dirname, './routes'))
 const RoutesWeb = require(join(__dirname, './routes/web'))
 const Config = require(join(__dirname, '../config/env'))
-const DB = require(join(__dirname, '../data/models'))
+const DB = require(join(__dirname, '../database/models'))
 const container = createContainer()
 
 /* -----------------------------------------------------*/
@@ -175,7 +175,7 @@ const {
 	TimeLogRepository,
 	TokenBlackListRepository,
 	UsersRepository
-} = require(join(__dirname, '../data/repositories'))
+} = require(join(__dirname, '../database/repositories'))
 
 /* -----------------------------------------------------*/
 /* DTOS: 																								*/
