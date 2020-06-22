@@ -21,7 +21,6 @@ class ExperiencesRequest extends Request {
 				.min(0)
 				.max(99999999990)
 				.required(),
-			organization: JoiValidator.string().min(8).max(225).required(),
 			years_position: JoiValidator.number()
 				.integer()
 				.min(0)

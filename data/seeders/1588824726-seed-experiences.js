@@ -8,7 +8,6 @@ module.exports = {
 			[
 				{
 					users_id: 1,
-					organization: 'Organization Ipsum 1',
 					years_position: '3',
 					years_generals: '7',
 					years_organization: '5',
@@ -23,7 +22,6 @@ module.exports = {
 				},
 				{
 					users_id: 2,
-					organization: 'Organization Ipsum 2',
 					years_position: '4',
 					years_generals: '5',
 					years_organization: '6',
@@ -38,7 +36,6 @@ module.exports = {
 				},
 				{
 					users_id: 3,
-					organization: 'Organization Ipsum 3',
 					years_position: '9',
 					years_generals: '3',
 					years_organization: '8',
@@ -53,7 +50,6 @@ module.exports = {
 				},
 				{
 					users_id: 4,
-					organization: 'Organization Ipsum 4',
 					years_position: '5',
 					years_generals: '2',
 					years_organization: '0',
@@ -68,7 +64,6 @@ module.exports = {
 				},
 				{
 					users_id: 5,
-					organization: 'Organization Ipsum 5',
 					years_position: '6',
 					years_generals: '7',
 					years_organization: '6',
@@ -83,7 +78,6 @@ module.exports = {
 				},
 				{
 					users_id: 6,
-					organization: 'Organization Ipsum 6',
 					years_position: '6',
 					years_generals: '3',
 					years_organization: '6',
@@ -98,7 +92,6 @@ module.exports = {
 				},
 				{
 					users_id: 7,
-					organization: 'Organization Ipsum 7',
 					years_position: '5',
 					years_generals: '7',
 					years_organization: '2',
@@ -113,7 +106,6 @@ module.exports = {
 				},
 				{
 					users_id: 8,
-					organization: 'Organization Ipsum 8',
 					years_position: '4',
 					years_generals: '9',
 					years_organization: '7',
@@ -128,7 +120,6 @@ module.exports = {
 				},
 				{
 					users_id: 9,
-					organization: 'Organization Ipsum 9',
 					years_position: '3',
 					years_generals: '1',
 					years_organization: '9',
@@ -143,7 +134,6 @@ module.exports = {
 				},
 				{
 					users_id: 10,
-					organization: 'Organization Ipsum 10',
 					years_position: '3',
 					years_generals: '8',
 					years_organization: '7',

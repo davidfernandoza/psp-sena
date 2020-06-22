@@ -16,9 +16,9 @@ class PipRequest extends Request {
 				.min(0)
 				.max(99999999990)
 				.required(),
-			description: JoiValidator.string().min(8).required(),
-			proposals: JoiValidator.string().min(8).required(),
-			comments: JoiValidator.string().min(8).allow(null).optional(),
+			description: JoiValidator.string().min(1).required(),
+			proposals: JoiValidator.string().min(1).required(),
+			comments: JoiValidator.string().min(1).allow(null).optional(),
 			date: JoiValidator.date().timestamp().required()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)

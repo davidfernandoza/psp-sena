@@ -15,7 +15,6 @@ module.exports = {
 				onUpdate: 'cascade',
 				onDelete: 'cascade'
 			},
-			organization: { type: Sequelize.STRING, allowNull: false },
 			years_position: { type: Sequelize.INTEGER, allowNull: false },
 			years_generals: { type: Sequelize.INTEGER, allowNull: false },
 			years_organization: { type: Sequelize.INTEGER, allowNull: false },

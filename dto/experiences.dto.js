@@ -8,7 +8,6 @@ class ExperiencesDto extends Dto {
 			id: 'id',
 			positions_id: 'positions_id',
 			users_id: 'users_id',
-			organization: 'organization',
 			years_position: 'years_position',
 			years_generals: 'years_generals',
 			years_organization: 'years_organization',

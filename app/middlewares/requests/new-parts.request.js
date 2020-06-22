@@ -22,7 +22,7 @@ class NewPartsRequest extends Request {
 				.min(0)
 				.max(99999999990)
 				.required(),
-			name: JoiValidator.string().min(8).max(225).required(),
+			name: JoiValidator.string().min(1).max(225).required(),
 			planned_lines: JoiValidator.number()
 				.integer()
 				.min(0)

@@ -235,7 +235,7 @@ class DevPolitic extends Politic {
 					{
 						route: '/',
 						method: 'POST',
-						status: 'enable'
+						status: 'disable'
 					},
 					{
 						route: '/:id',
