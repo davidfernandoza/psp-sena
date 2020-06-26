@@ -8,7 +8,7 @@ class QueriesString {
 		}
 		this.ProgramsRepository = {
 			getAllByOrganization:
-				'select p.id, p.users_id, p.languages_id, p.modules_id, p.name, p.description, p.total_lines, p.planning_date, p.start_date, p.update_date, p.delivery_date, p.created_at, p.updated_at from programs as p inner join modules as m on p.modules_id = m.id inner join projects as pj on m.projects_id = pj.id inner join projects_users as pu on pu.projects_id = pj.id inner join users as u on u.id = pu.users_id inner join organizations as o on o.id = u.organizations_id where o.id = :idOrganization;'
+				'SELECT DISTINCT p.id, p.users_id, p.languages_id, p.modules_id, p.name, p.description, p.total_lines, p.planning_date, p.start_date, p.update_date, p.delivery_date, p.created_at, p.updated_at FROM organizations AS o INNER JOIN users AS u ON o.id = u.organizations_id INNER JOIN projects_users AS pu ON pu.users_id = u.id INNER JOIN projects AS pj ON pu.projects_id = pj.id INNER JOIN modules AS m ON m.projects_id = pj.id INNER JOIN programs AS p ON p.modules_id = m.id WHERE o.id = :idOrganization;'
 		}
 	}
 }
