@@ -11,7 +11,7 @@ class PipController extends Controller {
 		await super.getByAttribute({
 			attribute: 'programs_id',
 			value: req.params.id,
-			type: 'one',
+			type: 'all',
 			res: res
 		})
 	}
