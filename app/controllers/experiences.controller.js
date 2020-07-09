@@ -12,6 +12,7 @@ class ExperiencesController extends Controller {
 			attribute: 'users_id',
 			value: req.params.id,
 			type: 'all',
+			limit: 1,
 			res: res
 		})
 	}

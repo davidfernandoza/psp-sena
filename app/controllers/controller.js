@@ -35,6 +35,9 @@ class Controller {
 			type: options.type,
 			dto: options.dto
 		}
+		if (options.limit) {
+			this.#options.limit = options.limit
+		}
 
 		this.#data = await this.entityRepository.getByAttribute(
 			this.#options,

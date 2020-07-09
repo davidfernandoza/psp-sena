@@ -7,6 +7,5 @@ class ExperiencesRepository extends Repository {
 		super(DB, ExperiencesDto, Config, 'experiences')
 		this.db = DB
 	}
-	// Aqui van las consultas especializadas
 }
 module.exports = ExperiencesRepository

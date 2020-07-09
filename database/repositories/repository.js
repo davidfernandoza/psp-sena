@@ -34,6 +34,9 @@ class Repository {
 
 			switch (options.type) {
 				case 'all':
+					if (options.limit) {
+						this.#query.limit = options.limit
+					}
 					this.#data = await this.db[this.entity].findAll(this.#query)
 					if (this.#data.length === 0) return null
 					return this.#data.map(item => morphism(this.#dto, item))
@@ -130,7 +133,7 @@ class Repository {
 			if (options.dto) this.#dto = options.dto
 
 			this.#data = await this.db[this.entity].findAll(this.#query)
-			
+
 			if (this.#data.length === 0) return null
 			return this.#data.map(item => morphism(this.#dto, item))
 		} catch (error) {
