@@ -11,27 +11,13 @@ class ExperiencesRequest extends Request {
 				.max(99999999990)
 				.allow(null)
 				.optional(),
-			positions_id: JoiValidator.number()
-				.integer()
-				.min(0)
-				.max(99999999990)
-				.required(),
 			users_id: JoiValidator.number()
 				.integer()
 				.min(0)
 				.max(99999999990)
 				.required(),
-			years_position: JoiValidator.number()
-				.integer()
-				.min(0)
-				.max(99999999990)
-				.required(),
+			positions: JoiValidator.string().min(1).required(),
 			years_generals: JoiValidator.number()
-				.integer()
-				.min(0)
-				.max(99999999990)
-				.required(),
-			years_organization: JoiValidator.number()
 				.integer()
 				.min(0)
 				.max(99999999990)

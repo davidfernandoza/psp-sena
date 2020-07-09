@@ -285,6 +285,25 @@ class DevPolitic extends Politic {
 						status: 'enable'
 					}
 				]
+			},
+			experiences: {
+				subRoutes: [
+					{
+						route: '/by-user/:id',
+						method: 'GET',
+						status: 'unique'
+					},
+					{
+						route: '/:id',
+						method: 'POST',
+						status: 'enable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'enable'
+					}
+				]
 			}
 		}
 		super(rol, authRol, baseUrl, permissions)

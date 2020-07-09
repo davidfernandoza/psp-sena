@@ -18,7 +18,7 @@ module.exports = ({
 	 * Request:
 	 */
 	const reqPrivate = ExperiencesRequest.private.bind(ExperiencesRequest)
-	const reqPublic = ExperiencesRequest.public.bind(ExperiencesRequest)
+	// const reqPublic = ExperiencesRequest.public.bind(ExperiencesRequest)
 	const reqBody = ExperiencesRequest.body.bind(ExperiencesRequest)
 
 	/*
@@ -43,14 +43,12 @@ module.exports = ({
 	 * -----------------------------------------------------------------------------------*
 	 * GET:
 	 */
-	router.get('/', reqPublic, auth, politics, controller.getAll.bind(controller))
-
 	router.get(
-		'/:id',
+		'/by-user/:id',
 		reqPrivate,
 		auth,
 		politics,
-		controller.get.bind(controller)
+		controller.getAllByUser.bind(controller)
 	)
 
 	/*
@@ -71,24 +69,12 @@ module.exports = ({
 	 * PUT:
 	 */
 	router.put(
-		'/',
+		'/:id',
 		reqPrivate,
 		auth,
 		politics,
 		reqBody,
 		controller.update.bind(controller)
-	)
-
-	/*
-	 * -----------------------------------------------------------------------------------*
-	 * DELETE:
-	 */
-	router.delete(
-		'/',
-		reqPrivate,
-		auth,
-		politics,
-		controller.delete.bind(controller)
 	)
 
 	return router

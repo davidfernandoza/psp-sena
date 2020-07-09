@@ -283,6 +283,25 @@ class AdminPolitic extends Politic {
 						status: 'disable'
 					}
 				]
+			},
+			experiences: {
+				subRoutes: [
+					{
+						route: '/by-user/:id',
+						method: 'GET',
+						status: 'enable'
+					},
+					{
+						route: '/:id',
+						method: 'POST',
+						status: 'disable'
+					},
+					{
+						route: '/:id',
+						method: 'PUT',
+						status: 'disable'
+					}
+				]
 			}
 		}
 

@@ -15,9 +15,8 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 				isNumeric: true
 			},
-			years_position: { type: DataTypes.INTEGER, allowNull: false },
+			positions: { type: DataTypes.TEXT, allowNull: false },
 			years_generals: { type: DataTypes.INTEGER, allowNull: false },
-			years_organization: { type: DataTypes.INTEGER, allowNull: false },
 			years_configuration: { type: DataTypes.INTEGER, allowNull: false },
 			years_integration: { type: DataTypes.INTEGER, allowNull: false },
 			years_requirements: { type: DataTypes.INTEGER, allowNull: false },

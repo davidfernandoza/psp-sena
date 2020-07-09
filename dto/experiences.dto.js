@@ -6,11 +6,10 @@ class ExperiencesDto extends Dto {
 	constructor() {
 		const schema = {
 			id: 'id',
-			positions_id: 'positions_id',
 			users_id: 'users_id',
+			positions: 'positions',
 			years_position: 'years_position',
 			years_generals: 'years_generals',
-			years_organization: 'years_organization',
 			years_configuration: 'years_configuration',
 			years_integration: 'years_integration',
 			years_requirements: 'years_requirements',

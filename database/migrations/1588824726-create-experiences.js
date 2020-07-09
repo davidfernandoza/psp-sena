@@ -15,9 +15,8 @@ module.exports = {
 				onUpdate: 'cascade',
 				onDelete: 'cascade'
 			},
-			years_position: { type: Sequelize.INTEGER, allowNull: false },
+			positions: { type: Sequelize.TEXT, allowNull: false },
 			years_generals: { type: Sequelize.INTEGER, allowNull: false },
-			years_organization: { type: Sequelize.INTEGER, allowNull: false },
 			years_configuration: { type: Sequelize.INTEGER, allowNull: false },
 			years_integration: { type: Sequelize.INTEGER, allowNull: false },
 			years_requirements: { type: Sequelize.INTEGER, allowNull: false },
