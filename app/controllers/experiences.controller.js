@@ -16,6 +16,18 @@ class ExperiencesController extends Controller {
 			res: res
 		})
 	}
+
+	// --------------------------------------------------------------------------
+	async create(req, res) {
+		req.body.users_id = req.id
+		super.create(req, res)
+	}
+
+	// --------------------------------------------------------------------------
+	async update(req, res) {
+		req.body.users_id = req.id
+		super.update(req, res)
+	}
 }
 
 module.exports = ExperiencesController

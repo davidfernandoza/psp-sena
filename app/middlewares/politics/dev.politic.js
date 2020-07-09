@@ -291,7 +291,8 @@ class DevPolitic extends Politic {
 					{
 						route: '/by-user/:id',
 						method: 'GET',
-						status: 'unique'
+						status: 'unique',
+						authParameter: 'id'
 					},
 					{
 						route: '/:id',
