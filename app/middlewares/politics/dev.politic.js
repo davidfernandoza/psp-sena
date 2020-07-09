@@ -241,6 +241,11 @@ class DevPolitic extends Politic {
 						route: '/:id',
 						method: 'PUT',
 						status: 'enable'
+					},
+					{
+						route: '/set-parts-to-program/:id',
+						method: 'PUT',
+						status: 'enable'
 					}
 				]
 			},
@@ -291,10 +296,11 @@ class DevPolitic extends Politic {
 					{
 						route: '/by-user/:id',
 						method: 'GET',
-						status: 'unique'
+						status: 'unique',
+						authParameter: 'id'
 					},
 					{
-						route: '/:id',
+						route: '/',
 						method: 'POST',
 						status: 'enable'
 					},

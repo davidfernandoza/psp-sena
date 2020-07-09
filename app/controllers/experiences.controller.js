@@ -12,9 +12,21 @@ class ExperiencesController extends Controller {
 			attribute: 'users_id',
 			value: req.params.id,
 			type: 'all',
-			limit: 1,
+			limit: 5,
 			res: res
 		})
+	}
+
+	// --------------------------------------------------------------------------
+	async create(req, res) {
+		req.body.users_id = req.id
+		super.create(req, res)
+	}
+
+	// --------------------------------------------------------------------------
+	async update(req, res) {
+		req.body.users_id = req.id
+		super.update(req, res)
 	}
 }
 

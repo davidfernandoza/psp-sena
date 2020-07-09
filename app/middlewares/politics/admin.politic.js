@@ -239,6 +239,11 @@ class AdminPolitic extends Politic {
 						route: '/:id',
 						method: 'PUT',
 						status: 'disable'
+					},
+					{
+						route: '/set-parts-to-program/:id',
+						method: 'PUT',
+						status: 'disable'
 					}
 				]
 			},
@@ -292,7 +297,7 @@ class AdminPolitic extends Politic {
 						status: 'enable'
 					},
 					{
-						route: '/:id',
+						route: '/',
 						method: 'POST',
 						status: 'disable'
 					},
