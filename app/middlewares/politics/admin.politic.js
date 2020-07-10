@@ -299,12 +299,12 @@ class AdminPolitic extends Politic {
 					{
 						route: '/',
 						method: 'POST',
-						status: 'disable'
+						status: 'enable'
 					},
 					{
 						route: '/:id',
 						method: 'PUT',
-						status: 'disable'
+						status: 'enable'
 					}
 				]
 			}
