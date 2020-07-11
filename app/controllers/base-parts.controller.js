@@ -4,8 +4,8 @@ const Controller = require(join(__dirname, './controller'))
 const { morphism } = require('morphism') // morphism(dto, entity)
 
 class BasePartsController extends Controller {
-	constructor({ BasePartsRepository, BasePartsDto, Config, DoneString }) {
-		super(BasePartsRepository, BasePartsDto, Config, DoneString)
+	constructor({ BasePartsRepository, BasePartsDto, ResponseController}) {
+		super(BasePartsRepository, BasePartsDto, ResponseController)
 	}
 
 	// -----------------------------------------------------------------------
@@ -25,7 +25,14 @@ class BasePartsController extends Controller {
 		}
 		if (transaction)
 			return basePartsArray.map(item => morphism(this.entityDto.schema, item))
-		await this.response(res, basePartsArray, 'DON201L')
+		await this.responseController.send({
+			res, 
+			entity: basePartsArray,
+			dto: this.entityDto, 
+			code: 'DON201L',
+			addSubDto: null,
+			typeDto: null
+		})
 	}
 
 	// -----------------------------------------------------------------------

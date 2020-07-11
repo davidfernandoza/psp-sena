@@ -1,21 +1,21 @@
 'use strict'
-const { morphism } = require('morphism')
 
 class Auth {
 	#encryptionHelper = {}
+	
 	constructor(
 		EntityController,
 		EncryptionHelper,
 		EntityDto,
 		JWTService,
 		DataEntity,
-		DoneString
+		ResponseController
 	) {
 		this.entityController = EntityController
 		this.dataEntity = DataEntity
 		this.JWTServices = JWTService
 		this.entityDto = EntityDto
-		this.doneString = DoneString
+		this.responseController = ResponseController
 		this.#encryptionHelper = EncryptionHelper
 	}
 
@@ -50,15 +50,16 @@ class Auth {
 		)
 		if (authToken.status != 200) throw new Error('ERR401')
 
-		// Formateo de respuesta exitosa para el usuario
+		//Respuesta exitosa
 		dataEntity.token = authToken.payload.token
-		const dto = await this.entityDto.api(),
-			entity = morphism(dto, dataEntity)
-		this.doneString.DON200.payload = entity
-
-		return res
-			.status(this.doneString.DON200.status)
-			.send(this.doneString.DON200)
+		this.responseController.send({
+			res,
+			code: 'DON200',
+			entity: dataEntity,
+			dto: this.entityDto,
+			addSubDto: null,
+			typeDto: null
+		})
 	}
 }
 

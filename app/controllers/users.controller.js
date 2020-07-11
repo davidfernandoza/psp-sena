@@ -4,8 +4,8 @@ const Controller = require(join(__dirname, './controller'))
 
 class UsersController extends Controller {
 	#data = {}
-	constructor({ UsersRepository, UsersDto, Config, DoneString }) {
-		super(UsersRepository, UsersDto, Config, DoneString)
+	constructor({ UsersRepository, UsersDto, ResponseController }) {
+		super(UsersRepository, UsersDto, ResponseController)
 	}
 
 	// --------------------------------------------------------------------------
@@ -43,7 +43,14 @@ class UsersController extends Controller {
 			includeWhere: { id: req.params.id },
 			type: 'all'
 		})
-		return await this.response(res, this.#data, 'DON200L')
+		return await this.responseController.send({
+			res, 
+			entity: this.#data,
+			dto: this.entityDto, 
+			code: 'DON200L',
+			addSubDto: null,
+			typeDto: null
+		})
 	}
 
 	// --------------------------------------------------------------------------
@@ -54,7 +61,14 @@ class UsersController extends Controller {
 			req.transaction
 		)
 		if (req.transaction) return this.#data
-		await this.response(res, this.#data, 'DON204')
+		return await this.responseController.send({
+				res, 
+				entity: this.#data,
+				dto: this.entityDto, 
+				code: 'DON204',
+				addSubDto: null,
+				typeDto: null
+			})
 	}
 }
 

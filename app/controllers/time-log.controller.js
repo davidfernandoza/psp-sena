@@ -3,8 +3,8 @@ const { join } = require('path')
 const Controller = require(join(__dirname, './controller'))
 
 class TimeLogController extends Controller {
-	constructor({ TimeLogRepository, TimeLogDto, Config, DoneString }) {
-		super(TimeLogRepository, TimeLogDto, Config, DoneString)
+	constructor({ TimeLogRepository, TimeLogDto, ResponseController }) {
+		super(TimeLogRepository, TimeLogDto, ResponseController)
 	}
 
 	async getAllByProgram(req, res) {

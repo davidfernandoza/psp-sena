@@ -6,10 +6,9 @@ class OrganizationsController extends Controller {
 	constructor({
 		OrganizationsRepository,
 		OrganizationsDto,
-		DoneString,
-		Config
+		ResponseController
 	}) {
-		super(OrganizationsRepository, OrganizationsDto, Config, DoneString)
+		super(OrganizationsRepository, OrganizationsDto, ResponseController)
 	}
 	// Logica diferente al CRUD base aqui:
 }

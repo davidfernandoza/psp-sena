@@ -5,8 +5,8 @@ const Controller = require(join(__dirname, './controller'))
 class ModulesController extends Controller {
 	#data = {}
 
-	constructor({ ModulesRepository, ModulesDto, Config, DoneString }) {
-		super(ModulesRepository, ModulesDto, Config, DoneString)
+	constructor({ ModulesRepository, ModulesDto, ResponseController }) {
+		super(ModulesRepository, ModulesDto, ResponseController)
 	}
 
 	async getAllByProject(req, res) {
@@ -17,7 +17,14 @@ class ModulesController extends Controller {
 			includeWhere: { id: req.params.id },
 			type: 'all'
 		})
-		return await this.response(res, this.#data, 'DON200L')
+		await this.responseController.send({
+			res, 
+			entity: this.#data,
+			dto: this.entityDto, 
+			code: 'DON200L',
+			addSubDto: null,
+			typeDto: null
+		})
 	}
 }
 

@@ -11,26 +11,30 @@ class ForgotPasswordController extends Controller {
 	#mailService = {}
 	#smsString = {}
 	#smsService = {}
-
+	#app = ''
+	#config = {}
+	
 	constructor({
 		ForgotPasswordRepository,
+		ResponseController,
 		ForgotPasswordDto,
 		UsersController,
 		MailService,
-		DoneString,
 		SmsService,
 		JWTService,
 		SmsString,
 		Config,
 		DB
 	}) {
-		super(ForgotPasswordRepository, ForgotPasswordDto, Config, DoneString)
+		super(ForgotPasswordRepository, ForgotPasswordDto, ResponseController)
 		this.#usersController = UsersController
 		this.#JWTService = JWTService
 		this.#forgotPasswordRepository = ForgotPasswordRepository
 		this.#smsService = SmsService
 		this.#mailService = MailService
 		this.#smsString = SmsString
+		this.#app = Config.APP_NAME.toUpperCase()
+		this.#config = Config
 
 		// paquete para transacciones en sequelize
 		this.#sequelize = DB.sequelize
@@ -58,7 +62,7 @@ class ForgotPasswordController extends Controller {
 				recoverPassword.id,
 				null,
 				null,
-				this.config.CSRF_TOKEN
+				this.#config.CSRF_TOKEN
 			)
 			const objecWeb = {
 				page: 'recover-password',
@@ -66,7 +70,14 @@ class ForgotPasswordController extends Controller {
 				csrfToken: cretedCsrfToken.payload.token
 			}
 			// Renderizar vista
-			return await super.response(res, objecWeb, 'OK')
+			await this.responseController.send({
+				res, 
+				entity: objecWeb,
+				dto: this.entityDto, 
+				code: 'OK',
+				addSubDto: null,
+				typeDto: null
+			})
 		}
 	}
 
@@ -84,7 +95,7 @@ class ForgotPasswordController extends Controller {
 			user.id,
 			null,
 			null,
-			this.config.CSRF_TOKEN
+			this.#config.CSRF_TOKEN
 		)
 
 		// Cuerpo de un registro para la tabla ForgotPassword
@@ -92,7 +103,7 @@ class ForgotPasswordController extends Controller {
 			users_id: user.id,
 			token: cretedToken.payload.token,
 			expiration: moment()
-				.add(parseInt(this.config.TOKEN_TIME_MINUTES), 'minutes')
+				.add(parseInt(this.#config.TOKEN_TIME_MINUTES), 'minutes')
 				.toISOString()
 		}
 		req.return = true
@@ -108,7 +119,15 @@ class ForgotPasswordController extends Controller {
 		const send = await this[user.sendType](cretedToken.payload.token, user)
 
 		if (!send) throw new Error('ERR404')
-		return await super.response(res, {}, 'DON204')
+
+		return await this.responseController.send({
+			res, 
+			entity: {},
+			dto: this.entityDto, 
+			code: 'DON204',
+			addSubDto: null,
+			typeDto: null
+		})
 	}
 
 	//  -------------------------------------------------------------
@@ -120,7 +139,7 @@ class ForgotPasswordController extends Controller {
 
 		// validacion de token
 		if (responseToken.status != 200) throw new Error('403')
-		if (responseToken.payload.token != this.config.CSRF_TOKEN)
+		if (responseToken.payload.token != this.#config.CSRF_TOKEN)
 			throw new Error('403')
 		try {
 			/*
@@ -146,7 +165,14 @@ class ForgotPasswordController extends Controller {
 			}
 
 			// Renderizar mensaje en vista
-			return await super.response(res, objecWeb, 'OK')
+			return await this.responseController.send({
+				res, 
+				entity: objecWeb,
+				dto: this.entityDto, 
+				code: 'OK',
+				addSubDto: null,
+				typeDto: null
+			})
 		} catch (error) {
 			await req.transaction.rollback()
 			if (error.message == '403') {
@@ -191,14 +217,14 @@ class ForgotPasswordController extends Controller {
 
 	async sendEmail(token, user) {
 		const optionMail = {
-			from: `${this.app} Server <${this.config.MAIL.EMAIL}>`,
+			from: `${this.#app} Server <${this.#config.MAIL.EMAIL}>`,
 			to: user.email,
-			subject: `${this.app} - ¿Olvidaste tu contraseña?`,
+			subject: `${this.#app} - ¿Olvidaste tu contraseña?`,
 			template: 'forgot-password-email',
 			context: {
-				url: `${this.config.BASE_URL}/recover-password/${token}`,
-				app: this.app,
-				appUp: this.app
+				url: `${this.#config.BASE_URL}/recover-password/${token}`,
+				app: this.#app,
+				appUp: this.#app
 			}
 		}
 
@@ -208,12 +234,12 @@ class ForgotPasswordController extends Controller {
 	//  ------------------------------------------------------------
 
 	async sendSms(token, user) {
-		let message = this.#smsString.MSG01.message.replace(/#1/g, this.app),
+		let message = this.#smsString.MSG01.message.replace(/#1/g, this.#app),
 			phone = user.phone.replace(/-/g, '')
 
 		message = message.replace(
 			/#2/g,
-			`${this.config.DOMAIN}/recover-password/${token}`
+			`${this.#config.DOMAIN}/recover-password/${token}`
 		)
 
 		const optionSms = {

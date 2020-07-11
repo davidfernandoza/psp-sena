@@ -8,10 +8,9 @@ class ReusablePartsController extends Controller {
 	constructor({
 		ReusablePartsRepository,
 		ReusablePartsDto,
-		DoneString,
-		Config
+		ResponseController
 	}) {
-		super(ReusablePartsRepository, ReusablePartsDto, Config, DoneString)
+		super(ReusablePartsRepository, ReusablePartsDto, ResponseController)
 	}
 
 	// -------------------------------------------------------------------
@@ -34,8 +33,14 @@ class ReusablePartsController extends Controller {
 			return reusablePartsArray.map(item =>
 				morphism(this.entityDto.schema, item)
 			)
-
-		await this.response(res, reusablePartsArray, 'DON201L')
+		return await this.responseController.send({
+				res, 
+				entity: reusablePartsArray,
+				dto: this.entityDto, 
+				code: 'DON201L',
+				addSubDto: null,
+				typeDto: null
+			})
 	}
 
 	// -------------------------------------------------------------------

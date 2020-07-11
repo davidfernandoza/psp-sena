@@ -201,6 +201,10 @@ class DevPolitic extends Politic {
 					}
 				]
 			},
+			parts: {
+				subRoutes: 'all',
+				status: 'enable'
+			},
 			pip: {
 				subRoutes: [
 					{
@@ -239,11 +243,6 @@ class DevPolitic extends Politic {
 					},
 					{
 						route: '/:id',
-						method: 'PUT',
-						status: 'enable'
-					},
-					{
-						route: '/set-parts-to-program/:id',
 						method: 'PUT',
 						status: 'enable'
 					}

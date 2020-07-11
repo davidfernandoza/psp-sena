@@ -9,12 +9,11 @@ class ProjectsController extends Controller {
 	constructor({
 		ProjectsUsersRepository,
 		ProjectsRepository,
+		ResponseController,
 		ProjectsDto,
-		DoneString,
-		Config,
 		DB
 	}) {
-		super(ProjectsRepository, ProjectsDto, Config, DoneString)
+		super(ProjectsRepository, ProjectsDto, ResponseController)
 		this.#sequelize = DB.sequelize
 		this.#projectsUsersRepository = ProjectsUsersRepository
 	}
@@ -26,7 +25,14 @@ class ProjectsController extends Controller {
 			req.params.id,
 			req.id
 		)
-		return await this.response(res, entities, 'DON200L')
+		return await this.responseController.send({
+			res, 
+			entity: entities,
+			dto: this.entityDto, 
+			code: 'DON200L',
+			addSubDto: null,
+			typeDto: null
+		})
 	}
 
 	// -------------------------------------------------------------------------------*
@@ -46,8 +52,17 @@ class ProjectsController extends Controller {
 				req.addSubDto,
 				req.transaction
 			)
+			
+			//Respuesta exitosa
 			await req.transaction.commit()
-			await super.response(res, created, 'DON201')
+			return await this.responseController.send({
+				res, 
+				entity: created,
+				dto: this.entityDto, 
+				code: 'DON201',
+				addSubDto: null,
+				typeDto: null
+			})
 		} catch (error) {
 			await req.transaction.rollback()
 
