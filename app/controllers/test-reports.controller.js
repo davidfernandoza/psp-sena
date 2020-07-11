@@ -3,8 +3,8 @@ const { join } = require('path')
 const Controller = require(join(__dirname, './controller'))
 
 class TestReportsController extends Controller {
-	constructor({ TestReportsRepository, TestReportsDto, Config, DoneString }) {
-		super(TestReportsRepository, TestReportsDto, Config, DoneString)
+	constructor({ TestReportsRepository, TestReportsDto, ResponseController }) {
+		super(TestReportsRepository, TestReportsDto, ResponseController)
 	}
 
 	async getAllByProgram(req, res) {

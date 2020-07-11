@@ -199,6 +199,10 @@ class AdminPolitic extends Politic {
 					}
 				]
 			},
+			parts: {
+				subRoutes: 'all',
+				status: 'disable'
+			},
 			pip: {
 				subRoutes: [
 					{
@@ -237,11 +241,6 @@ class AdminPolitic extends Politic {
 					},
 					{
 						route: '/:id',
-						method: 'PUT',
-						status: 'disable'
-					},
-					{
-						route: '/set-parts-to-program/:id',
 						method: 'PUT',
 						status: 'disable'
 					}
@@ -299,12 +298,12 @@ class AdminPolitic extends Politic {
 					{
 						route: '/',
 						method: 'POST',
-						status: 'disable'
+						status: 'enable'
 					},
 					{
 						route: '/:id',
 						method: 'PUT',
-						status: 'disable'
+						status: 'enable'
 					}
 				]
 			}

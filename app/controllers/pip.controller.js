@@ -3,8 +3,8 @@ const { join } = require('path')
 const Controller = require(join(__dirname, './controller'))
 
 class PipController extends Controller {
-	constructor({ PipRepository, PipDto, Config, DoneString }) {
-		super(PipRepository, PipDto, Config, DoneString)
+	constructor({ PipRepository, PipDto, ResponseController }) {
+		super(PipRepository, PipDto, ResponseController)
 	}
 
 	async getByProgram(req, res) {

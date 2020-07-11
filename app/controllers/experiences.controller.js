@@ -3,8 +3,8 @@ const { join } = require('path')
 const Controller = require(join(__dirname, './controller'))
 
 class ExperiencesController extends Controller {
-	constructor({ ExperiencesRepository, ExperiencesDto, Config, DoneString }) {
-		super(ExperiencesRepository, ExperiencesDto, Config, DoneString)
+	constructor({ ExperiencesRepository, ExperiencesDto, ResponseController }) {
+		super(ExperiencesRepository, ExperiencesDto, ResponseController)
 	}
 	// --------------------------------------------------------------------------
 	async getAllByUser(req, res) {

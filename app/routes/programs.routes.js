@@ -84,5 +84,6 @@ module.exports = ({
 		controller.update.bind(controller)
 	)
 
+	
 	return router
 }

@@ -7,10 +7,10 @@ class UsersAuth extends Auth {
 		UsersController,
 		UsersDto,
 		JWTService,
-		DoneString,
-		EncryptionHelper
+		EncryptionHelper,
+		ResponseController
 	}) {
-		const dataUser = {
+		const DataUser = {
 			attribute: 'email' //username -> con este atributo busca en base de datos
 		}
 		super(
@@ -18,8 +18,8 @@ class UsersAuth extends Auth {
 			EncryptionHelper,
 			UsersDto,
 			JWTService,
-			dataUser,
-			DoneString
+			DataUser,
+			ResponseController
 		)
 	}
 }

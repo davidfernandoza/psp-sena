@@ -3,8 +3,8 @@ const { join } = require('path')
 const Controller = require(join(__dirname, './controller'))
 
 class EstimatesController extends Controller {
-	constructor({ EstimatesRepository, EstimatesDto, Config, DoneString }) {
-		super(EstimatesRepository, EstimatesDto, Config, DoneString)
+	constructor({ EstimatesRepository, EstimatesDto, ResponseController }) {
+		super(EstimatesRepository, EstimatesDto, ResponseController)
 	}
 
 	// --------------------------------------------------------------------------
@@ -27,7 +27,14 @@ class EstimatesController extends Controller {
 			idLanguage,
 			idOrganization
 		)
-		return await this.response(res, entities, 'DON200L')
+		await this.responseController.send({
+			res, 
+			entity: entities,
+			dto: this.entityDto, 
+			code: 'DON200L',
+			addSubDto: null,
+			typeDto: null
+		})
 	}
 }
 

@@ -11,15 +11,14 @@ module.exports = ({
 	BasePartsRoutes,
 	Config,
 	DefectLogRoutes,
-	EstimatesNewPartsRoutes,
 	EstimatesRoutes,
-	ExperiencesLanguagesRoutes,
 	ExperiencesRoutes,
 	ForgotPasswordRoutes,
 	LanguagesRoutes,
 	ModulesRoutes,
 	NewPartsRoutes,
 	OrganizationsRoutes,
+	PartsRoutes,
 	PipRoutes,
 	ProgramsRoutes,
 	ProjectsRoutes,
@@ -45,14 +44,13 @@ module.exports = ({
 	apiRoute.use('/auth', AuthRoutes)
 	apiRoute.use('/base-parts', BasePartsRoutes)
 	apiRoute.use('/defect-logs', DefectLogRoutes)
-	apiRoute.use('/estimates-new-parts', EstimatesNewPartsRoutes)
 	apiRoute.use('/estimates', EstimatesRoutes)
-	apiRoute.use('/experiences-languages', ExperiencesLanguagesRoutes)
 	apiRoute.use('/experiences', ExperiencesRoutes)
 	apiRoute.use('/languages', LanguagesRoutes)
 	apiRoute.use('/modules', ModulesRoutes)
 	apiRoute.use('/new-parts', NewPartsRoutes)
 	apiRoute.use('/organizations', OrganizationsRoutes)
+	apiRoute.use('/parts', PartsRoutes)
 	apiRoute.use('/pip', PipRoutes)
 	apiRoute.use('/programs', ProgramsRoutes)
 	apiRoute.use('/projects', ProjectsRoutes)

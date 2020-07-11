@@ -2,26 +2,16 @@
 const { morphism } = require('morphism')
 
 class Controller {
-	#doneString = null
 	#data = {}
 	#transaction = {}
 	#addSubDto = {}
 	#options = {}
 	#code = ''
 
-	constructor(EntityRepository, EntityDto, Config, DoneString) {
+	constructor(EntityRepository, EntityDto, ResponseController) {
 		this.entityRepository = EntityRepository
 		this.entityDto = EntityDto
-
-		if (Config) {
-			this.config = Config
-			this.app = Config.APP_NAME.toUpperCase()
-		}
-
-		// Singleton manual del objeto de mensajes
-		if (!this.#doneString) {
-			this.#doneString = DoneString
-		}
+		this.responseController = ResponseController
 	}
 
 	async getByAttribute(options, addSubDto, transaction) {
@@ -53,7 +43,14 @@ class Controller {
 			default:
 				this.#code = 'DON200'
 		}
-		await this.response(options.res, this.#data, this.#code, this.#addSubDto)
+		await this.responseController.send({
+			res: options.res, 
+			entity: this.#data,
+			dto: this.entityDto, 
+			code: this.#code, 
+			addSubDto: this.#addSubDto,
+			typeDto: null
+		})
 	}
 
 	// ------------------------------------------------------------------------------
@@ -74,7 +71,15 @@ class Controller {
 		)
 
 		if (req.return || this.#transaction) return this.#data
-		await this.response(res, this.#data, this.#code, this.#addSubDto)
+		await this.responseController.send({
+			res, 
+			entity: this.#data,
+			dto: this.entityDto, 
+			code: this.#code, 
+			addSubDto: this.#addSubDto,
+			typeDto: null
+		})
+
 	}
 
 	async get(req, res) {
@@ -92,7 +97,14 @@ class Controller {
 			this.#transaction
 		)
 		if (req.return || this.#transaction) return this.#data
-		await this.response(res, this.#data, this.#code, this.#addSubDto)
+		await this.responseController.send({
+			res, 
+			entity: this.#data,
+			dto: this.entityDto, 
+			code: this.#code, 
+			addSubDto: this.#addSubDto,
+			typeDto: null
+		})
 	}
 
 	async create(req, res) {
@@ -111,7 +123,14 @@ class Controller {
 			this.#transaction
 		)
 		if (req.return || this.#transaction) return this.#data
-		await this.response(res, this.#data, this.#code, this.#addSubDto)
+		await this.responseController.send({
+			res, 
+			entity: this.#data,
+			dto: this.entityDto, 
+			code: this.#code, 
+			addSubDto: this.#addSubDto,
+			typeDto: null
+		})
 	}
 
 	async update(req, res) {
@@ -134,7 +153,14 @@ class Controller {
 			this.#transaction
 		)
 		if (req.return || this.#transaction) return this.#data
-		await this.response(res, this.#data, this.#code, this.#addSubDto)
+		await this.responseController.send({
+			res, 
+			entity: this.#data,
+			dto: this.entityDto, 
+			code: this.#code, 
+			addSubDto: this.#addSubDto,
+			typeDto: null
+		})
 	}
 
 	async delete(req, res) {
@@ -151,53 +177,15 @@ class Controller {
 			this.#transaction
 		)
 		if (req.return || this.#transaction) return this.#data
-		await this.response(res, this.#data, this.#code, this.#addSubDto)
-	}
-
-	// ----------------------------------------------------------------------
-
-	// Funcion que responde al cliente
-	async response(res, entity, code, addSubDto, typeDto) {
-		/*
-		 * Atributo no encontrado
-		 */
-
-		if (!entity) {
-			this.#doneString.DON404.payload = entity
-			return res
-				.status(this.#doneString.DON404.status)
-				.send(this.#doneString.DON404)
-		}
-
-		// Respuesta WEB
-		if (code == 'OK') {
-			entity.app = this.app
-			return res.render(entity.page, entity)
-		}
-
-		// Atributo OK
-		else if (
-			code == 'DON200' ||
-			code == 'DON201' ||
-			code == 'DON200L' ||
-			code == 'DON201L'
-		) {
-			addSubDto = !addSubDto ? null : addSubDto
-			const dto = !typeDto
-				? await this.entityDto.api(addSubDto)
-				: await this.entityDto[typeDto](addSubDto)
-			if (code == 'DON200L' || code == 'DON201L') {
-				entity = entity.map(item => morphism(dto, item))
-				code = code == 'DON200L' ? 'DON200' : 'DON201'
-			} else {
-				entity = morphism(dto, entity)
-			}
-		}
-		this.#doneString[code].payload = entity
-		return res
-			.status(this.#doneString[code].status)
-			.send(this.#doneString[code])
-	}
+		await this.responseController.send({
+			res, 
+			entity: this.#data,
+			dto: this.entityDto, 
+			code: this.#code, 
+			addSubDto: this.#addSubDto,
+			typeDto: null
+		})
+	}	
 }
 
 module.exports = Controller

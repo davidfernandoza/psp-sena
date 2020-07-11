@@ -10,12 +10,11 @@ const Controller = require(join(__dirname, '../controller'))
 class TokenAuth extends Controller {
 	constructor({
 		TokenBlackListRepository,
+		ResponseController,
 		TokenBlackListDto,
-		DoneString,
-		JWTService,
-		Config
+		JWTService
 	}) {
-		super(TokenBlackListRepository, TokenBlackListDto, Config, DoneString)
+		super(TokenBlackListRepository, TokenBlackListDto, ResponseController)
 		this.JWTServices = JWTService
 		this.tokenBlackListRepository = TokenBlackListRepository
 	}
@@ -26,12 +25,22 @@ class TokenAuth extends Controller {
 		const { id, rol, organization } = req
 		const { http_auth_token } = req.headers
 		const newToken = await this.JWTServices.create(id, rol, organization)
+		const responseData = {
+			res,
+			code: 'DON404',
+			dto: this.entityDto,
+			entity: null,
+			addSubDto: null,
+			typeDto: null
+		}
 		if (newToken.status === 200) {
 			if (await this.addBlackList(http_auth_token)) {
-				return await super.response(res, newToken.payload, 'DON200')
+				responseData.entity = newToken.payload
+				responseData.code = 'DON200'
+				return await this.response.send(responseData)
 			}
 		}
-		await super.response(res, null, 'DON404')
+		await this.response.send(responseData)
 	}
 
 	// Eliminar token (logout) ----------------------------------------------------+
@@ -39,12 +48,22 @@ class TokenAuth extends Controller {
 	async delete(req, res) {
 		const { http_auth_token } = req.headers
 		const token = await this.JWTServices.decode(http_auth_token)
+		const responseData = {
+			res,
+			code: 'DON404',
+			dto: this.entityDto,
+			entity: null,
+			addSubDto: null,
+			typeDto: null
+		}
 		if (token.status === 200) {
 			if (await this.addBlackList(http_auth_token)) {
-				return await super.response(res, {}, 'DON204')
+				responseData.entity = {}
+				responseData.code = 'DON204'
+				return await this.response.send(responseData)
 			}
 		}
-		return await super.response(res, null, 'DON404')
+		return await this.response.send(responseData)
 	}
 
 	// Crear token viejo en lista negra --------------------------------------------+

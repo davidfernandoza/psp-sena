@@ -6,16 +6,22 @@ class ProjectsUsersController extends Controller {
 	constructor({
 		ProjectsUsersRepository,
 		ProjectsUsersDto,
-		Config,
-		DoneString
+		ResponseController
 	}) {
-		super(ProjectsUsersRepository, ProjectsUsersDto, Config, DoneString)
+		super(ProjectsUsersRepository, ProjectsUsersDto, ResponseController)
 	}
 
 	async delete(req, res) {
 		const { projects_id: idProject, users_id: idUser } = req.body,
 			deleted = await this.entityRepository.delete(idProject, idUser)
-		await this.response(res, deleted, 'DON204', false)
+		return await this.responseController.send({
+			res, 
+			entity: deleted,
+			dto: this.entityDto, 
+			code: 'DON204',
+			addSubDto: null,
+			typeDto: null
+		})
 	}
 }
 
