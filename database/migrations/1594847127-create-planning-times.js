@@ -28,7 +28,7 @@ module.exports = {
 			updated_at: { allowNull: false, type: Sequelize.DATE }
 		})
 	},
-	down: queryInterface => {
-		return queryInterface.dropTable('planning_times')
-	}
+	// down: queryInterface => {
+	// 	return queryInterface.dropTable('planning_times')
+	// }
 }
