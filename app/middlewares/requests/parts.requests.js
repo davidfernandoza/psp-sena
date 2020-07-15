@@ -6,6 +6,37 @@ class PartsRequest extends Request {
 	constructor({ JoiValidator, Config, JWTService }) {
 		//  ---------------------------------------------------------------------
 
+		const planningTimes = JoiValidator.object().keys({
+			id: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
+				.allow(null)
+				.optional(),
+			phases_id: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
+				.required(),
+			programs_id: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
+				.required(),
+			planning_time: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
+				.required(),
+			current_time: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
+				.allow(null)
+				.optional()
+		})
+		//  ---------------------------------------------------------------------
+
 		const reusableParts = JoiValidator.object().keys({
 			id: JoiValidator.number()
 				.integer()
@@ -17,7 +48,7 @@ class PartsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required(),			
+				.required(),
 			programs_reusables_id: JoiValidator.number()
 				.integer()
 				.min(0)
@@ -49,7 +80,7 @@ class PartsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required()	,
+				.required(),
 			programs_base_id: JoiValidator.number()
 				.integer()
 				.min(0)
@@ -114,7 +145,7 @@ class PartsRequest extends Request {
 				.integer()
 				.min(0)
 				.max(99999999990)
-				.required(),	
+				.required(),
 			types_sizes_id: JoiValidator.number().integer().min(1).max(30).required(),
 			name: JoiValidator.string().min(1).max(225).required(),
 			planned_lines: JoiValidator.number()
@@ -143,10 +174,11 @@ class PartsRequest extends Request {
 
 		//  ---------------------------------------------------------------------
 
-		const body = {			
+		const body = {
 			base_parts: JoiValidator.array().items(baseParts),
 			reusable_parts: JoiValidator.array().items(reusableParts),
-			new_parts: JoiValidator.array().items(newParts).required()
+			new_parts: JoiValidator.array().items(newParts).required(),
+			planning_times: JoiValidator.array().items(planningTimes).required()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
 	}

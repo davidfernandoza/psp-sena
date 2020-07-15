@@ -31,10 +31,9 @@ module.exports = {
 			},
 			name: { type: Sequelize.STRING, allowNull: false },
 			description: { type: Sequelize.TEXT, allowNull: false },
-			total_lines: { type: Sequelize.INTEGER },
+			total_lines: { type: Sequelize.INTEGER }, // 
 			planning_date: { type: Sequelize.BIGINT, allowNull: false },
 			start_date: { type: Sequelize.BIGINT, allowNull: false },
-			update_date: { type: Sequelize.BIGINT },
 			delivery_date: { type: Sequelize.BIGINT },
 			created_at: { allowNull: false, type: Sequelize.DATE },
 			updated_at: { allowNull: false, type: Sequelize.DATE }

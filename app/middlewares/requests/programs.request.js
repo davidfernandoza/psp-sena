@@ -37,7 +37,6 @@ class ProgramsRequest extends Request {
 			.optional(),
 			planning_date: JoiValidator.date().timestamp().required(),
 			start_date: JoiValidator.date().timestamp().required(),
-			update_date: JoiValidator.date().timestamp().allow(null).optional(),
 			delivery_date: JoiValidator.date().timestamp().allow(null).optional()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)

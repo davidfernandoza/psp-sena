@@ -45,7 +45,7 @@ const OrganizationsRoutes = require(join(
 	__dirname,
 	'./routes/organizations.routes'
 ))
-const PartsRoutes = require(join(__dirname, './routes/parts.routes')) 
+const PartsRoutes = require(join(__dirname, './routes/parts.routes'))
 const PipRoutes = require(join(__dirname, './routes/pip.routes'))
 const ProgramsRoutes = require(join(__dirname, './routes/programs.routes'))
 const ProjectsRoutes = require(join(__dirname, './routes/projects.routes'))
@@ -91,8 +91,8 @@ const { AdminPolitic, DevPolitic } = require(join(
 const {
 	AuthRequest,
 	BasePartsRequest,
-	DefectLogRequest,	
-	EstimatesRequest,	
+	DefectLogRequest,
+	EstimatesRequest,
 	ExperiencesRequest,
 	ForgotPasswordRequest,
 	LanguagesRequest,
@@ -121,14 +121,15 @@ const { UsersAuth, TokenAuth } = require(join(__dirname, './controllers/auth'))
 /*------------------------------------------------------*/
 const {
 	BasePartsController,
-	DefectLogController,	
-	EstimatesController,	
+	DefectLogController,
+	EstimatesController,
 	ExperiencesController,
 	ForgotPasswordController,
 	LanguagesController,
 	ModulesController,
 	NewPartsController,
 	OrganizationsController,
+	PlanningTimesController,
 	PartsController,
 	PipController,
 	ProgramsController,
@@ -146,8 +147,8 @@ const {
 /*------------------------------------------------------*/
 const {
 	BasePartsRepository,
-	DefectLogRepository,	
-	EstimatesRepository,	
+	DefectLogRepository,
+	EstimatesRepository,
 	ExperiencesRepository,
 	ForgotPasswordRepository,
 	LanguagesRepository,
@@ -158,6 +159,7 @@ const {
 	PipRepository,
 	ProgramsRepository,
 	ProjectsUsersRepository,
+	PlanningTimesRepository,
 	ProjectsRepository,
 	ReusablePartsRepository,
 	StandardDefectsRepository,
@@ -172,8 +174,8 @@ const {
 /*------------------------------------------------------*/
 const {
 	BasePartsDto,
-	DefectLogDto,	
-	EstimatesDto,	
+	DefectLogDto,
+	EstimatesDto,
 	ExperiencesDto,
 	ForgotPasswordDto,
 	LanguagesDto,
@@ -184,6 +186,7 @@ const {
 	PhasesDto,
 	PipDto,
 	ProgramsDto,
+	PlanningTimesDto,
 	ProjectsUsersDto,
 	ProjectsDto,
 	ReusablePartsDto,
@@ -236,7 +239,7 @@ container
 	.register({
 		AuthRoutes: asFunction(AuthRoutes).singleton(),
 		BasePartsRoutes: asFunction(BasePartsRoutes).singleton(),
-		DefectLogRoutes: asFunction(DefectLogRoutes).singleton(),		
+		DefectLogRoutes: asFunction(DefectLogRoutes).singleton(),
 		EstimatesRoutes: asFunction(EstimatesRoutes).singleton(),
 		ExperiencesRoutes: asFunction(ExperiencesRoutes).singleton(),
 		ForgotPasswordRoutes: asFunction(ForgotPasswordRoutes).singleton(),
@@ -307,6 +310,7 @@ container
 		NewPartsController: asClass(NewPartsController).singleton(),
 		OrganizationsController: asClass(OrganizationsController).singleton(),
 		PartsController: asClass(PartsController).singleton(),
+		PlanningTimesController: asClass(PlanningTimesController).singleton(),
 		PipController: asClass(PipController).singleton(),
 		ProgramsController: asClass(ProgramsController).singleton(),
 		ProjectsUsersController: asClass(ProjectsUsersController).singleton(),
@@ -343,7 +347,7 @@ container
 	.register({
 		AuthRequest: asClass(AuthRequest).singleton(),
 		BasePartsRequest: asClass(BasePartsRequest).singleton(),
-		DefectLogRequest: asClass(DefectLogRequest).singleton(),		
+		DefectLogRequest: asClass(DefectLogRequest).singleton(),
 		EstimatesRequest: asClass(EstimatesRequest).singleton(),
 		ExperiencesRequest: asClass(ExperiencesRequest).singleton(),
 		ForgotPasswordRequest: asClass(ForgotPasswordRequest).singleton(),
@@ -379,6 +383,7 @@ container
 		PhasesRepository: asClass(PhasesRepository).singleton(),
 		PipRepository: asClass(PipRepository).singleton(),
 		ProgramsRepository: asClass(ProgramsRepository).singleton(),
+		PlanningTimesRepository: asClass(PlanningTimesRepository).singleton(),
 		ProjectsUsersRepository: asClass(ProjectsUsersRepository).singleton(),
 		ProjectsRepository: asClass(ProjectsRepository).singleton(),
 		ReusablePartsRepository: asClass(ReusablePartsRepository).singleton(),
@@ -394,7 +399,7 @@ container
 	 */
 	.register({
 		BasePartsDto: asClass(BasePartsDto).singleton(),
-		DefectLogDto: asClass(DefectLogDto).singleton(),		
+		DefectLogDto: asClass(DefectLogDto).singleton(),
 		EstimatesDto: asClass(EstimatesDto).singleton(),
 		ExperiencesDto: asClass(ExperiencesDto).singleton(),
 		ForgotPasswordDto: asClass(ForgotPasswordDto).singleton(),
@@ -404,6 +409,7 @@ container
 		OrganizationsDto: asClass(OrganizationsDto).singleton(),
 		PhasesDto: asClass(PhasesDto).singleton(),
 		PartsDto: asClass(PartsDto).singleton(),
+		PlanningTimesDto: asClass(PlanningTimesDto).singleton(),
 		PipDto: asClass(PipDto).singleton(),
 		ProgramsDto: asClass(ProgramsDto).singleton(),
 		ProjectsUsersDto: asClass(ProjectsUsersDto).singleton(),

@@ -1,18 +1,16 @@
 'use strict'
-const { join } = require('path')
-const Controller = require(join(__dirname, './controller'))
-
 class PartsController {
 	#sequelize = {}
 	#basePartsController = {}
 	#newPartsController = {}
 	#reusablePartsController = {}
-	#data = {}
-	#dto = {}
+	#planningTimesController = {}
 	#responseController = {}
+	#dto = {}
 
 	constructor({
 		ReusablePartsController,
+		PlanningTimesController,
 		BasePartsController,
 		NewPartsController,
 		ResponseController,
@@ -24,6 +22,7 @@ class PartsController {
 		this.#newPartsController = NewPartsController
 		this.#reusablePartsController = ReusablePartsController
 		this.#responseController = ResponseController
+		this.#planningTimesController = PlanningTimesController
 		this.#dto = PartsDto
 	}
 
@@ -32,10 +31,10 @@ class PartsController {
 
 	async create(req, res) {
 		const temp = {
-				transaction: await this.#sequelize.transaction(),
-				body: req.body,
-				res: {}
-			}
+			transaction: await this.#sequelize.transaction(),
+			body: req.body,
+			res: {}
+		}
 
 		try {
 			temp.body = req.body.base_parts
@@ -47,19 +46,22 @@ class PartsController {
 			temp.body = req.body.reusable_parts
 			temp.res.reusable_parts = await this.#reusablePartsController.create(temp)
 
+			temp.body = req.body.planning_times
+			temp.res.planning_times = await this.#planningTimesController.create(temp)
+
 			//Respuesta exitosa
-			
+
 			await this.#responseController.send({
-				res, 
+				res,
 				entity: temp.res,
-				dto: this.#dto, 
+				dto: this.#dto,
 				code: 'DON201',
 				addSubDto: null,
 				typeDto: null
 			})
 			temp.transaction.commit()
 		} catch (error) {
-			console.log(error)
+			// console.log(error)
 			await temp.transaction.rollback()
 
 			// Validar si el error viene de la base de datos

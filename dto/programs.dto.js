@@ -14,7 +14,6 @@ class ProgramsDto extends Dto {
 			total_lines: 'total_lines',
 			planning_date: 'planning_date',
 			start_date: 'start_date',
-			update_date: 'update_date',
 			delivery_date: 'delivery_date'
 		}
 		super(schema)

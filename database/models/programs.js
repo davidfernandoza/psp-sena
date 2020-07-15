@@ -30,7 +30,6 @@ module.exports = (sequelize, DataTypes) => {
 			total_lines: { type: DataTypes.INTEGER },
 			planning_date: { type: DataTypes.BIGINT, allowNull: false },
 			start_date: { type: DataTypes.BIGINT, allowNull: false },
-			update_date: { type: DataTypes.BIGINT },
 			delivery_date: { type: DataTypes.BIGINT }
 		},
 		{
@@ -130,6 +129,13 @@ module.exports = (sequelize, DataTypes) => {
 			foreignKey: 'programs_reusables_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
 			as: 'reusable_parts_2'
+		})
+
+		// Un programs se registra en muchos planning_times (1:M)
+		models.programs.hasMany(models.planning_times, {
+			foreignKey: 'programs_id', // a donde va
+			sourceKey: 'id', // de donde se obtiene
+			as: 'planning_times'
 		})
 	}
 

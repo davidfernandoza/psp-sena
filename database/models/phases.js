@@ -33,18 +33,25 @@ module.exports = (sequelize, DataTypes) => {
 			as: 'time_log'
 		})
 
-		// Un phases se registra en muchos defect_log (1:M
+		// Un phases se registra en muchos defect_log (1:M)
 		models.phases.hasMany(models.defect_log, {
 			foreignKey: 'phase_added_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
 			as: 'defect_log_1'
 		})
 
-		// Un phases se registra en muchos defect_log (1:M
+		// Un phases se registra en muchos defect_log (1:M)
 		models.phases.hasMany(models.defect_log, {
 			foreignKey: 'phase_removed_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
 			as: 'defect_log_2'
+		})
+
+		// Un phases se registra en muchos planning_times (1:M)
+		models.phases.hasMany(models.planning_times, {
+			foreignKey: 'phases_id', // a donde va
+			sourceKey: 'id', // de donde se obtiene
+			as: 'planning_times'
 		})
 	}
 

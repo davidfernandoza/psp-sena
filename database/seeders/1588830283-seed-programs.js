@@ -16,7 +16,6 @@ module.exports = {
 					total_lines: '802014713',
 					planning_date: 1589754486,
 					start_date: 1589754486,
-					update_date: 1589754486,
 					delivery_date: 1589754486,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
@@ -31,7 +30,6 @@ module.exports = {
 					total_lines: '815530160',
 					planning_date: 1589754486,
 					start_date: 1589754486,
-					update_date: 1589754486,
 					delivery_date: null,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
@@ -46,7 +44,6 @@ module.exports = {
 					total_lines: '311256324',
 					planning_date: 1589754486,
 					start_date: 1589754486,
-					update_date: 1589754486,
 					delivery_date: 1589754486,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
@@ -61,7 +58,6 @@ module.exports = {
 					total_lines: '169439193',
 					planning_date: 1589754486,
 					start_date: 1589754486,
-					update_date: 1589754486,
 					delivery_date: 1589754486,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
@@ -76,7 +72,6 @@ module.exports = {
 					total_lines: '798459984',
 					planning_date: 1589754486,
 					start_date: 1589754486,
-					update_date: 1589754486,
 					delivery_date: 1589754486,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
@@ -91,7 +86,6 @@ module.exports = {
 					total_lines: '240386870',
 					planning_date: 1589754486,
 					start_date: 1589754486,
-					update_date: 1589754486,
 					delivery_date: 1589754486,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
@@ -106,7 +100,6 @@ module.exports = {
 					total_lines: '182077295',
 					planning_date: 1589754486,
 					start_date: 1589754486,
-					update_date: 1589754486,
 					delivery_date: 1589754486,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
@@ -121,7 +114,6 @@ module.exports = {
 					total_lines: '549509165',
 					planning_date: 1589754486,
 					start_date: 1589754486,
-					update_date: 1589754486,
 					delivery_date: 1589754486,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
@@ -136,7 +128,6 @@ module.exports = {
 					total_lines: '255115485',
 					planning_date: 1589754486,
 					start_date: 1589754486,
-					update_date: 1589754486,
 					delivery_date: 1589754486,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
@@ -151,7 +142,6 @@ module.exports = {
 					total_lines: '639865431',
 					planning_date: 1589754486,
 					start_date: 1589754486,
-					update_date: 1589754486,
 					delivery_date: 1589754486,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
@@ -166,7 +156,6 @@ module.exports = {
 					total_lines: '386989311',
 					planning_date: 1589754486,
 					start_date: 1589754486,
-					update_date: 1589754486,
 					delivery_date: 1589754486,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
@@ -181,7 +170,6 @@ module.exports = {
 					total_lines: '545163147',
 					planning_date: 1589754486,
 					start_date: 1589754486,
-					update_date: 1589754486,
 					delivery_date: 1589754486,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
@@ -196,7 +184,6 @@ module.exports = {
 					total_lines: '545163147',
 					planning_date: 1589754486,
 					start_date: 1589754486,
-					update_date: 1589754486,
 					delivery_date: 1589754486,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()

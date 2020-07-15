@@ -5,12 +5,13 @@ const Dto = require(join(__dirname, './dto'))
 class PartsDto extends Dto {
 	constructor() {
 		const schema = {
-			base_parts : 'base_parts',
-			reusable_parts : 'reusable_parts',
-			new_parts: 'new_parts'
+			base_parts: 'base_parts',
+			reusable_parts: 'reusable_parts',
+			new_parts: 'new_parts',
+			planning_times: 'planning_times'
 		}
 		super(schema)
-	}	
+	}
 }
 
 module.exports = PartsDto
