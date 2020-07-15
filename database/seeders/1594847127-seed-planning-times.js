@@ -106,7 +106,7 @@ module.exports = {
 			{}
 		)
 	},
-	// down: queryInterface => {
-	// 	return queryInterface.bulkDelete('planning_times', null, {})
-	// }
+	down: queryInterface => {
+		return queryInterface.bulkDelete('planning_times', null, {})
+	}
 }
