@@ -111,7 +111,7 @@ class ErrorHandleMiddleware {
 
 		res.status(errorObject.status)
 		res.json(errorObject)
-		next(error.message)
+		next()
 	}
 }
 module.exports = ErrorHandleMiddleware
