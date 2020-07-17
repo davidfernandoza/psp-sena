@@ -7,29 +7,31 @@ module.exports = {
 			'reusable_parts',
 			[
 				{
-					programs_id: 1,
-					programs_reusables_id: 1,
-					planned_lines: '385145818',
-					current_lines: '813678238',
-					created_at: new Date().toDateString(),
-					updated_at: new Date().toDateString()
-				},
-				{
 					programs_id: 2,
-					programs_reusables_id: 2,
-					planned_lines: '141346326',
-					current_lines: '773915218',
+					programs_reusables_id: 1,
+					planned_lines: 100,
+					current_lines: 112,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
 				{
 					programs_id: 3,
-					programs_reusables_id: 3,
-					planned_lines: '484397960',
-					current_lines: '517014204',
+					programs_reusables_id: 1,
+					planned_lines: 123.0,
+					current_lines: 202.0,
+					created_at: new Date().toDateString(),
+					updated_at: new Date().toDateString()
+				},
+				// -----------------
+				{
+					programs_id: 4,
+					programs_reusables_id: 2,
+					planned_lines: 510.0,
+					current_lines: 231.0,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				}
+				// -----------------
 			],
 			{}
 		)

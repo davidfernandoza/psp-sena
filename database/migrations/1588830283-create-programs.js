@@ -31,7 +31,7 @@ module.exports = {
 			},
 			name: { type: Sequelize.STRING, allowNull: false },
 			description: { type: Sequelize.TEXT, allowNull: false },
-			total_lines: { type: Sequelize.INTEGER }, // 
+			total_lines: { type: Sequelize.DOUBLE }, //
 			planning_date: { type: Sequelize.BIGINT, allowNull: false },
 			start_date: { type: Sequelize.BIGINT, allowNull: false },
 			delivery_date: { type: Sequelize.BIGINT },

@@ -54,13 +54,8 @@ class PartsRequest extends Request {
 				.min(0)
 				.max(99999999990)
 				.required(),
-			planned_lines: JoiValidator.number()
-				.integer()
-				.min(0)
-				.max(99999999990)
-				.required(),
+			planned_lines: JoiValidator.number().min(0).max(99999999990).required(),
 			current_lines: JoiValidator.number()
-				.integer()
 				.min(0)
 				.max(99999999990)
 				.allow(null)
@@ -87,45 +82,37 @@ class PartsRequest extends Request {
 				.max(99999999990)
 				.required(),
 			planned_lines_base: JoiValidator.number()
-				.integer()
 				.min(0)
 				.max(99999999990)
 				.required(),
 			planned_lines_deleted: JoiValidator.number()
-				.integer()
 				.min(0)
 				.max(99999999990)
 				.required(),
 			planned_lines_edits: JoiValidator.number()
-				.integer()
 				.min(0)
 				.max(99999999990)
 				.required(),
 			planned_lines_added: JoiValidator.number()
-				.integer()
 				.min(0)
 				.max(99999999990)
 				.required(),
 			current_lines_base: JoiValidator.number()
-				.integer()
 				.min(0)
 				.max(99999999990)
 				.allow(null)
 				.optional(),
 			current_lines_deleted: JoiValidator.number()
-				.integer()
 				.min(0)
 				.max(99999999990)
 				.allow(null)
 				.optional(),
 			current_lines_edits: JoiValidator.number()
-				.integer()
 				.min(0)
 				.max(99999999990)
 				.allow(null)
 				.optional(),
 			current_lines_added: JoiValidator.number()
-				.integer()
 				.min(0)
 				.max(99999999990)
 				.allow(null)
@@ -148,18 +135,13 @@ class PartsRequest extends Request {
 				.required(),
 			types_sizes_id: JoiValidator.number().integer().min(1).max(30).required(),
 			name: JoiValidator.string().min(1).max(225).required(),
-			planned_lines: JoiValidator.number()
-				.integer()
-				.min(0)
-				.max(99999999990)
-				.required(),
+			planned_lines: JoiValidator.number().min(0).max(99999999990).required(),
 			number_methods_planned: JoiValidator.number()
 				.integer()
 				.min(0)
 				.max(99999999990)
 				.required(),
 			current_lines: JoiValidator.number()
-				.integer()
 				.min(0)
 				.max(99999999990)
 				.allow(null)

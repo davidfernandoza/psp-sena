@@ -7,27 +7,27 @@ module.exports = {
 			'languages',
 			[
 				{
-					name: 'Name Ipsum 1',
+					name: 'Java',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
 				{
-					name: 'Name Ipsum 2',
+					name: 'Javascript',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
 				{
-					name: 'Name Ipsum 3',
+					name: 'C++',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
 				{
-					name: 'Name Ipsum 4',
+					name: 'C#',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
 				{
-					name: 'Name Ipsum 5',
+					name: 'SQL',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				}

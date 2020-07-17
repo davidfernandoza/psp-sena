@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 				isNumeric: true
 			},
-			planned_lines: { type: DataTypes.INTEGER, allowNull: false },
-			current_lines: { type: DataTypes.INTEGER }
+			planned_lines: { type: DataTypes.DOUBLE, allowNull: false },
+			current_lines: { type: DataTypes.DOUBLE }
 		},
 		{
 			timestamps: true,

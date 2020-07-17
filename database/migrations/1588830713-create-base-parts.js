@@ -1,4 +1,3 @@
-
 'use strict'
 module.exports = {
 	up: (queryInterface, Sequelize) => {
@@ -23,14 +22,14 @@ module.exports = {
 				onUpdate: 'cascade',
 				onDelete: 'cascade'
 			},
-			planned_lines_base: { type: Sequelize.INTEGER, allowNull: false },
-			planned_lines_deleted: { type: Sequelize.INTEGER, allowNull: false },
-			planned_lines_edits: { type: Sequelize.INTEGER, allowNull: false },
-			planned_lines_added: { type: Sequelize.INTEGER, allowNull: false },
-			current_lines_base: { type: Sequelize.INTEGER },
-			current_lines_deleted: { type: Sequelize.INTEGER },
-			current_lines_edits: { type: Sequelize.INTEGER },
-			current_lines_added: { type: Sequelize.INTEGER },
+			planned_lines_base: { type: Sequelize.DOUBLE, allowNull: false },
+			planned_lines_deleted: { type: Sequelize.DOUBLE, allowNull: false },
+			planned_lines_edits: { type: Sequelize.DOUBLE, allowNull: false },
+			planned_lines_added: { type: Sequelize.DOUBLE, allowNull: false },
+			current_lines_base: { type: Sequelize.DOUBLE },
+			current_lines_deleted: { type: Sequelize.DOUBLE },
+			current_lines_edits: { type: Sequelize.DOUBLE },
+			current_lines_added: { type: Sequelize.DOUBLE },
 			created_at: { allowNull: false, type: Sequelize.DATE },
 			updated_at: { allowNull: false, type: Sequelize.DATE }
 		})

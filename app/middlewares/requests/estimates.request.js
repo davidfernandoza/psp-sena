@@ -26,11 +26,7 @@ class EstimatesRequest extends Request {
 				.allow(null)
 				.optional(),
 			algorithm: JoiValidator.string().min(1).max(225).required(),
-			code_lines: JoiValidator.number()
-				.integer()
-				.min(0)
-				.max(99999999990)
-				.required()
+			code_lines: JoiValidator.number().min(0).max(99999999990).required()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
 	}

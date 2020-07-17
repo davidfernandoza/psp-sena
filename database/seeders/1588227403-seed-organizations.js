@@ -7,17 +7,12 @@ module.exports = {
 			'organizations',
 			[
 				{
-					name: 'Name Ipsum 1',
+					name: 'SENA - 1',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
 				{
-					name: 'Name Ipsum 2',
-					created_at: new Date().toDateString(),
-					updated_at: new Date().toDateString()
-				},
-				{
-					name: 'Name Ipsum 3',
+					name: 'INDRA - 2',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				}

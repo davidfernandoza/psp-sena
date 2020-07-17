@@ -23,7 +23,7 @@ module.exports = {
 				onDelete: 'cascade'
 			},
 			start_date: { type: Sequelize.BIGINT, allowNull: false },
-			delta_time: { type: Sequelize.DOUBLE },
+			delta_time: { type: Sequelize.INTEGER },
 			finish_date: { type: Sequelize.BIGINT },
 			interruption: { type: Sequelize.INTEGER, allowNull: false },
 			comments: { type: Sequelize.TEXT },

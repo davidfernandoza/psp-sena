@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			start_date: { type: DataTypes.BIGINT, allowNull: false },
 			delta_time: {
-				type: DataTypes.DOUBLE,
+				type: DataTypes.INTEGER,
 				isNumeric: true
 			},
 			finish_date: { type: DataTypes.BIGINT },

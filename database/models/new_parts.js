@@ -21,9 +21,9 @@ module.exports = (sequelize, DataTypes) => {
 				isNumeric: true
 			},
 			name: { type: DataTypes.STRING, allowNull: false },
-			planned_lines: { type: DataTypes.INTEGER, allowNull: false },
+			planned_lines: { type: DataTypes.DOUBLE, allowNull: false },
 			number_methods_planned: { type: DataTypes.INTEGER, allowNull: false },
-			current_lines: { type: DataTypes.INTEGER },
+			current_lines: { type: DataTypes.DOUBLE },
 			number_methods_current: { type: DataTypes.INTEGER }
 		},
 		{

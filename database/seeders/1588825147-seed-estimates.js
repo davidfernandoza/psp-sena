@@ -10,7 +10,7 @@ module.exports = {
 					languages_id: 1,
 					organizations_id: 1,
 					algorithm: 'Burbuja',
-					code_lines: '287289344',
+					code_lines: 28.0,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -18,7 +18,7 @@ module.exports = {
 					languages_id: 2,
 					organizations_id: 1,
 					algorithm: 'Arbol',
-					code_lines: '212726423',
+					code_lines: 21.0,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -26,7 +26,7 @@ module.exports = {
 					languages_id: 3,
 					organizations_id: 1,
 					algorithm: 'Arbol Binario',
-					code_lines: '909964228',
+					code_lines: 90.0,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -34,7 +34,7 @@ module.exports = {
 					languages_id: 4,
 					organizations_id: 1,
 					algorithm: 'Busqueda Desendente',
-					code_lines: '389665954',
+					code_lines: 38.0,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -42,7 +42,7 @@ module.exports = {
 					languages_id: 5,
 					organizations_id: 1,
 					algorithm: 'Camino Corto',
-					code_lines: '878209359',
+					code_lines: 20.0,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -50,7 +50,7 @@ module.exports = {
 					languages_id: 1,
 					organizations_id: 1,
 					algorithm: 'Ordenamiento',
-					code_lines: '029036651',
+					code_lines: 29.0,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -58,7 +58,7 @@ module.exports = {
 					languages_id: 2,
 					organizations_id: 1,
 					algorithm: 'Grupo de nodos',
-					code_lines: '136425831',
+					code_lines: 16.0,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -66,15 +66,15 @@ module.exports = {
 					languages_id: 3,
 					organizations_id: 1,
 					algorithm: 'Integracion',
-					code_lines: '139573361',
+					code_lines: 13.0,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
 				{
 					languages_id: 4,
-					organizations_id: 3,
+					organizations_id: 2,
 					algorithm: 'Lista en Pila',
-					code_lines: '473931463',
+					code_lines: 47.0,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -82,7 +82,7 @@ module.exports = {
 					languages_id: 5,
 					organizations_id: 2,
 					algorithm: 'Burbuja',
-					code_lines: '110175547',
+					code_lines: 11.0,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				}

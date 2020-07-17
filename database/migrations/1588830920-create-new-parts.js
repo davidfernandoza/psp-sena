@@ -23,9 +23,9 @@ module.exports = {
 				onDelete: 'cascade'
 			},
 			name: { type: Sequelize.STRING, allowNull: false },
-			planned_lines: { type: Sequelize.INTEGER, allowNull: false },
+			planned_lines: { type: Sequelize.DOUBLE, allowNull: false },
 			number_methods_planned: { type: Sequelize.INTEGER, allowNull: false },
-			current_lines: { type: Sequelize.INTEGER },
+			current_lines: { type: Sequelize.DOUBLE },
 			number_methods_current: { type: Sequelize.INTEGER },
 			created_at: { allowNull: false, type: Sequelize.DATE },
 			updated_at: { allowNull: false, type: Sequelize.DATE }

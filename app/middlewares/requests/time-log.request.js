@@ -22,7 +22,7 @@ class TimeLogRequest extends Request {
 				.max(99999999990)
 				.required(),
 			start_date: JoiValidator.date().timestamp().required(),
-			delta_time: JoiValidator.number().allow(null).optional(),
+			delta_time: JoiValidator.number().integer().allow(null).optional(),
 			finish_date: JoiValidator.date().timestamp().allow(null).optional(),
 			interruption: JoiValidator.number()
 				.integer()

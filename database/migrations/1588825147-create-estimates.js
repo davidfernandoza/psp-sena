@@ -26,7 +26,7 @@ module.exports = {
 				onUpdate: 'cascade',
 				onDelete: 'cascade'
 			},
-			code_lines: { type: Sequelize.INTEGER, allowNull: false },
+			code_lines: { type: Sequelize.DOUBLE, allowNull: false },
 			created_at: { allowNull: false, type: Sequelize.DATE },
 			updated_at: { allowNull: false, type: Sequelize.DATE }
 		})

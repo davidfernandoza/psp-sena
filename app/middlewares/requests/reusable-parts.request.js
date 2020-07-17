@@ -21,13 +21,8 @@ class ReusablePartsRequest extends Request {
 				.min(0)
 				.max(99999999990)
 				.required(),
-			planned_lines: JoiValidator.number()
-				.integer()
-				.min(0)
-				.max(99999999990)
-				.required(),
+			planned_lines: JoiValidator.number().min(0).max(99999999990).required(),
 			current_lines: JoiValidator.number()
-				.integer()
 				.min(0)
 				.max(99999999990)
 				.allow(null)

@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			name: { type: DataTypes.STRING, allowNull: false },
 			description: { type: DataTypes.TEXT, allowNull: false },
-			total_lines: { type: DataTypes.INTEGER },
+			total_lines: { type: DataTypes.DOUBLE },
 			planning_date: { type: DataTypes.BIGINT, allowNull: false },
 			start_date: { type: DataTypes.BIGINT, allowNull: false },
 			delivery_date: { type: DataTypes.BIGINT }

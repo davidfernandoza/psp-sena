@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: false
 			},
-			code_lines: { type: DataTypes.INTEGER, allowNull: false }
+			code_lines: { type: DataTypes.DOUBLE, allowNull: false }
 		},
 		{
 			timestamps: true,
