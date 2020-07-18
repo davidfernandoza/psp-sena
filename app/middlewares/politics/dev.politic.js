@@ -309,6 +309,16 @@ class DevPolitic extends Politic {
 						status: 'enable'
 					}
 				]
+			},
+			'analysis-tools': {
+				subRoutes: [
+					{
+						route: '/by-user/:id',
+						method: 'GET',
+						status: 'unique',
+						authParameter: 'id'
+					}
+				]
 			}
 		}
 		super(rol, authRol, baseUrl, permissions)

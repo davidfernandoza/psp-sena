@@ -27,6 +27,10 @@ const { StringHelper, EncryptionHelper } = require(join(
 /* -----------------------------------------------------*/
 
 const AuthRoutes = require(join(__dirname, './routes/auth.routes'))
+const AnalysisToolsRoutes = require(join(
+	__dirname,
+	'./routes/analysis-tools.routes'
+))
 const BasePartsRoutes = require(join(__dirname, './routes/base-parts.routes'))
 const DefectLogRoutes = require(join(__dirname, './routes/defect-log.routes'))
 const EstimatesRoutes = require(join(__dirname, './routes/estimates.routes'))
@@ -90,6 +94,7 @@ const { AdminPolitic, DevPolitic } = require(join(
 /*------------------------------------------------------*/
 const {
 	AuthRequest,
+	AnalysisToolsRequest,
 	BasePartsRequest,
 	DefectLogRequest,
 	EstimatesRequest,
@@ -120,6 +125,7 @@ const { UsersAuth, TokenAuth } = require(join(__dirname, './controllers/auth'))
 /* Controllers: 																				*/
 /*------------------------------------------------------*/
 const {
+	AnalysisToolsController,
 	BasePartsController,
 	DefectLogController,
 	EstimatesController,
@@ -173,6 +179,7 @@ const {
 /* DTOS: 																								*/
 /*------------------------------------------------------*/
 const {
+	AnalysisToolsDto,
 	BasePartsDto,
 	DefectLogDto,
 	EstimatesDto,
@@ -238,6 +245,7 @@ container
 	// API
 	.register({
 		AuthRoutes: asFunction(AuthRoutes).singleton(),
+		AnalysisToolsRoutes: asFunction(AnalysisToolsRoutes).singleton(),
 		BasePartsRoutes: asFunction(BasePartsRoutes).singleton(),
 		DefectLogRoutes: asFunction(DefectLogRoutes).singleton(),
 		EstimatesRoutes: asFunction(EstimatesRoutes).singleton(),
@@ -300,6 +308,7 @@ container
 	 * Controllers:
 	 */
 	.register({
+		AnalysisToolsController: asClass(AnalysisToolsController).singleton(),
 		BasePartsController: asClass(BasePartsController).singleton(),
 		DefectLogController: asClass(DefectLogController).singleton(),
 		EstimatesController: asClass(EstimatesController).singleton(),
@@ -346,6 +355,7 @@ container
 	})
 	.register({
 		AuthRequest: asClass(AuthRequest).singleton(),
+		AnalysisToolsRequest: asClass(AnalysisToolsRequest).singleton(),
 		BasePartsRequest: asClass(BasePartsRequest).singleton(),
 		DefectLogRequest: asClass(DefectLogRequest).singleton(),
 		EstimatesRequest: asClass(EstimatesRequest).singleton(),
@@ -398,6 +408,7 @@ container
 	 * DTOS:
 	 */
 	.register({
+		AnalysisToolsDto: asClass(AnalysisToolsDto).singleton(),
 		BasePartsDto: asClass(BasePartsDto).singleton(),
 		DefectLogDto: asClass(DefectLogDto).singleton(),
 		EstimatesDto: asClass(EstimatesDto).singleton(),

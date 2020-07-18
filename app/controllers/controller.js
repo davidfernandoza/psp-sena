@@ -1,6 +1,4 @@
 'use strict'
-const { morphism } = require('morphism')
-
 class Controller {
 	#data = {}
 	#transaction = {}
@@ -44,10 +42,10 @@ class Controller {
 				this.#code = 'DON200'
 		}
 		await this.responseController.send({
-			res: options.res, 
+			res: options.res,
 			entity: this.#data,
-			dto: this.entityDto, 
-			code: this.#code, 
+			dto: this.entityDto,
+			code: this.#code,
 			addSubDto: this.#addSubDto,
 			typeDto: null
 		})
@@ -72,14 +70,13 @@ class Controller {
 
 		if (req.return || this.#transaction) return this.#data
 		await this.responseController.send({
-			res, 
+			res,
 			entity: this.#data,
-			dto: this.entityDto, 
-			code: this.#code, 
+			dto: this.entityDto,
+			code: this.#code,
 			addSubDto: this.#addSubDto,
 			typeDto: null
 		})
-
 	}
 
 	async get(req, res) {
@@ -98,10 +95,10 @@ class Controller {
 		)
 		if (req.return || this.#transaction) return this.#data
 		await this.responseController.send({
-			res, 
+			res,
 			entity: this.#data,
-			dto: this.entityDto, 
-			code: this.#code, 
+			dto: this.entityDto,
+			code: this.#code,
 			addSubDto: this.#addSubDto,
 			typeDto: null
 		})
@@ -124,10 +121,10 @@ class Controller {
 		)
 		if (req.return || this.#transaction) return this.#data
 		await this.responseController.send({
-			res, 
+			res,
 			entity: this.#data,
-			dto: this.entityDto, 
-			code: this.#code, 
+			dto: this.entityDto,
+			code: this.#code,
 			addSubDto: this.#addSubDto,
 			typeDto: null
 		})
@@ -154,10 +151,10 @@ class Controller {
 		)
 		if (req.return || this.#transaction) return this.#data
 		await this.responseController.send({
-			res, 
+			res,
 			entity: this.#data,
-			dto: this.entityDto, 
-			code: this.#code, 
+			dto: this.entityDto,
+			code: this.#code,
 			addSubDto: this.#addSubDto,
 			typeDto: null
 		})
@@ -178,14 +175,14 @@ class Controller {
 		)
 		if (req.return || this.#transaction) return this.#data
 		await this.responseController.send({
-			res, 
+			res,
 			entity: this.#data,
-			dto: this.entityDto, 
-			code: this.#code, 
+			dto: this.entityDto,
+			code: this.#code,
 			addSubDto: this.#addSubDto,
 			typeDto: null
 		})
-	}	
+	}
 }
 
 module.exports = Controller

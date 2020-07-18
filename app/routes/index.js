@@ -8,6 +8,7 @@ require('express-async-errors')
 
 module.exports = ({
 	AuthRoutes,
+	AnalysisToolsRoutes,
 	BasePartsRoutes,
 	Config,
 	DefectLogRoutes,
@@ -42,6 +43,7 @@ module.exports = ({
 
 	// registro de las rutas
 	apiRoute.use('/auth', AuthRoutes)
+	apiRoute.use('/analysis-tools', AnalysisToolsRoutes)
 	apiRoute.use('/base-parts', BasePartsRoutes)
 	apiRoute.use('/defect-logs', DefectLogRoutes)
 	apiRoute.use('/estimates', EstimatesRoutes)

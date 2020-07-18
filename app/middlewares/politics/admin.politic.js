@@ -306,6 +306,15 @@ class AdminPolitic extends Politic {
 						status: 'enable'
 					}
 				]
+			},
+			'analysis-tools': {
+				subRoutes: [
+					{
+						route: '/by-user/:id',
+						method: 'GET',
+						status: 'enable'
+					}
+				]
 			}
 		}
 

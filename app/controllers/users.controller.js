@@ -44,9 +44,9 @@ class UsersController extends Controller {
 			type: 'all'
 		})
 		return await this.responseController.send({
-			res, 
+			res,
 			entity: this.#data,
-			dto: this.entityDto, 
+			dto: this.entityDto,
 			code: 'DON200L',
 			addSubDto: null,
 			typeDto: null
@@ -62,13 +62,13 @@ class UsersController extends Controller {
 		)
 		if (req.transaction) return this.#data
 		return await this.responseController.send({
-				res, 
-				entity: this.#data,
-				dto: this.entityDto, 
-				code: 'DON204',
-				addSubDto: null,
-				typeDto: null
-			})
+			res,
+			entity: this.#data,
+			dto: this.entityDto,
+			code: 'DON204',
+			addSubDto: null,
+			typeDto: null
+		})
 	}
 }
 
