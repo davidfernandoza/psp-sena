@@ -5,11 +5,7 @@ const Controller = require(join(__dirname, './controller'))
 class ProgramsController extends Controller {
 	#data = {}
 
-	constructor({
-		ProgramsRepository,
-		ProgramsDto,
-		ResponseController
-	}) {
+	constructor({ ProgramsRepository, ProgramsDto, ResponseController }) {
 		super(ProgramsRepository, ProgramsDto, ResponseController)
 	}
 
@@ -34,9 +30,9 @@ class ProgramsController extends Controller {
 			})
 		}
 		return await this.responseController.send({
-			res, 
+			res,
 			entity: this.#data,
-			dto: this.entityDto, 
+			dto: this.entityDto,
 			code: 'DON200L',
 			addSubDto: null,
 			typeDto: null
@@ -51,13 +47,29 @@ class ProgramsController extends Controller {
 			idOrganization
 		)
 		return await this.responseController.send({
-			res, 
+			res,
 			entity: program,
-			dto: this.entityDto, 
+			dto: this.entityDto,
 			code: 'DON200L',
 			addSubDto: null,
 			typeDto: 'byOrganization'
 		})
+	}
+
+	// -------------------------------------------------------------------------+
+
+	async getAllByUser(req, res) {
+		const { id: idUser } = req.params,
+			objectQuery = {
+				attribute: 'users_id',
+				value: idUser,
+				type: 'all',
+				res: res,
+				return: true
+			}
+		if (req.transaction) objectQuery.transaction = req.transaction
+		if (req.return) objectQuery.return = true
+		return await super.getByAttribute(objectQuery)
 	}
 }
 

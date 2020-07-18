@@ -7,6 +7,10 @@ class PlanningTimesRepository extends Repository {
 		super(DB, PlanningTimesDto, Config, 'planning_times')
 		this.db = DB
 	}
-	// Aqui van las consultas especializadas
+	async getTotalCurrentTime(idProgram) {
+		return await this.db[this.entity].sum('current_time', {
+			where: { programs_id: idProgram }
+		})
+	}
 }
 module.exports = PlanningTimesRepository

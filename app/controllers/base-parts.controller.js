@@ -4,7 +4,7 @@ const Controller = require(join(__dirname, './controller'))
 const { morphism } = require('morphism') // morphism(dto, entity)
 
 class BasePartsController extends Controller {
-	constructor({ BasePartsRepository, BasePartsDto, ResponseController}) {
+	constructor({ BasePartsRepository, BasePartsDto, ResponseController }) {
 		super(BasePartsRepository, BasePartsDto, ResponseController)
 	}
 
@@ -16,19 +16,19 @@ class BasePartsController extends Controller {
 
 		for (const item of req.body) {
 			item.programs_id = req.programs_id ? req.programs_id : item.programs_id
-			const col = await super.create({
+			const program = await super.create({
 				body: item,
 				transaction: transaction
 			})
 
-			basePartsArray.push(col)
+			basePartsArray.push(program)
 		}
 		if (transaction)
 			return basePartsArray.map(item => morphism(this.entityDto.schema, item))
 		await this.responseController.send({
-			res, 
+			res,
 			entity: basePartsArray,
-			dto: this.entityDto, 
+			dto: this.entityDto,
 			code: 'DON201L',
 			addSubDto: null,
 			typeDto: null
