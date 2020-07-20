@@ -24,12 +24,7 @@ class AnalysisToolsController {
 	// ------------------------------------------------------------------
 
 	async getAllByUser(req, res) {
-		const { id: idUser } = req.params,
-			tempReq = {
-				params: { id: idUser },
-				return: true
-			},
-			programs = await this.#programsController.getAllByUser(tempReq, res),
+		const programs = await this.#programsController.getAllByUser(req),
 			arrayReturn = await this.doGenerateResponseObject(programs)
 		return await this.#responseController.send({
 			res,
@@ -42,7 +37,7 @@ class AnalysisToolsController {
 	}
 
 	async doGenerateResponseObject(arrayPrograms) {
-		if (arrayPrograms == [] || arrayPrograms < 3) throw Error('ERR404')
+		if (arrayPrograms == [] || arrayPrograms.length < 3) throw Error('ERR404')
 		const arrayReturn = []
 		for (const program of arrayPrograms) {
 			const objectReturn = {

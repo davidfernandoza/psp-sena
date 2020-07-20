@@ -58,18 +58,9 @@ class ProgramsController extends Controller {
 
 	// -------------------------------------------------------------------------+
 
-	async getAllByUser(req, res) {
-		const { id: idUser } = req.params,
-			objectQuery = {
-				attribute: 'users_id',
-				value: idUser,
-				type: 'all',
-				res: res,
-				return: true
-			}
-		if (req.transaction) objectQuery.transaction = req.transaction
-		if (req.return) objectQuery.return = true
-		return await super.getByAttribute(objectQuery)
+	async getAllByUser(req) {
+		const { id: idUser } = req.params
+		return await this.entityRepository.getAllCompleteByUser(idUser)
 	}
 }
 

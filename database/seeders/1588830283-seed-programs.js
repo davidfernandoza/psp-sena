@@ -30,7 +30,7 @@ module.exports = {
 					total_lines: 1831.0,
 					planning_date: 1580734800 * 1000,
 					start_date: 1580734800 * 1000,
-					delivery_date: 1581015600 * 1000,
+					delivery_date: 1581015600 * 1000,					
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},

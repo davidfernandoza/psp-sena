@@ -22,6 +22,19 @@ class ProgramsRepository extends Repository {
 		})
 	}
 
+	async getAllCompleteByUser(idUser) {
+		return await super.getAll({
+			query: {
+				where: {
+					[Op.and]: [
+						{ users_id: idUser },
+						{ delivery_date: { [Op.not]: null } }
+					]
+				}
+			}
+		})
+	}
+
 	async getAllByOrganization(idOrganization) {
 		return await super.getBySql({
 			query: this.#queriesString.getAllByOrganization,
