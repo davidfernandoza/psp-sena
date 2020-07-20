@@ -41,6 +41,14 @@ class ProgramsController extends Controller {
 
 	// -------------------------------------------------------------------------+
 
+	async update(req, res) {
+		delete req.body.delivery_date
+		req.body.users_id = req.id
+		await super.update(req, res)
+	}
+
+	// -------------------------------------------------------------------------+
+
 	async getAllByOrganization(req, res) {
 		const { organization: idOrganization } = req
 		const program = await this.entityRepository.getAllByOrganization(

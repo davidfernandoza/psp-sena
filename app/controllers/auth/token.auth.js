@@ -17,6 +17,7 @@ class TokenAuth extends Controller {
 		super(TokenBlackListRepository, TokenBlackListDto, ResponseController)
 		this.JWTServices = JWTService
 		this.tokenBlackListRepository = TokenBlackListRepository
+		this._responseController = ResponseController
 	}
 
 	// Nuevo token ---------------------------------------------------------------+
@@ -37,10 +38,10 @@ class TokenAuth extends Controller {
 			if (await this.addBlackList(http_auth_token)) {
 				responseData.entity = newToken.payload
 				responseData.code = 'DON200'
-				return await this.response.send(responseData)
+				return await this.responseController.send(responseData)
 			}
 		}
-		await this.response.send(responseData)
+		await this.responseController.send(responseData)
 	}
 
 	// Eliminar token (logout) ----------------------------------------------------+
@@ -51,7 +52,7 @@ class TokenAuth extends Controller {
 		const responseData = {
 			res,
 			code: 'DON404',
-			dto: this.entityDto,
+			dto: null,
 			entity: null,
 			addSubDto: null,
 			typeDto: null
@@ -60,10 +61,10 @@ class TokenAuth extends Controller {
 			if (await this.addBlackList(http_auth_token)) {
 				responseData.entity = {}
 				responseData.code = 'DON204'
-				return await this.response.send(responseData)
+				return await this.responseController.send(responseData)
 			}
 		}
-		return await this.response.send(responseData)
+		return await this.responseController.send(responseData)
 	}
 
 	// Crear token viejo en lista negra --------------------------------------------+

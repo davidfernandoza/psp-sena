@@ -152,12 +152,12 @@ class AdminPolitic extends Politic {
 					{
 						route: '/',
 						method: 'POST',
-						status: 'disable'
+						status: 'enable'
 					},
 					{
 						route: '/:id',
 						method: 'PUT',
-						status: 'disable'
+						status: 'enable'
 					}
 				]
 			},
@@ -171,12 +171,12 @@ class AdminPolitic extends Politic {
 					{
 						route: '/',
 						method: 'POST',
-						status: 'disable'
+						status: 'enable'
 					},
 					{
 						route: '/:id',
 						method: 'PUT',
-						status: 'disable'
+						status: 'enable'
 					}
 				]
 			},
@@ -190,35 +190,35 @@ class AdminPolitic extends Politic {
 					{
 						route: '/',
 						method: 'POST',
-						status: 'disable'
+						status: 'enable'
 					},
 					{
 						route: '/:id',
 						method: 'PUT',
-						status: 'disable'
+						status: 'enable'
 					}
 				]
 			},
 			parts: {
 				subRoutes: 'all',
-				status: 'disable'
+				status: 'enable'
 			},
 			pip: {
 				subRoutes: [
 					{
 						route: '/by-program/:id',
 						method: 'GET',
-						status: 'disable'
+						status: 'enable'
 					},
 					{
 						route: '/',
 						method: 'POST',
-						status: 'disable'
+						status: 'enable'
 					},
 					{
 						route: '/:id',
 						method: 'PUT',
-						status: 'disable'
+						status: 'enable'
 					}
 				]
 			},
@@ -242,7 +242,7 @@ class AdminPolitic extends Politic {
 					{
 						route: '/:id',
 						method: 'PUT',
-						status: 'disable'
+						status: 'enable'
 					}
 				]
 			},
@@ -256,7 +256,7 @@ class AdminPolitic extends Politic {
 					{
 						route: '/:id',
 						method: 'PUT',
-						status: 'disable'
+						status: 'enable'
 					}
 				]
 			},
@@ -270,7 +270,7 @@ class AdminPolitic extends Politic {
 					{
 						route: '/:id',
 						method: 'PUT',
-						status: 'disable'
+						status: 'enable'
 					}
 				]
 			},
@@ -284,7 +284,7 @@ class AdminPolitic extends Politic {
 					{
 						route: '/:id',
 						method: 'PUT',
-						status: 'disable'
+						status: 'enable'
 					}
 				]
 			},
