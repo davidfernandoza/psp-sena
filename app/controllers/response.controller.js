@@ -5,9 +5,9 @@ class ResponseController {
 	#doneString = null
 	#app = null
 
-	constructor({DoneString, Config}) {
+	constructor({ DoneString, Config }) {
 		this.#app = Config.APP_NAME.toUpperCase()
-		
+
 		// Singleton manual del objeto de mensajes
 		if (!this.#doneString) {
 			this.#doneString = DoneString
@@ -20,9 +20,9 @@ class ResponseController {
 		 * Atributo no encontrado
 		 */
 
-		 const {res, entity, code, dto, addSubDto, typeDto} = options
-		 let returnEntity = entity
-		 let returnCode = code
+		const { res, entity, code, dto, addSubDto, typeDto } = options
+		let returnEntity = entity
+		let returnCode = code
 
 		if (!entity) {
 			this.#doneString.DON404.payload = entity
@@ -48,7 +48,7 @@ class ResponseController {
 			const dtoMap = !typeDto
 				? await dto.api(subDto)
 				: await dto[typeDto](subDto)
-				
+
 			if (code == 'DON200L' || code == 'DON201L') {
 				returnEntity = entity.map(item => morphism(dtoMap, item))
 				returnCode = code == 'DON200L' ? 'DON200' : 'DON201'

@@ -30,7 +30,7 @@ module.exports = {
 					total_lines: 1831.0,
 					planning_date: 1580734800 * 1000,
 					start_date: 1580734800 * 1000,
-					delivery_date: 1581015600 * 1000,					
+					delivery_date: 1581015600 * 1000,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -55,7 +55,8 @@ module.exports = {
 					modules_id: 2,
 					name: 'Nombre del programa - 4',
 					description: 'Descripcion del programa 4',
-					total_lines: 922.0,
+					// total_lines: 922.0,
+					total_lines: null,
 					planning_date: 1581858000 * 1000,
 					start_date: 1581858000 * 1000,
 					delivery_date: 1581944400 * 1000,

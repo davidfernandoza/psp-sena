@@ -6,39 +6,62 @@ class AnalysisToolsController {
 	#planningTimesRepository = {}
 	#defectLogRepository = {}
 	#programsController = {}
+	#phasesProcessController = {}
+	#phasesRepository = {}
 
 	constructor({
-		DefectLogRepository,
 		PlanningTimesRepository,
+		PhasesProcessController,
+		DefectLogRepository,
 		ResponseController,
+		ProgramsController,
 		AnalysisToolsDto,
-		ProgramsController
+		PhasesRepository
 	}) {
 		this.#analysisToolsDto = AnalysisToolsDto
 		this.#responseController = ResponseController
 		this.#planningTimesRepository = PlanningTimesRepository
 		this.#defectLogRepository = DefectLogRepository
 		this.#programsController = ProgramsController
+		this.#phasesProcessController = PhasesProcessController
+		this.#phasesRepository = PhasesRepository
 	}
 
 	// ------------------------------------------------------------------
 
 	async getAllByUser(req, res) {
-		const programs = await this.#programsController.getAllByUser(req),
-			arrayReturn = await this.doGenerateResponseObject(programs)
-		return await this.#responseController.send({
-			res,
-			entity: arrayReturn,
-			dto: this.#analysisToolsDto,
-			code: 'DON200',
-			addSubDto: null,
-			typeDto: null
-		})
+		const programs = await this.#programsController.getAllByUser(req)
+		if (await this.minProgramsValidator(programs)) {
+			const arrayReturn = await this.responseHandler(programs)
+			return await this.#responseController.send({
+				res,
+				entity: arrayReturn,
+				dto: this.#analysisToolsDto,
+				code: 'DON200',
+				addSubDto: null,
+				typeDto: null
+			})
+		}
 	}
 
-	async doGenerateResponseObject(arrayPrograms) {
+	// ------------------------------------------------------------------
+	async minProgramsValidator(arrayPrograms) {
 		if (arrayPrograms == [] || arrayPrograms.length < 3) throw Error('ERR404')
+		return true
+	}
+
+	// ------------------------------------------------------------------
+
+	async responseHandler(arrayPrograms) {
 		const arrayReturn = []
+
+		/*
+		 * Por cada programa que itera genera un objeto de respuesta
+		 * - se consulta los defectos y su cantidad
+		 * - se consulta la cantidad de fases
+		 * - se consulta el total de tiempo de desarrollo del programa
+		 */
+
 		for (const program of arrayPrograms) {
 			const objectReturn = {
 					program_name: program.name,
@@ -47,38 +70,34 @@ class AnalysisToolsController {
 				defects = await this.#defectLogRepository.getDefectsCountByProgram(
 					program.id
 				),
+				phases = await this.#phasesRepository.getPhasesCount(),
 				time = await this.#planningTimesRepository.getTotalCurrentTime(
 					program.id
-				),
-				defectsByPhases = await this.countDefectsByPhase(defects.rows)
+				)
+
+			// Se cuenta la cantidad de defectos agregado en cada fase
+			objectReturn.defects_injected = await this.#phasesProcessController.countAttributes(
+				{
+					attributeFromCount: 'phase_added_id',
+					amountPhases: phases,
+					body: defects.rows
+				}
+			)
+			// Se cuenta la cantidad de defectos removidos en cada fase
+			objectReturn.defects_removed = await this.#phasesProcessController.countAttributes(
+				{
+					attributeFromCount: 'phase_removed_id',
+					amountPhases: phases,
+					body: defects.rows
+				}
+			)
+
+			// Se arama el objeto y se agrega al array de respuesta
 			objectReturn.defects = defects.amountDefects
 			objectReturn.time = time
-			objectReturn.defects_injected = defectsByPhases.defectsInjected
-			objectReturn.defects_removed = defectsByPhases.defectsRemoved
 			arrayReturn.push(objectReturn)
 		}
 		return arrayReturn
-	}
-
-	async countDefectsByPhase(arrayDefects) {
-		const defectsByPhases = {},
-			defectsInjected = [],
-			defectsRemoved = []
-
-		// por cada fase se suma la cantidad de defectos que pueda tener un programa
-		for (let i = 1; i <= 6; i++) {
-			let countInjected = 0
-			let countRemoved = 0
-			for (const defect of arrayDefects) {
-				if (defect.schema.phase_added_id == i) countInjected++ // defectos agregados por fase
-				if (defect.schema.phase_removed_id == i) countRemoved++ // defectos removidos por fase
-			}
-			defectsInjected.push({ phases_id: i, amount: countInjected })
-			defectsRemoved.push({ phases_id: i, amount: countRemoved })
-		}
-		defectsByPhases.defectsInjected = defectsInjected
-		defectsByPhases.defectsRemoved = defectsRemoved
-		return defectsByPhases
 	}
 }
 

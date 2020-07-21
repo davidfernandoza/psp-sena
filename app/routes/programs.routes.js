@@ -19,6 +19,7 @@ module.exports = ({
 	 */
 	const reqPrivate = ProgramsRequest.private.bind(ProgramsRequest)
 	const reqBody = ProgramsRequest.body.bind(ProgramsRequest)
+	const reqEnd = ProgramsRequest.endProgram.bind(ProgramsRequest)
 
 	/*
 	 * Politics:
@@ -84,6 +85,18 @@ module.exports = ({
 		controller.update.bind(controller)
 	)
 
-	
+	/*
+	 * -----------------------------------------------------------------------------------*
+	 * PATCH:
+	 */
+	router.patch(
+		'/end/:id',
+		reqPrivate,
+		auth,
+		politics,
+		reqEnd,
+		controller.endProgram.bind(controller)
+	)
+
 	return router
 }

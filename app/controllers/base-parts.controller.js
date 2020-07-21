@@ -37,12 +37,14 @@ class BasePartsController extends Controller {
 
 	// -----------------------------------------------------------------------
 	async getAllByProgram(req, res) {
-		await super.getByAttribute({
+		const query = {
 			attribute: 'programs_id',
 			value: req.params.id,
 			type: 'all',
 			res: res
-		})
+		}
+		if (req.return) query.return = true
+		return await super.getByAttribute(query)
 	}
 }
 

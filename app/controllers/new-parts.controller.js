@@ -26,9 +26,9 @@ class NewPartsController extends Controller {
 		if (transaction)
 			return newPartsArray.map(item => morphism(this.entityDto.schema, item))
 		await this.responseController.send({
-			res, 
+			res,
 			entity: newPartsArray,
-			dto: this.entityDto, 
+			dto: this.entityDto,
 			code: 'DON201L',
 			addSubDto: null,
 			typeDto: null
@@ -38,12 +38,14 @@ class NewPartsController extends Controller {
 	// -------------------------------------------------------------------
 
 	async getAllByProgram(req, res) {
-		await super.getByAttribute({
+		const query = {
 			attribute: 'programs_id',
 			value: req.params.id,
 			type: 'all',
 			res: res
-		})
+		}
+		if (req.return) query.return = true
+		return await super.getByAttribute(query)
 	}
 }
 

@@ -4,9 +4,16 @@ const Controller = require(join(__dirname, './controller'))
 
 class ProgramsController extends Controller {
 	#data = {}
+	#calculateProgramController = {}
 
-	constructor({ ProgramsRepository, ProgramsDto, ResponseController }) {
+	constructor({
+		CalculateProgramController,
+		ResponseController,
+		ProgramsRepository,
+		ProgramsDto
+	}) {
 		super(ProgramsRepository, ProgramsDto, ResponseController)
+		this.#calculateProgramController = CalculateProgramController
 	}
 
 	// -------------------------------------------------------------------------+
@@ -69,6 +76,28 @@ class ProgramsController extends Controller {
 	async getAllByUser(req) {
 		const { id: idUser } = req.params
 		return await this.entityRepository.getAllCompleteByUser(idUser)
+	}
+
+	// --------------------------------------------------------------------------+
+	async endProgram(req, res) {
+		req.return = true
+		const { id: idProgram } = req.params,
+			sizes = await this.#calculateProgramController.programSize(idProgram)
+		await this.#calculateProgramController.phasesCurrentTime(idProgram)
+		await super.update({
+			return: true,
+			dto: { total_lines: 'total_lines' },
+			body: { total_lines: sizes },
+			params: { id: idProgram }
+		})
+		return await this.responseController.send({
+			res,
+			entity: {},
+			dto: {},
+			code: 'DON204',
+			addSubDto: null,
+			typeDto: null
+		})
 	}
 }
 

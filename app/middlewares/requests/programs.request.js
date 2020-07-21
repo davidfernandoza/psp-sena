@@ -3,6 +3,8 @@ const { join } = require('path')
 const Request = require(join(__dirname, './request'))
 
 class ProgramsRequest extends Request {
+	#joiValidator = {}
+
 	constructor({ JoiValidator, Config, JWTService }) {
 		const body = {
 			id: JoiValidator.number()
@@ -39,6 +41,15 @@ class ProgramsRequest extends Request {
 			delivery_date: JoiValidator.date().timestamp().allow(null).optional()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
+		this.#joiValidator = JoiValidator
+	}
+
+	async endProgram(req, res, next) {
+		const body = await this.bodyValidator(req, {
+			delivery_date: this.#joiValidator.date().timestamp().required()
+		})
+		if (body != true) await this.errorHandle(body)
+		next()
 	}
 }
 module.exports = ProgramsRequest

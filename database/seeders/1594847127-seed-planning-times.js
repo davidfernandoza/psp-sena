@@ -159,7 +159,8 @@ module.exports = {
 					phases_id: 1,
 					programs_id: 4,
 					planning_time: 60,
-					current_time: 60,
+					// current_time: 60,
+					current_time: null,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -167,7 +168,8 @@ module.exports = {
 					phases_id: 2,
 					programs_id: 4,
 					planning_time: 45,
-					current_time: 60,
+					// current_time: 60,
+					current_time: null,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -175,7 +177,8 @@ module.exports = {
 					phases_id: 3,
 					programs_id: 4,
 					planning_time: 65,
-					current_time: 96,
+					// current_time: 96,
+					current_time: null,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -183,7 +186,8 @@ module.exports = {
 					phases_id: 4,
 					programs_id: 4,
 					planning_time: 45,
-					current_time: 60,
+					// current_time: 60,
+					current_time: null,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -191,7 +195,8 @@ module.exports = {
 					phases_id: 5,
 					programs_id: 4,
 					planning_time: 35,
-					current_time: 30,
+					// current_time: 30,
+					current_time: null,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				},
@@ -199,7 +204,8 @@ module.exports = {
 					phases_id: 6,
 					programs_id: 4,
 					planning_time: 120,
-					current_time: 174,
+					// current_time: 174,
+					current_time: null,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				}

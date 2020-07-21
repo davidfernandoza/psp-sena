@@ -7,6 +7,9 @@ class PhasesRepository extends Repository {
 		super(DB, PhasesDto, Config, 'phases')
 		this.db = DB
 	}
-	// Aqui van las consultas especializadas
+	//  ----------------------------------------------------------------------
+	async getPhasesCount() {
+		return await this.db[this.entity].count()
+	}
 }
 module.exports = PhasesRepository

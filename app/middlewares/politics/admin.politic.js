@@ -243,6 +243,11 @@ class AdminPolitic extends Politic {
 						route: '/:id',
 						method: 'PUT',
 						status: 'enable'
+					},
+					{
+						route: '/end/:id',
+						method: 'PATCH',
+						status: 'enable'
 					}
 				]
 			},

@@ -19,7 +19,9 @@ class DefectLogRepository extends Repository {
 					programs_id: idProgram
 				}
 			}),
-			defectsList = await defects.rows.map(item => morphism(this.#dto, item))
+			defectsList = await defects.rows.map(item =>
+				morphism(this.#dto.schema, item)
+			)
 
 		return {
 			amountDefects: defects.count,

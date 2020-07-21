@@ -127,6 +127,7 @@ const { UsersAuth, TokenAuth } = require(join(__dirname, './controllers/auth'))
 const {
 	AnalysisToolsController,
 	BasePartsController,
+	CalculateProgramController,
 	DefectLogController,
 	EstimatesController,
 	ExperiencesController,
@@ -136,6 +137,7 @@ const {
 	NewPartsController,
 	OrganizationsController,
 	PlanningTimesController,
+	PhasesProcessController,
 	PartsController,
 	PipController,
 	ProgramsController,
@@ -310,6 +312,7 @@ container
 	.register({
 		AnalysisToolsController: asClass(AnalysisToolsController).singleton(),
 		BasePartsController: asClass(BasePartsController).singleton(),
+		CalculateProgramController: asClass(CalculateProgramController).singleton(),
 		DefectLogController: asClass(DefectLogController).singleton(),
 		EstimatesController: asClass(EstimatesController).singleton(),
 		ExperiencesController: asClass(ExperiencesController).singleton(),
@@ -320,6 +323,7 @@ container
 		OrganizationsController: asClass(OrganizationsController).singleton(),
 		PartsController: asClass(PartsController).singleton(),
 		PlanningTimesController: asClass(PlanningTimesController).singleton(),
+		PhasesProcessController: asClass(PhasesProcessController).singleton(),
 		PipController: asClass(PipController).singleton(),
 		ProgramsController: asClass(ProgramsController).singleton(),
 		ProjectsUsersController: asClass(ProjectsUsersController).singleton(),
