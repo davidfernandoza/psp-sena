@@ -22,6 +22,13 @@ class ErrorString {
 			message: 'There are not enough permissions'
 		}
 
+		this.PRO400 = {
+			status: 400,
+			name: 'Bad Request',
+			code: 'PRO400',
+			message: 'Current program does not meet records to end'
+		}
+
 		this.ERR404 = {
 			status: 404,
 			name: 'Not Found',

@@ -72,6 +72,19 @@ module.exports = {
 					number_methods_current: 15,
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
+				},
+				//  --------
+
+				{
+					programs_id: 5,
+					types_sizes_id: 13,
+					name: 'Parte nueva 1 programa 5',
+					planned_lines: 290.07,
+					number_methods_planned: 18,
+					current_lines: 250.0,
+					number_methods_current: 15,
+					created_at: new Date().toDateString(),
+					updated_at: new Date().toDateString()
 				}
 				//  --------
 			],
