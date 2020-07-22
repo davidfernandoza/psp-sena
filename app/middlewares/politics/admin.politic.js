@@ -320,6 +320,15 @@ class AdminPolitic extends Politic {
 						status: 'enable'
 					}
 				]
+			},
+			pps: {
+				subRoutes: [
+					{
+						route: '/by-program/:id',
+						method: 'GET',
+						status: 'enable'
+					}
+				]
 			}
 		}
 

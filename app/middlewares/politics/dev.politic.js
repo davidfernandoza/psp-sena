@@ -324,6 +324,15 @@ class DevPolitic extends Politic {
 						authParameter: 'id'
 					}
 				]
+			},
+			pps: {
+				subRoutes: [
+					{
+						route: '/by-program/:id',
+						method: 'GET',
+						status: 'enable'
+					}
+				]
 			}
 		}
 		super(rol, authRol, baseUrl, permissions)

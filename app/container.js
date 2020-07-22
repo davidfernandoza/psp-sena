@@ -51,6 +51,7 @@ const OrganizationsRoutes = require(join(
 ))
 const PartsRoutes = require(join(__dirname, './routes/parts.routes'))
 const PipRoutes = require(join(__dirname, './routes/pip.routes'))
+const PPSRoutes = require(join(__dirname, './routes/pps.routes'))
 const ProgramsRoutes = require(join(__dirname, './routes/programs.routes'))
 const ProjectsRoutes = require(join(__dirname, './routes/projects.routes'))
 const ReusablePartsRoutes = require(join(
@@ -107,6 +108,7 @@ const {
 	OwnersRequests,
 	PartsRequest,
 	PipRequest,
+	PPSRequest,
 	ProgramsRequest,
 	ProjectsUsersRequest,
 	ProjectsRequest,
@@ -140,6 +142,7 @@ const {
 	PhasesProcessController,
 	PartsController,
 	PipController,
+	PPSController,
 	ProgramsController,
 	ProjectsUsersController,
 	ProjectsController,
@@ -194,6 +197,7 @@ const {
 	PartsDto,
 	PhasesDto,
 	PipDto,
+	PPSDto,
 	ProgramsDto,
 	PlanningTimesDto,
 	ProjectsUsersDto,
@@ -259,6 +263,7 @@ container
 		OrganizationsRoutes: asFunction(OrganizationsRoutes).singleton(),
 		PartsRoutes: asFunction(PartsRoutes).singleton(),
 		PipRoutes: asFunction(PipRoutes).singleton(),
+		PPSRoutes: asFunction(PPSRoutes).singleton(),
 		ProgramsRoutes: asFunction(ProgramsRoutes).singleton(),
 		ProjectsRoutes: asFunction(ProjectsRoutes).singleton(),
 		ReusablePartsRoutes: asFunction(ReusablePartsRoutes).singleton(),
@@ -325,6 +330,7 @@ container
 		PlanningTimesController: asClass(PlanningTimesController).singleton(),
 		PhasesProcessController: asClass(PhasesProcessController).singleton(),
 		PipController: asClass(PipController).singleton(),
+		PPSController: asClass(PPSController).singleton(),
 		ProgramsController: asClass(ProgramsController).singleton(),
 		ProjectsUsersController: asClass(ProjectsUsersController).singleton(),
 		ProjectsController: asClass(ProjectsController).singleton(),
@@ -372,6 +378,7 @@ container
 		OwnersRequests: asClass(OwnersRequests).singleton(),
 		PartsRequest: asClass(PartsRequest).singleton(),
 		PipRequest: asClass(PipRequest).singleton(),
+		PPSRequest: asClass(PPSRequest).singleton(),
 		ProgramsRequest: asClass(ProgramsRequest).singleton(),
 		ProjectsUsersRequest: asClass(ProjectsUsersRequest).singleton(),
 		ProjectsRequest: asClass(ProjectsRequest).singleton(),
@@ -426,6 +433,7 @@ container
 		PartsDto: asClass(PartsDto).singleton(),
 		PlanningTimesDto: asClass(PlanningTimesDto).singleton(),
 		PipDto: asClass(PipDto).singleton(),
+		PPSDto: asClass(PPSDto).singleton(),
 		ProgramsDto: asClass(ProgramsDto).singleton(),
 		ProjectsUsersDto: asClass(ProjectsUsersDto).singleton(),
 		ProjectsDto: asClass(ProjectsDto).singleton(),
