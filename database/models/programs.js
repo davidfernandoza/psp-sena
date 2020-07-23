@@ -131,11 +131,11 @@ module.exports = (sequelize, DataTypes) => {
 			as: 'reusable_parts_2'
 		})
 
-		// Un programs se registra en muchos planning_times (1:M)
-		models.programs.hasMany(models.planning_times, {
+		// Un programs se registra en muchos planning (1:M)
+		models.programs.hasMany(models.plannings, {
 			foreignKey: 'programs_id', // a donde va
 			sourceKey: 'id', // de donde se obtiene
-			as: 'planning_times'
+			as: 'plannings'
 		})
 	}
 

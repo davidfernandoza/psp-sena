@@ -5,26 +5,29 @@ class CalculateProgramController {
 	#basePartsController = {}
 	#reusablePartsController = {}
 	#timeLogController = {}
-	#planningTimesController = {}
+	#planningController = {}
 	#phasesRepository = {}
 	#phasesProcessController = {}
+	#defectLogController = {}
 
 	constructor({
 		NewPartsController,
 		BasePartsController,
 		ReusablePartsController,
 		TimeLogController,
-		PlanningTimesController,
+		PlanningController,
 		PhasesProcessController,
+		DefectLogController,
 		PhasesRepository
 	}) {
 		this.#basePartsController = BasePartsController
 		this.#newPartsController = NewPartsController
 		this.#reusablePartsController = ReusablePartsController
-		this.#planningTimesController = PlanningTimesController
+		this.#planningController = PlanningController
 		this.#timeLogController = TimeLogController
 		this.#phasesRepository = PhasesRepository
 		this.#phasesProcessController = PhasesProcessController
+		this.#defectLogController = DefectLogController
 	}
 
 	/*
@@ -69,20 +72,28 @@ class CalculateProgramController {
 	}
 
 	// ----------------------------------------------------------------------------------+
-	async phasesCurrentTime(idProgram, transaction) {
+	/*
+	 * Este metodo calcula:
+	 * - El tiempo total por fase
+	 * - Los defectos totales por fase
+	 * - Actualiza la planeacion del programa
+	 */
+	async phasesCurrentAttributes(idProgram, transaction) {
 		try {
-			const planningTimes = await this.#planningTimesController.getAllByProgram(
-				{
-					return: true,
-					params: { id: idProgram }
-				}
-			)
+			const plannings = await this.#planningController.getAllByProgram({
+				return: true,
+				params: { id: idProgram }
+			})
 			const phases = await this.#phasesRepository.getPhasesCount()
 			let timeLogs = await this.#timeLogController.getAllByProgram({
 				return: true,
 				params: { id: idProgram }
 			})
-			if (timeLogs && planningTimes) {
+			let defectLogs = await this.#defectLogController.getAllByProgram({
+				return: true,
+				params: { id: idProgram }
+			})
+			if (timeLogs && plannings && defectLogs) {
 				const totalTimeLog = await this.#phasesProcessController.countAttributes(
 					{
 						attributeFromCount: 'phases_id',
@@ -92,30 +103,55 @@ class CalculateProgramController {
 					}
 				)
 
-				// Insercion en planeacion de tiempos que depende del numero de fases
-				for (let i = 1; i <= phases; i++) {
-					let iterator = i - 1
-
-					// Se valida si el registro de log de tiempo coincide con la fase actual en la iteracion
-					if (totalTimeLog[iterator].phases_id == i) {
-						const amount = totalTimeLog[iterator].amount
-						const phases_id = totalTimeLog[iterator].phases_id
-
-						// Se busca el registro de planeacion de tiempos con la misma fase del log de tiempos
-						for (const item of planningTimes) {
-							if (item.phases_id == phases_id) {
-								/*
-								 * Se actualiza el registro encontrado con la suma total de la fase
-								 */
-								await this.#planningTimesController.update({
-									params: { id: item.id },
-									body: { current_time: amount },
-									dto: { current_time: 'current_time' },
-									transaction
-								})
-							}
-						}
+				const totalDefectLog = await this.#phasesProcessController.countAttributes(
+					{
+						attributeFromCount: 'phase_added_id',
+						amountPhases: phases,
+						body: defectLogs
 					}
+				)
+
+				// Se indexa los arrays de tiempos, defectos y planeaciones con el id de la fase
+				// Esto es lo mas lindo que hay 😍
+
+				const indexTime = totalTimeLog.reduce(
+					(acumulator, item) => ({
+						...acumulator,
+						[item.phases_id]: item
+					}),
+					0
+				)
+
+				const indexPlannig = plannings.reduce(
+					(acumulator, item) => ({
+						...acumulator,
+						[item.phases_id]: item
+					}),
+					0
+				)
+
+				const indexDefects = totalDefectLog.reduce(
+					(acumulator, item) => ({
+						...acumulator,
+						[item.phases_id]: item
+					}),
+					0
+				)
+
+				// Se actualiza la planeacion con los datos finales
+				for (let i = 1; i <= phases; i++) {
+					await this.#planningController.update({
+						params: { id: indexPlannig[i].id },
+						body: {
+							current_time: indexTime[i].amount,
+							current_defect: indexDefects[i].amount
+						},
+						dto: {
+							current_time: 'current_time',
+							current_defect: 'current_defect'
+						},
+						transaction
+					})
 				}
 				return true
 			} else {

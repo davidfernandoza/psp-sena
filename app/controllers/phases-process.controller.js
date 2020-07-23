@@ -2,7 +2,7 @@
 
 class PhasesProcessController {
 	/*
-	 * Cuenta loas atributos o acumula el valor de los atributos que hay por fases
+	 * Cuenta los atributos o acumula el valor de los atributos que hay por fases
 	 */
 	async countAttributes(object) {
 		const { attributeFromCount, amountPhases, body } = object,

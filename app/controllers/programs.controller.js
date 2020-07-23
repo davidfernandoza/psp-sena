@@ -89,7 +89,7 @@ class ProgramsController extends Controller {
 			const { id: idProgram } = req.params,
 				sizes = await this.#calculateProgramController.programSize(idProgram)
 			if (
-				await this.#calculateProgramController.phasesCurrentTime(
+				await this.#calculateProgramController.phasesCurrentAttributes(
 					idProgram,
 					transaction
 				)

@@ -8,7 +8,7 @@ class PartsDto extends Dto {
 			base_parts: 'base_parts',
 			reusable_parts: 'reusable_parts',
 			new_parts: 'new_parts',
-			planning_times: 'planning_times'
+			planning: 'planning'
 		}
 		super(schema)
 	}

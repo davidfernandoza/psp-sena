@@ -3,19 +3,19 @@ const { join } = require('path')
 const Controller = require(join(__dirname, './controller'))
 const { morphism } = require('morphism') // morphism(dto, entity)
 
-class PlanningTimesController extends Controller {
+class PlanningController extends Controller {
 	constructor({
-		PlanningTimesRepository,
-		PlanningTimesDto,
+		PlanningRepository,
+		PlanningDto,
 		ResponseController
 	}) {
-		super(PlanningTimesRepository, PlanningTimesDto, ResponseController)
+		super(PlanningRepository, PlanningDto, ResponseController)
 	}
 
 	// -----------------------------------------------------------------------
 
 	async create(req, res) {
-		const planningTimesArray = [],
+		const planningArray = [],
 			transaction = !req.transaction ? null : req.transaction
 
 		for (const item of req.body) {
@@ -25,15 +25,15 @@ class PlanningTimesController extends Controller {
 				transaction: transaction
 			})
 
-			planningTimesArray.push(newDataReturn)
+			planningArray.push(newDataReturn)
 		}
 		if (transaction)
-			return planningTimesArray.map(item =>
+			return planningArray.map(item =>
 				morphism(this.entityDto.schema, item)
 			)
 		await this.responseController.send({
 			res,
-			entity: planningTimesArray,
+			entity: planningArray,
 			dto: this.entityDto,
 			code: 'DON201L',
 			addSubDto: null,
@@ -54,4 +54,4 @@ class PlanningTimesController extends Controller {
 	}
 }
 
-module.exports = PlanningTimesController
+module.exports = PlanningController

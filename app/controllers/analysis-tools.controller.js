@@ -3,14 +3,14 @@
 class AnalysisToolsController {
 	#analysisToolsDto = {}
 	#responseController = {}
-	#planningTimesRepository = {}
+	#planningRepository = {}
 	#defectLogRepository = {}
 	#programsController = {}
 	#phasesProcessController = {}
 	#phasesRepository = {}
 
 	constructor({
-		PlanningTimesRepository,
+		PlanningRepository,
 		PhasesProcessController,
 		DefectLogRepository,
 		ResponseController,
@@ -20,7 +20,7 @@ class AnalysisToolsController {
 	}) {
 		this.#analysisToolsDto = AnalysisToolsDto
 		this.#responseController = ResponseController
-		this.#planningTimesRepository = PlanningTimesRepository
+		this.#planningRepository = PlanningRepository
 		this.#defectLogRepository = DefectLogRepository
 		this.#programsController = ProgramsController
 		this.#phasesProcessController = PhasesProcessController
@@ -45,6 +45,7 @@ class AnalysisToolsController {
 	}
 
 	// ------------------------------------------------------------------
+	// minimos 3 para enviar graficas
 	async minProgramsValidator(arrayPrograms) {
 		if (arrayPrograms == [] || arrayPrograms.length < 3) throw Error('ERR404')
 		return true
@@ -71,9 +72,7 @@ class AnalysisToolsController {
 					program.id
 				),
 				phases = await this.#phasesRepository.getPhasesCount(),
-				time = await this.#planningTimesRepository.getTotalCurrentTime(
-					program.id
-				)
+				time = await this.#planningRepository.getTotalCurrentTime(program.id)
 
 			// Se cuenta la cantidad de defectos agregado en cada fase
 			objectReturn.defects_injected = await this.#phasesProcessController.countAttributes(

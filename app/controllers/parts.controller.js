@@ -4,13 +4,13 @@ class PartsController {
 	#basePartsController = {}
 	#newPartsController = {}
 	#reusablePartsController = {}
-	#planningTimesController = {}
+	#planningController = {}
 	#responseController = {}
 	#dto = {}
 
 	constructor({
 		ReusablePartsController,
-		PlanningTimesController,
+		PlanningController,
 		BasePartsController,
 		NewPartsController,
 		ResponseController,
@@ -22,7 +22,7 @@ class PartsController {
 		this.#newPartsController = NewPartsController
 		this.#reusablePartsController = ReusablePartsController
 		this.#responseController = ResponseController
-		this.#planningTimesController = PlanningTimesController
+		this.#planningController = PlanningController
 		this.#dto = PartsDto
 	}
 
@@ -46,8 +46,8 @@ class PartsController {
 			temp.body = req.body.reusable_parts
 			temp.res.reusable_parts = await this.#reusablePartsController.create(temp)
 
-			temp.body = req.body.planning_times
-			temp.res.planning_times = await this.#planningTimesController.create(temp)
+			temp.body = req.body.planning
+			temp.res.planning = await this.#planningController.create(temp)
 
 			//Respuesta exitosa
 

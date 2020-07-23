@@ -1,7 +1,7 @@
 'use strict'
 module.exports = {
 	up: (queryInterface, Sequelize) => {
-		return queryInterface.createTable('planning_times', {
+		return queryInterface.createTable('plannings', {
 			id: {
 				type: Sequelize.INTEGER,
 				allowNull: false,
@@ -24,11 +24,13 @@ module.exports = {
 			},
 			planning_time: { type: Sequelize.INTEGER, allowNull: false },
 			current_time: { type: Sequelize.INTEGER },
+			planning_defect: { type: Sequelize.INTEGER, allowNull: false },
+			current_defect: { type: Sequelize.INTEGER },
 			created_at: { allowNull: false, type: Sequelize.DATE },
 			updated_at: { allowNull: false, type: Sequelize.DATE }
 		})
 	},
 	down: queryInterface => {
-		return queryInterface.dropTable('planning_times')
+		return queryInterface.dropTable('plannings')
 	}
 }

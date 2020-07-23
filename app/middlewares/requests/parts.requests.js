@@ -6,7 +6,7 @@ class PartsRequest extends Request {
 	constructor({ JoiValidator, Config, JWTService }) {
 		//  ---------------------------------------------------------------------
 
-		const planningTimes = JoiValidator.object().keys({
+		const planning = JoiValidator.object().keys({
 			id: JoiValidator.number()
 				.integer()
 				.min(0)
@@ -29,6 +29,17 @@ class PartsRequest extends Request {
 				.max(99999999990)
 				.required(),
 			current_time: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
+				.allow(null)
+				.optional(),
+			planning_defect: JoiValidator.number()
+				.integer()
+				.min(0)
+				.max(99999999990)
+				.required(),
+			current_defect: JoiValidator.number()
 				.integer()
 				.min(0)
 				.max(99999999990)
@@ -160,7 +171,7 @@ class PartsRequest extends Request {
 			base_parts: JoiValidator.array().items(baseParts),
 			reusable_parts: JoiValidator.array().items(reusableParts),
 			new_parts: JoiValidator.array().items(newParts).required(),
-			planning_times: JoiValidator.array().items(planningTimes).required()
+			planning: JoiValidator.array().items(planning).required()
 		}
 		super(body, JoiValidator, Config.CSRF_TOKEN, JWTService)
 	}

@@ -2,9 +2,9 @@
 const { join } = require('path')
 const Repository = require(join(__dirname, './repository'))
 
-class PlanningTimesRepository extends Repository {
-	constructor({ DB, PlanningTimesDto, Config }) {
-		super(DB, PlanningTimesDto, Config, 'planning_times')
+class PlanningRepository extends Repository {
+	constructor({ DB, PlanningDto, Config }) {
+		super(DB, PlanningDto, Config, 'plannings')
 		this.db = DB
 	}
 	async getTotalCurrentTime(idProgram) {
@@ -13,4 +13,4 @@ class PlanningTimesRepository extends Repository {
 		})
 	}
 }
-module.exports = PlanningTimesRepository
+module.exports = PlanningRepository
