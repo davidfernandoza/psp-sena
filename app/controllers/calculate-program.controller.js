@@ -93,7 +93,9 @@ class CalculateProgramController {
 				return: true,
 				params: { id: idProgram }
 			})
-			if (timeLogs && plannings && defectLogs) {
+			if (timeLogs && plannings) {
+				let totalDefectLog = [],
+					indexDefects = {}
 				const totalTimeLog = await this.#phasesProcessController.countAttributes(
 					{
 						attributeFromCount: 'phases_id',
@@ -103,17 +105,25 @@ class CalculateProgramController {
 					}
 				)
 
-				const totalDefectLog = await this.#phasesProcessController.countAttributes(
-					{
+				// Validar si tiene defectos para sumar
+				if (defectLogs) {
+					totalDefectLog = await this.#phasesProcessController.countAttributes({
 						attributeFromCount: 'phase_added_id',
 						amountPhases: phases,
 						body: defectLogs
-					}
-				)
+					})
+
+					indexDefects = totalDefectLog.reduce(
+						(acumulator, item) => ({
+							...acumulator,
+							[item.phases_id]: item
+						}),
+						0
+					)
+				}
 
 				// Se indexa los arrays de tiempos, defectos y planeaciones con el id de la fase
 				// Esto es lo mas lindo que hay 😍
-
 				const indexTime = totalTimeLog.reduce(
 					(acumulator, item) => ({
 						...acumulator,
@@ -130,21 +140,14 @@ class CalculateProgramController {
 					0
 				)
 
-				const indexDefects = totalDefectLog.reduce(
-					(acumulator, item) => ({
-						...acumulator,
-						[item.phases_id]: item
-					}),
-					0
-				)
-
 				// Se actualiza la planeacion con los datos finales
 				for (let i = 1; i <= phases; i++) {
+					const defect = totalDefectLog.length > 0 ? indexDefects[i].amount : 0
 					await this.#planningController.update({
 						params: { id: indexPlannig[i].id },
 						body: {
 							current_time: indexTime[i].amount,
-							current_defect: indexDefects[i].amount
+							current_defect: defect
 						},
 						dto: {
 							current_time: 'current_time',
