@@ -24,12 +24,12 @@ module.exports = {
 				{
 					// table_id: 2,
 					organizations_id: 1,
-					first_name: 'Esteban',
-					last_name: 'Pescador',
-					email: 'desarrollador_2@gmail.com',
+					first_name: 'Juan Camilo',
+					last_name: 'Agudelo Franco',
+					email: 'jcagudelo42@misena.edu.co',
 					password: hash,
 					rol: 'DEV',
-					phone: '+57-3893279842',
+					phone: '+57-3146432187',
 					created_at: new Date().toDateString(),
 					updated_at: new Date().toDateString()
 				}
