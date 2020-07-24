@@ -47,7 +47,7 @@ class AnalysisToolsController {
 	// ------------------------------------------------------------------
 	// minimos 3 para enviar graficas
 	async minProgramsValidator(arrayPrograms) {
-		if (arrayPrograms == [] || arrayPrograms.length < 3) throw Error('ERR404')
+		if (!arrayPrograms || arrayPrograms.length < 3) throw Error('ERR404')
 		return true
 	}
 
@@ -74,22 +74,28 @@ class AnalysisToolsController {
 				phases = await this.#phasesRepository.getPhasesCount(),
 				time = await this.#planningRepository.getTotalCurrentTime(program.id)
 
-			// Se cuenta la cantidad de defectos agregado en cada fase
-			objectReturn.defects_injected = await this.#phasesProcessController.countAttributes(
-				{
-					attributeFromCount: 'phase_added_id',
-					amountPhases: phases,
-					body: defects.rows
-				}
-			)
-			// Se cuenta la cantidad de defectos removidos en cada fase
-			objectReturn.defects_removed = await this.#phasesProcessController.countAttributes(
-				{
-					attributeFromCount: 'phase_removed_id',
-					amountPhases: phases,
-					body: defects.rows
-				}
-			)
+			// Validar si existen defectos
+			if (defects.amountDefects != 0) {
+				// Se cuenta la cantidad de defectos agregado en cada fase
+				objectReturn.defects_injected = await this.#phasesProcessController.countAttributes(
+					{
+						attributeFromCount: 'phase_added_id',
+						amountPhases: phases,
+						body: defects.rows
+					}
+				)
+				// Se cuenta la cantidad de defectos removidos en cada fase
+				objectReturn.defects_removed = await this.#phasesProcessController.countAttributes(
+					{
+						attributeFromCount: 'phase_removed_id',
+						amountPhases: phases,
+						body: defects.rows
+					}
+				)
+			} else {
+				objectReturn.defects_injected = []
+				objectReturn.defects_removed = []
+			}
 
 			// Se arama el objeto y se agrega al array de respuesta
 			objectReturn.defects = defects.amountDefects

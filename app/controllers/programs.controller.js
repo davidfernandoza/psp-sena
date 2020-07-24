@@ -87,18 +87,22 @@ class ProgramsController extends Controller {
 
 		try {
 			const { id: idProgram } = req.params,
-				sizes = await this.#calculateProgramController.programSize(idProgram)
-			if (
-				await this.#calculateProgramController.phasesCurrentAttributes(
+				{ delivery_date } = req.body,
+				sizes = await this.#calculateProgramController.programSize(idProgram),
+				time = await this.#calculateProgramController.phasesCurrentAttributes(
 					idProgram,
 					transaction
 				)
-			) {
-				// Actualiza el programa con los valores de tamaño calculados
+
+			if (sizes == 0) throw 'SZS400'
+			if (time) {
+				/*
+				 * Actualiza el programa con los valores de tamaño calculados
+				 */
 				await super.update({
 					return: true,
-					dto: { total_lines: 'total_lines' },
-					body: { total_lines: sizes },
+					dto: { total_lines: 'total_lines', delivery_date: 'delivery_date' },
+					body: { total_lines: sizes, delivery_date },
 					params: { id: idProgram },
 					transaction
 				})
@@ -112,7 +116,9 @@ class ProgramsController extends Controller {
 					typeDto: null
 				})
 			} else {
-				throw 'PRO400'
+				// Valida si no tiene los tiempos delta
+				if (time == null) throw 'TIM400'
+				else throw 'PRO400' // Valida si le hace falta los tiempos o planeaciones
 			}
 		} catch (error) {
 			await transaction.rollback()

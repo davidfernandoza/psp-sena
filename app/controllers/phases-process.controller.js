@@ -12,24 +12,29 @@ class PhasesProcessController {
 				: object.attributeAcumulator
 
 		// Por cada fase se suma la cantidad de atributos
-		for (let i = 1; i <= amountPhases; i++) {
-			let count = 0
-			let acomulator = 0
-			for (const defect of body) {
-				if (!attributeAcumulator) {
-					if (defect[attributeFromCount] == i) count++
-				} else {
-					/*
-					 * Acomulador
-					 */
-					if (defect[attributeFromCount] == i)
+		try {
+			for (let i = 1; i <= amountPhases; i++) {
+				let count = 0
+				let acomulator = 0
+				for (const defect of body) {
+					if (!attributeAcumulator) {
+						if (defect[attributeFromCount] == i) count++
+					} else {
+						/*
+						 * Acomulador
+						 */
+						if (defect[attributeFromCount] == i)
+							if (!defect[attributeAcumulator]) throw 0 // No hay atributo para sumar
 						acomulator += defect[attributeAcumulator]
+					}
 				}
+				const amount = !attributeAcumulator ? count : acomulator
+				defects.push({ phases_id: i, amount })
 			}
-			const amount = !attributeAcumulator ? count : acomulator
-			defects.push({ phases_id: i, amount })
+			return defects
+		} catch (error) {
+			return null
 		}
-		return defects
 	}
 }
 

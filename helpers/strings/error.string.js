@@ -29,6 +29,20 @@ class ErrorString {
 			message: 'Current program does not meet records to end'
 		}
 
+		this.SZS400 = {
+			status: 400,
+			name: 'Bad Request',
+			code: 'SZS400',
+			message: 'The program does not have the current parts'
+		}
+
+		this.TIM400 = {
+			status: 400,
+			name: 'Bad Request',
+			code: 'TIM400',
+			message: 'The program does not have the delta times'
+		}
+
 		this.ERR404 = {
 			status: 404,
 			name: 'Not Found',

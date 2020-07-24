@@ -52,23 +52,35 @@ class CalculateProgramController {
 			params: { id: idProgram }
 		})
 
-		let addLines = 0
-		let subLines = 0
-		if (newPats)
-			for (const item of newPats) {
-				addLines += item.current_lines
-			}
-		if (reusableParts)
-			for (const item of reusableParts) {
-				addLines += item.current_lines
-			}
-		if (baseParts)
-			for (const item of baseParts) {
-				addLines += item.current_lines_base
-				addLines += item.current_lines_added
-				subLines += item.current_lines_deleted
-			}
-		return addLines - subLines
+		try {
+			let addLines = 0
+			let subLines = 0
+			if (newPats)
+				for (const item of newPats) {
+					if (!item.current_lines) throw 0
+					addLines += item.current_lines
+				}
+			if (reusableParts)
+				for (const item of reusableParts) {
+					if (!item.current_lines) throw 0
+					addLines += item.current_lines
+				}
+			if (baseParts)
+				for (const item of baseParts) {
+					if (
+						!item.current_lines_base ||
+						!item.current_lines_added ||
+						!item.current_lines_deleted
+					)
+						throw 0
+					addLines += item.current_lines_base
+					addLines += item.current_lines_added
+					subLines += item.current_lines_deleted
+				}
+			return addLines - subLines
+		} catch (error) {
+			return 0
+		}
 	}
 
 	// ----------------------------------------------------------------------------------+
@@ -104,6 +116,8 @@ class CalculateProgramController {
 						body: timeLogs
 					}
 				)
+
+				if (!totalTimeLog) throw 'TimeNull'
 
 				// Validar si tiene defectos para sumar
 				if (defectLogs) {
@@ -161,6 +175,9 @@ class CalculateProgramController {
 				return false
 			}
 		} catch (error) {
+			if (error == 'TimeNull') {
+				return null
+			}
 			return false
 		}
 	}
