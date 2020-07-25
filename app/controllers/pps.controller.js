@@ -46,6 +46,7 @@ class PPSController {
 
 	async getAllByProgram(req, res) {
 		const response = {},
+			arryResponse = [],
 			{ id: idProgram } = req.params
 		const tempData = await this.queryDataProgram(idProgram),
 			program_lines = await this.countLinesFromParts(tempData),
@@ -64,12 +65,13 @@ class PPSController {
 		response.time_phase = time_phase
 		response.defects_injected = defects_injected
 		response.defects_removed = defects_removed
+		arryResponse.push(response)
 
 		await this.#responseController.send({
 			res,
-			entity: response,
+			entity: arryResponse,
 			dto: this.#PPSDto,
-			code: 'DON200',
+			code: 'DON200L',
 			addSubDto: null,
 			typeDto: null
 		})
