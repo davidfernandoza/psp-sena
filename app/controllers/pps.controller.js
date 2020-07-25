@@ -46,8 +46,8 @@ class PPSController {
 
 	async getAllByProgram(req, res) {
 		const response = {},
-			{ id: idProgram } = req.params,
-			tempData = await this.queryDataProgram(idProgram),
+			{ id: idProgram } = req.params
+		const tempData = await this.queryDataProgram(idProgram),
 			program_lines = await this.countLinesFromParts(tempData),
 			time_phase = await this.countTimesFromPhases(tempData),
 			defects_injected = await this.defectCountHandler(
@@ -62,14 +62,14 @@ class PPSController {
 		response.language = tempData.language.name
 		response.program_lines = program_lines
 		response.time_phase = time_phase
-		response.time_phase = defects_injected
-		response.time_phase = defects_removed
+		response.defects_injected = defects_injected
+		response.defects_removed = defects_removed
 
 		await this.#responseController.send({
 			res,
 			entity: response,
 			dto: this.#PPSDto,
-			code: 'DON200L',
+			code: 'DON200',
 			addSubDto: null,
 			typeDto: null
 		})
@@ -80,30 +80,38 @@ class PPSController {
 	async queryDataProgram(idProgram) {
 		const tempData = {}
 		tempData.programs = await this.#programsController.get({
+			return: true,
 			params: { id: idProgram }
 		})
 		if (!tempData.programs) throw Error('ERR404')
 		tempData.language = await this.#languagesController.get({
+			return: true,
 			params: { id: tempData.programs.languages_id }
 		})
 		tempData.newParts = await this.#newPartsController.getAllByProgram({
+			return: true,
 			params: { id: idProgram }
 		})
 		tempData.baseParts = await this.#basePartsController.getAllByProgram({
+			return: true,
 			params: { id: idProgram }
 		})
 		tempData.reusableParts = await this.#reusablePartsController.getAllByProgram(
 			{
+				return: true,
 				params: { id: idProgram }
 			}
 		)
 		tempData.timeLogs = await this.#timeLogController.getAllByProgram({
+			return: true,
 			params: { id: idProgram }
 		})
 		tempData.defectLogs = await this.#defectLogController.getAllByProgram({
+			return: true,
 			params: { id: idProgram }
 		})
 		tempData.planning = await this.#planningController.getAllByProgram({
+			return: true,
 			params: { id: idProgram }
 		})
 		tempData.phases = await this.#phasesRepository.getPhasesCount()
@@ -150,8 +158,8 @@ class PPSController {
 
 		if (newParts)
 			for (const item of newParts) {
-				lines.new_planned_lines += item.planning_time
-				lines.new_current_lines += item.current_time
+				lines.new_planned_lines += item.planned_lines
+				lines.new_current_lines += item.current_lines
 			}
 
 		return lines
@@ -240,7 +248,7 @@ class PPSController {
 			// Que porcentaje de ese tiempo equivale al total del tiempo usado
 			objectTimePhase.percent = !timeLogs
 				? 0
-				: (to_date_time[i].amount / sumToDateTime) * 100 * 100
+				: (to_date_time[i].amount / sumToDateTime) * 100
 
 			time_phase.push(objectTimePhase)
 		}
@@ -260,8 +268,7 @@ class PPSController {
 		 */
 		if (defectLogs) {
 			to_date_defect = await this.#phasesProcessController.countAttributes({
-				attributeFromCount: 'phases_id',
-				attributeAcumulator: type,
+				attributeFromCount: type,
 				amountPhases: phases,
 				body: defectLogs
 			})
@@ -338,7 +345,7 @@ class PPSController {
 			// Que porcentaje de esos defectos equivale al total del defectos procesados
 			objectDefectPhase.percent = !defectLogs
 				? 0
-				: (to_date_defect[i].amount / sumToDateDefect) * 100 * 100
+				: (to_date_defect[i].amount / sumToDateDefect) * 100
 
 			defect_phase.push(objectDefectPhase)
 		}
