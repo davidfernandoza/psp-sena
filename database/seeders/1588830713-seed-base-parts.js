@@ -10,7 +10,7 @@ module.exports = {
 					// 300
 					programs_id: 2,
 					programs_base_id: 1,
-					planned_lines_base: 510.0,
+					planned_lines_base: 510.1,
 					planned_lines_deleted: 53.0,
 					planned_lines_edits: 50.0,
 					planned_lines_added: 75.0,

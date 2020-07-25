@@ -23,9 +23,15 @@ class PhasesProcessController {
 						/*
 						 * Acomulador
 						 */
-						if (defect[attributeFromCount] == i)
-							if (!defect[attributeAcumulator]) throw 0 // No hay atributo para sumar
-						acomulator += defect[attributeAcumulator]
+						if (defect[attributeFromCount] == i) {
+							if (
+								!defect[attributeAcumulator] &&
+								defect[attributeAcumulator] != 0
+							) {
+								throw 0 // No hay atributo para sumar
+							}
+							acomulator += defect[attributeAcumulator]
+						}
 					}
 				}
 				const amount = !attributeAcumulator ? count : acomulator
