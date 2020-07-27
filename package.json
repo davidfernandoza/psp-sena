@@ -10,7 +10,8 @@
     "db-init": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "db-init-hard": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "db-refresh": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
-    "db-refresh-hard": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
+    "db-refresh-hard": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
+    "test": "jest"
   },
   "author": "David Fernando Torres Zapata (@davidfernandoza)",
   "license": "MIT",
@@ -42,6 +43,8 @@
     "babel-eslint": "10.1.0",
     "eslint": "6.8.0",
     "eslint-plugin-no-private-class-fields": "github:brianjenkins94/eslint-plugin-no-private-class-fields",
-    "nodemon": "2.0.2"
+    "jest": "^26.1.0",
+    "nodemon": "2.0.2",
+    "sequelize-mock": "^0.10.2"
   }
 }

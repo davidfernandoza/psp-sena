@@ -331,7 +331,7 @@ container
 		PhasesProcessController: asClass(PhasesProcessController).singleton(),
 		PipController: asClass(PipController).singleton(),
 		PPSController: asClass(PPSController).singleton(),
-		ProgramsController: asClass(ProgramsController).singleton(),
+		ProgramsController: asClass(ProgramsController),
 		ProjectsUsersController: asClass(ProjectsUsersController).singleton(),
 		ProjectsController: asClass(ProjectsController).singleton(),
 		ReusablePartsController: asClass(ReusablePartsController).singleton(),

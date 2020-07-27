@@ -106,7 +106,7 @@ class ProgramsController extends Controller {
 					params: { id: idProgram },
 					transaction
 				})
-				transaction.commit()
+				await transaction.commit()
 				return await this.responseController.send({
 					res,
 					entity: {},

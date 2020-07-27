@@ -45,47 +45,16 @@ class PPSController {
 	// --------------------------------------------------------------------------
 
 	async getAllByProgram(req, res) {
+		const tempData = {}
 		const response = {},
 			arryResponse = [],
 			{ id: idProgram } = req.params
-		const tempData = await this.queryDataProgram(idProgram),
-			program_lines = await this.countLinesFromParts(tempData),
-			time_phase = await this.countTimesFromPhases(tempData),
-			defects_injected = await this.defectCountHandler(
-				tempData,
-				'phase_added_id'
-			),
-			defects_removed = await this.defectCountHandler(
-				tempData,
-				'phase_removed_id'
-			)
-
-		response.language = tempData.language.name
-		response.program_lines = program_lines
-		response.time_phase = time_phase
-		response.defects_injected = defects_injected
-		response.defects_removed = defects_removed
-		arryResponse.push(response)
-
-		await this.#responseController.send({
-			res,
-			entity: arryResponse,
-			dto: this.#PPSDto,
-			code: 'DON200L',
-			addSubDto: null,
-			typeDto: null
-		})
-	}
-
-	// --------------------------------------------------------------------------
-
-	async queryDataProgram(idProgram) {
-		const tempData = {}
 		tempData.programs = await this.#programsController.get({
 			return: true,
 			params: { id: idProgram }
 		})
 		if (!tempData.programs) throw Error('ERR404')
+
 		tempData.language = await this.#languagesController.get({
 			return: true,
 			params: { id: tempData.programs.languages_id }
@@ -118,7 +87,32 @@ class PPSController {
 		})
 		tempData.phases = await this.#phasesRepository.getPhasesCount()
 
-		return tempData
+		const program_lines = await this.countLinesFromParts(tempData),
+			time_phase = await this.countTimesFromPhases(tempData),
+			defects_injected = await this.defectCountHandler(
+				tempData,
+				'phase_added_id'
+			),
+			defects_removed = await this.defectCountHandler(
+				tempData,
+				'phase_removed_id'
+			)
+
+		response.language = tempData.language.name
+		response.program_lines = program_lines
+		response.time_phase = time_phase
+		response.defects_injected = defects_injected
+		response.defects_removed = defects_removed
+		arryResponse.push(response)
+
+		await this.#responseController.send({
+			res,
+			entity: arryResponse,
+			dto: this.#PPSDto,
+			code: 'DON200L',
+			addSubDto: null,
+			typeDto: null
+		})
 	}
 
 	// --------------------------------------------------------------------------
