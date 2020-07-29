@@ -24,17 +24,8 @@ module.exports = {
 			first_name: 'Lina Maria',
 			last_name: 'Torres',
 			email: 'lina@email.com',
-			phone: '+57-3102938291',
+			phone: '+57-3213217632',
 			rol: 'DEV'
-		},
-		{
-			id: 3,
-			organizations_id: 1,
-			first_name: 'Carlos Arturo',
-			last_name: 'Gomez',
-			email: 'carlos@email.com',
-			phone: '+57-3112342321',
-			rol: 'ADMIN'
 		}
 	]
 }
