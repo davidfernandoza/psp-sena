@@ -1,4 +1,4 @@
-'user strict'
+'use strict'
 const DB = require('./../../mocks/models')
 const Config = require('./../../../config/env')
 const { UsersRepository } = require('./../../../database/repositories')
