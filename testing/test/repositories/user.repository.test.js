@@ -56,17 +56,11 @@ describe('User Repository Test', () => {
 
 	it('Should update a user by id', async () => {
 		const _user = { ...UserDataMock.user }
+		_user.first_name = 'Juan Fernando'
 		const expected = await _userRepository.update(
 			{
 				id: _user.id,
-				data: {
-					organizations_id: 1,
-					first_name: 'Juan Fernando',
-					last_name: 'Torres',
-					email: 'juan@email.com',
-					phone: '+57-3214567823',
-					rol: 'ADMIN'
-				}
+				data: _user
 			},
 			addSubDto,
 			transaction

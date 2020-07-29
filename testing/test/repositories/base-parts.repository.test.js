@@ -3,7 +3,7 @@ const DB = require('./../../mocks/models')
 const Config = require('./../../../config/env')
 const { BasePartsRepository } = require('./../../../database/repositories')
 const { BasePartsDto } = require('./../../../dto')
-const { BasePartsDataMock } = require('./../../mocks/mock/base-parts')
+const { BasePartsDataMock } = require('./../../mocks/mock/base_parts')
 const [addSubDto, transaction] = Array(2).fill(null)
 const _basePartsRepository = new BasePartsRepository({
 	DB,
@@ -12,7 +12,7 @@ const _basePartsRepository = new BasePartsRepository({
 })
 
 jest.mock('./../../mocks/models/base_parts', () => () => {
-	const { BasePartsDataMock } = require('./../../mocks/mock/base-parts')
+	const { BasePartsDataMock } = require('./../../mocks/mock/base_parts')
 	const SequelizeMock = require('sequelize-mock')
 	const _base_part = { ...BasePartsDataMock.base_part }
 	const DBMock = new SequelizeMock()
@@ -53,20 +53,10 @@ describe('Base Parts Repository Test', () => {
 
 	it('Should update a base part by id', async () => {
 		const _base_part = { ...BasePartsDataMock.base_part }
+		_base_part.planned_lines_added = 36
 		const expected = await _basePartsRepository.update({
 			id: _base_part.id,
-			data: {
-				programs_id: 1,
-				programs_base_id: 1,
-				planned_lines_base: 5,
-				planned_lines_deleted: 3,
-				planned_lines_edits: 4,
-				planned_lines_added: 36,
-				current_lines_base: 13,
-				current_lines_deleted: 2,
-				current_lines_edits: 6,
-				current_lines_added: 54
-			},
+			data: _base_part,
 			addSubDto,
 			transaction
 		})
