@@ -18,9 +18,9 @@ class ModulesController extends Controller {
 			type: 'all'
 		})
 		await this.responseController.send({
-			res, 
+			res,
 			entity: this.#data,
-			dto: this.entityDto, 
+			dto: this.entityDto,
 			code: 'DON200L',
 			addSubDto: null,
 			typeDto: null

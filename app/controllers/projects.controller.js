@@ -26,9 +26,9 @@ class ProjectsController extends Controller {
 			req.id
 		)
 		return await this.responseController.send({
-			res, 
+			res,
 			entity: entities,
-			dto: this.entityDto, 
+			dto: this.entityDto,
 			code: 'DON200L',
 			addSubDto: null,
 			typeDto: null
@@ -52,13 +52,13 @@ class ProjectsController extends Controller {
 				req.addSubDto,
 				req.transaction
 			)
-			
+
 			//Respuesta exitosa
 			await req.transaction.commit()
 			return await this.responseController.send({
-				res, 
+				res,
 				entity: created,
-				dto: this.entityDto, 
+				dto: this.entityDto,
 				code: 'DON201',
 				addSubDto: null,
 				typeDto: null

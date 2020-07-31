@@ -34,7 +34,6 @@ class CalculateProgramController {
 
 	Calcular el tamaño del programa
 	Calcular el total de tiempo utilizado por fase
-	
 	*/
 
 	// Se suman los diferentes valores de tamaño de cada consulta para dar un total de lineas

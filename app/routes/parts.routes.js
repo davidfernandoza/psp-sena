@@ -17,8 +17,8 @@ module.exports = ({
 	/*
 	 * Request:
 	 */
-	 	const reqPrivate = PartsRequest.private.bind(PartsRequest)
-		const reqParts = PartsRequest.body.bind(PartsRequest)
+	const reqPrivate = PartsRequest.private.bind(PartsRequest)
+	const reqParts = PartsRequest.body.bind(PartsRequest)
 
 	/*
 	 * Politics:
@@ -51,6 +51,6 @@ module.exports = ({
 		reqParts,
 		controller.create.bind(controller)
 	)
-	
+
 	return router
 }

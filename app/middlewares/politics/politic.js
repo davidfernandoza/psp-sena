@@ -11,7 +11,7 @@ class Politic {
 
 	async validate(req) {
 		let passport = false
-		
+
 		// Validacion del rol de usuario.
 		if (this.rol != req[this.authRol]) return { status: 200 }
 

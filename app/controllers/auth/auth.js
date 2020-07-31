@@ -2,7 +2,7 @@
 
 class Auth {
 	#encryptionHelper = {}
-	
+
 	constructor(
 		EntityController,
 		EncryptionHelper,

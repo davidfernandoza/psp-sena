@@ -10,7 +10,7 @@ module.exports = ({
 	#2Request,
 	AuthMiddleware,
 	AdminPolitic,
-	DevPolitic	
+	DevPolitic
 }) => {
 	const router = Router()
 
@@ -39,7 +39,7 @@ module.exports = ({
 	 * Controller:
 	 */
 	const controller = #2Controller
-	
+
 	/*
 	 * -----------------------------------------------------------------------------------*
 	 * GET:

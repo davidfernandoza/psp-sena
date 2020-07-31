@@ -13,7 +13,7 @@ class ForgotPasswordController extends Controller {
 	#smsService = {}
 	#app = ''
 	#config = {}
-	
+
 	constructor({
 		ForgotPasswordRepository,
 		ResponseController,
@@ -71,9 +71,9 @@ class ForgotPasswordController extends Controller {
 			}
 			// Renderizar vista
 			await this.responseController.send({
-				res, 
+				res,
 				entity: objecWeb,
-				dto: this.entityDto, 
+				dto: this.entityDto,
 				code: 'OK',
 				addSubDto: null,
 				typeDto: null
@@ -121,9 +121,9 @@ class ForgotPasswordController extends Controller {
 		if (!send) throw new Error('ERR404')
 
 		return await this.responseController.send({
-			res, 
+			res,
 			entity: {},
-			dto: this.entityDto, 
+			dto: this.entityDto,
 			code: 'DON204',
 			addSubDto: null,
 			typeDto: null
@@ -166,9 +166,9 @@ class ForgotPasswordController extends Controller {
 
 			// Renderizar mensaje en vista
 			return await this.responseController.send({
-				res, 
+				res,
 				entity: objecWeb,
-				dto: this.entityDto, 
+				dto: this.entityDto,
 				code: 'OK',
 				addSubDto: null,
 				typeDto: null

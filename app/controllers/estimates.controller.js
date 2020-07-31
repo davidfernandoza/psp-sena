@@ -28,9 +28,9 @@ class EstimatesController extends Controller {
 			idOrganization
 		)
 		await this.responseController.send({
-			res, 
+			res,
 			entity: entities,
-			dto: this.entityDto, 
+			dto: this.entityDto,
 			code: 'DON200L',
 			addSubDto: null,
 			typeDto: null

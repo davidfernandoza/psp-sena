@@ -15,9 +15,9 @@ class ProjectsUsersController extends Controller {
 		const { projects_id: idProject, users_id: idUser } = req.body,
 			deleted = await this.entityRepository.delete(idProject, idUser)
 		return await this.responseController.send({
-			res, 
+			res,
 			entity: deleted,
-			dto: this.entityDto, 
+			dto: this.entityDto,
 			code: 'DON204',
 			addSubDto: null,
 			typeDto: null
